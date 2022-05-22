@@ -1,4 +1,5 @@
 import React from 'react';
+import './Search.css';
 
 import SearchIcon from '@mui/icons-material/Search';
 

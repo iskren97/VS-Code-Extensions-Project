@@ -1,5 +1,7 @@
-import { Container, Divider, Grid } from '@mui/material';
 import React from 'react';
+import './Categories.css';
+
+import { Container, Divider, Grid } from '@mui/material';
 import ListCategory from './ListCategory';
 
 const Categories = () => {
