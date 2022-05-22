@@ -5,10 +5,19 @@ import Items from './Item/Item';
 
 import { Container, Divider, Grid } from '@mui/material';
 import Section from './Section/Section';
+import Intro from '../Intro/Intro';
+import Search from '../Search/Search';
+import Categories from '../Categories/Categories';
 
 const Main = () => {
   return (
     <div>
+      <Intro />
+
+      <Search />
+
+      <Categories />
+
       <Container
         maxWidth="xl"
         sx={{
