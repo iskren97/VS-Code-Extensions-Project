@@ -63,6 +63,7 @@ const Main = () => {
         }}
       >
         <Section category={'Most Popular'} />
+
         <Divider sx={{ marginBottom: '30px' }} />
 
         <Grid container direction="row" spacing={2} className="item-grid">
