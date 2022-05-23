@@ -44,6 +44,7 @@ const App = () => {
       <Header />
       {/* <Main /> */}
       <SingleExtension />
+      {/* <Register /> */}
 
       <ScrollTop showBelow={250} />
     </div>

@@ -68,7 +68,7 @@ input[type='submit'] {
   -webkit-appearance: none;
 }
 
-button[type='button'] {
+.register-form button[type='button'] {
   background: #333;
   padding: 10px 20px;
 }

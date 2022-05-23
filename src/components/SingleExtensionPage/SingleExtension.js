@@ -1,5 +1,6 @@
 import React from 'react'
 import './SingleExtension.css'
+import './Markdown.css'
 
 import { useState, useEffect } from 'react'
 import ReactMarkdown from "react-markdown";
@@ -106,6 +107,8 @@ function SingleExtension() {
           Download
         </Button>
           <p> 1 521 downloads</p>
+
+          
         </Grid>
 
 
@@ -140,7 +143,7 @@ function SingleExtension() {
 
 </Stack>
 
-      <article style={{maxWidth: '100%', overflow: 'auto'}}>
+      <article className="markdown-body" style={{maxWidth: '100%', overflow: 'auto'}}>
         <Markdown children={readMe} />
         </article>
 
