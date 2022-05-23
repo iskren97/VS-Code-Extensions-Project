@@ -15,7 +15,7 @@ const Categories = () => {
           paddingBottom: '55px',
           boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
           background: 'white',
-          borderRadius: '20px',
+          borderRadius: '7px',
         }}
       >
         <div className="extensions-category">

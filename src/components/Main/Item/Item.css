@@ -17,8 +17,6 @@ h2 {
   font-family: 'Inter', sans-serif !important;
 
   transition: background-color 0.15s ease !important;
-
-  /* border-radius: 0 !important; */
 }
 
 .item:hover {

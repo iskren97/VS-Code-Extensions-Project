@@ -9,6 +9,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ScrollTop from './components/ScrollTop/ScrollTop';
+import Register from './views/Register/Register';
 
 const App = () => {
   const [appState, setAppState] = useState({
