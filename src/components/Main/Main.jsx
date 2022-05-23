@@ -5,10 +5,19 @@ import Items from './Item/Item';
 
 import { Container, Divider, Grid } from '@mui/material';
 import Section from './Section/Section';
+import Intro from '../Intro/Intro';
+import Search from '../Search/Search';
+import Categories from '../Categories/Categories';
 
 const Main = () => {
   return (
     <div>
+      <Intro />
+
+      <Search />
+
+      <Categories />
+
       <Container
         maxWidth="xl"
         sx={{
@@ -17,7 +26,7 @@ const Main = () => {
           paddingBottom: '50px',
           boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
           background: 'white',
-          borderRadius: '20px',
+          borderRadius: '7px',
         }}
       >
         <Section category={'Recommended'} />
@@ -59,10 +68,11 @@ const Main = () => {
           paddingBottom: '50px',
           boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
           background: 'white',
-          borderRadius: '20px',
+          borderRadius: '7px',
         }}
       >
         <Section category={'Most Popular'} />
+
         <Divider sx={{ marginBottom: '30px' }} />
 
         <Grid container direction="row" spacing={2} className="item-grid">

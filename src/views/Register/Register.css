@@ -1,0 +1,89 @@
+.register-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.register-form p {
+  color: red;
+}
+
+.register-form input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.register-form input:not([type='submit']):hover {
+  background-color: rgb(248, 248, 248);
+}
+
+.register-form input:not([type='submit']):focus {
+  background-color: white;
+}
+
+.register-form button[type='submit'],
+input[type='submit'] {
+  cursor: pointer;
+  background: rgba(0, 122, 205, 255);
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 10px;
+}
+
+.register-form button[type='submit']:hover,
+input[type='submit']:hover {
+  color: white;
+}
+
+.register-form button[type='submit']:active,
+input[type='button']:active,
+input[type='submit']:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+.register-form input:disabled {
+  opacity: 0.4;
+}
+
+.register-form input[type='button']:hover {
+  transition: 0.3s all;
+}
+
+.register-form button[type='submit'],
+input[type='button'],
+input[type='submit'] {
+  -webkit-appearance: none;
+}
+
+button[type='button'] {
+  background: #333;
+  padding: 10px 20px;
+}
+
+.register-form hr {
+  margin-top: 30px;
+}
+
+.register-form button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
