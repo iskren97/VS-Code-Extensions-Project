@@ -1,0 +1,6 @@
+
+
+.infoContainer{
+  display: flex;
+  flex-direction: column;
+}

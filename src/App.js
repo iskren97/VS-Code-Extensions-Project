@@ -8,6 +8,7 @@ import { getUserData } from './services/users.service';
 import './App.css';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
+import SingleExtension from './components/SingleExtensionPage/SingleExtension';
 
 
 const App = () => {
@@ -40,7 +41,8 @@ const App = () => {
   return (
     <div>
       <Header />
-      <Main />
+      {/* <Main /> */}
+      <SingleExtension />
     </div>
   );
 };
