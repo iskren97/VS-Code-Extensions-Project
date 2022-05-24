@@ -3,12 +3,10 @@ import './Header.css';
 
 import { Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router';
 
 import LoginIcon from '@mui/icons-material/Login';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
-
 
 const Header = () => {
   return (
@@ -82,8 +80,9 @@ const Header = () => {
                     textTransform: 'uppercase',
                   }}
                 >
-                  extensions 
-                </span> <span> </span>
+                  extensions
+                </span>{' '}
+                <span> </span>
                 <span
                   style={{
                     fontSize: '25px',
@@ -96,16 +95,25 @@ const Header = () => {
           </div>
         </Grid>
 
-        <div className="header-buttons-container" >
+        <div className="header-buttons-container">
+          <NavLink to="/register">
+            <Button
+              variant="contained"
+              startIcon={<AccountCircleIcon />}
+              sx={{ textDecoration: 'none' }}
+            >
+              {' '}
+              Sign Up{' '}
+            </Button>
+          </NavLink>
 
-            <NavLink to="/register">
-              <Button variant="contained" startIcon={<AccountCircleIcon />} sx={{textDecoration: 'none'}}> Sign Up </Button>
-            </NavLink>
-
-            <NavLink to="/register">
-            <Button variant="contained" startIcon={<LoginIcon />}> Sign In </Button>
-            </NavLink>
-            </div>
+          <NavLink to="/login">
+            <Button variant="contained" startIcon={<LoginIcon />}>
+              {' '}
+              Sign In{' '}
+            </Button>
+          </NavLink>
+        </div>
       </Grid>
     </>
   );

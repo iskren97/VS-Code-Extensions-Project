@@ -15,6 +15,7 @@ import ScrollTop from './components/ScrollTop/ScrollTop';
 import SingleExtension from './views/SingleExtensionPage/SingleExtension';
 import Register from './views/Register/Register';
 import AlertUser from './views/Register/AlertUser';
+import Login from './views/Login/Login';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/" element={<Main />} />
           <Route path="/home" element={<Main />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
 
         {/* <Main /> */}

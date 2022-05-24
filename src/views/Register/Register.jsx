@@ -118,15 +118,12 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
           <input
             placeholder="Username"
+            required
             {...register('username', {
-              required: true,
               minLength: 2,
               maxLength: 20,
             })}
           />
-          {errors?.username?.type === 'required' && (
-            <p>⚠ This field is required</p>
-          )}
 
           {errors?.username?.type === 'minLength' && (
             <p>Username cannot be less than 2 characters</p>
@@ -137,15 +134,12 @@ const Register = () => {
 
           <input
             placeholder="Email"
+            required
             {...register('email', {
               minLength: 2,
               maxLength: 35,
-              required: true,
             })}
           />
-          {errors?.email?.type === 'required' && (
-            <p>⚠ This field is required</p>
-          )}
 
           {errors?.email?.type === 'minLength' && (
             <p>Email cannot be less than 2 characters</p>
@@ -179,15 +173,12 @@ const Register = () => {
           <input
             placeholder="Password"
             type="password"
+            required
             {...register('password', {
-              required: true,
               minLength: 6,
               maxLength: 18,
             })}
           />
-          {errors?.password?.type === 'required' && (
-            <p>⚠ This field is required</p>
-          )}
 
           {errors?.password?.type === 'minLength' && (
             <p>Password cannot be less than 6 characters </p>
@@ -203,7 +194,12 @@ const Register = () => {
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <p>
             Already have an account?{' '}
-            <span style={{ color: 'blue', cursor: 'pointer' }}>Log In</span>
+            <span
+              onClick={() => navigate('/login')}
+              style={{ color: 'blue', cursor: 'pointer' }}
+            >
+              Log In
+            </span>
           </p>
         </div>
       </Container>
