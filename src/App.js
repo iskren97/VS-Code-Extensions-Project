@@ -1,16 +1,18 @@
+import './App.css';
 import React from 'react';
 import { useState, useContext, useEffect } from 'react';
-import AppContext from './providers/AppContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase-config';
 import { getUserData } from './services/users.service';
-import './App.css';
+import AppContext from './providers/AppContext';
+
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
-import SingleExtension from './components/SingleExtensionPage/SingleExtension';
-
 import ScrollTop from './components/ScrollTop/ScrollTop';
+
+import SingleExtension from './views/SingleExtensionPage/SingleExtension';
 import Register from './views/Register/Register';
 import AlertUser from './views/Register/AlertUser';
 
@@ -42,14 +44,19 @@ const App = () => {
 
   return (
     <div>
-      {/* <Header /> */}
-      {/* <Main /> */}
-      {/* <SingleExtension /> */}
-      <Register />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/home" element={<Main />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
 
-      {/* <AlertUser /> */}
+        {/* <Main /> */}
+        {/* <SingleExtension /> */}
+        {/* <Register /> */}
 
-      <ScrollTop showBelow={250} />
+        <ScrollTop showBelow={250} />
+      </BrowserRouter>
     </div>
   );
 };
