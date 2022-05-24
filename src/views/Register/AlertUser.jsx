@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
-const AlertUser = ({ msg }) => {
+const AlertUser = ({ msg, type }) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = (_, reason) => {
@@ -27,7 +27,7 @@ const AlertUser = ({ msg }) => {
       >
         <Alert
           onClose={handleClose}
-          severity="error"
+          severity={type}
           sx={{ width: '100%', fontSize: '18px' }}
         >
           {msg}

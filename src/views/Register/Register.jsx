@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import './Register.css';
+import { useNavigate } from 'react-router';
 
+import './Register.css';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
@@ -25,6 +26,9 @@ const Register = () => {
   const { setContext } = useContext(AppContext);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [msgType, setMsgType] = useState('');
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -44,13 +48,15 @@ const Register = () => {
             ? (setError(true),
               setErrorMsg(
                 `User with phone number ${data.phoneNumber} already exists!`
-              ))
+              ),
+              setMsgType('error'))
             : null
         );
 
         if (getUser.exists()) {
           setError(true);
           setErrorMsg(`User with username ${data.username} already exists!`);
+          setMsgType('error');
         }
 
         const credential = await registerUser(data.email, data.password);
@@ -70,12 +76,18 @@ const Register = () => {
           });
         }
 
-        // closeOnSubmit();
-        // swal('Success', 'Your account was created!', 'success');
+        setError(true);
+        setErrorMsg(`Account successfully created!`);
+        setMsgType('success');
+
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
       } catch (err) {
         if (err.message.includes('auth/email-already-in-use')) {
           setError(true);
           setErrorMsg(`Email already used!`);
+          setMsgType('error');
         }
       }
     })();
@@ -195,7 +207,7 @@ const Register = () => {
           </p>
         </div>
       </Container>
-      {error ? <AlertUser msg={errorMsg} /> : null}
+      {error ? <AlertUser msg={errorMsg} type={msgType} /> : null}
     </>
   );
 };
