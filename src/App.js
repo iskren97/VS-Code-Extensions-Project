@@ -55,7 +55,7 @@ const App = () => {
         </Routes>
 
         {/* <Main /> */}
-        {/* <SingleExtension /> */}
+        <SingleExtension />
         {/* <Register /> */}
 
         <ScrollTop showBelow={250} />
