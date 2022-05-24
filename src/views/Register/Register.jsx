@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './Register.css';
 
+import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import PhoneInput, { formatPhoneNumberIntl } from 'react-phone-number-input';
 
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
@@ -14,12 +14,17 @@ import AppContext from '../../providers/AppContext';
 import { registerUser } from '../../services/auth.service';
 import {
   createUserHandle,
+  getAllUsers,
   getUserByHandle,
   getUserData,
 } from '../../services/users.service';
 
+import AlertUser from './AlertUser';
+
 const Register = () => {
   const { setContext } = useContext(AppContext);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const {
     register,
@@ -29,27 +34,32 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-
     (async () => {
       try {
         const getUser = await getUserByHandle(data.username);
 
+        const users = await getAllUsers();
+        Object.values(users.val()).map((o) =>
+          o.phoneNumber === data.phoneNumber
+            ? (setError(true),
+              setErrorMsg(
+                `User with phone number ${data.phoneNumber} already exists!`
+              ))
+            : null
+        );
+
         if (getUser.exists()) {
-          // return swal(
-          //   `User with username ${data.username} already exists!`,
-          //   'Please use another username',
-          //   'error'
-          // );
+          setError(true);
+          setErrorMsg(`User with username ${data.username} already exists!`);
         }
 
         const credential = await registerUser(data.email, data.password);
 
         createUserHandle(
-          data.username,
           data.email,
-          formatPhoneNumberIntl(data.phoneNumber),
-          credential.user.uid
+          data.username,
+          credential.user.uid,
+          data.phoneNumber
         );
 
         const userData = await getUserData(credential.user.uid);
@@ -64,7 +74,8 @@ const Register = () => {
         // swal('Success', 'Your account was created!', 'success');
       } catch (err) {
         if (err.message.includes('auth/email-already-in-use')) {
-          // swal('Email already used!', 'Please use another email', 'error');
+          setError(true);
+          setErrorMsg(`Email already used!`);
         }
       }
     })();
@@ -132,7 +143,7 @@ const Register = () => {
           )}
 
           <Controller
-            name="phone"
+            name="phoneNumber"
             control={control}
             rules={{
               required: true,
@@ -144,12 +155,14 @@ const Register = () => {
                 international
                 value={value}
                 onChange={onChange}
-                id="phone"
+                id="phoneNumber"
               />
             )}
           />
 
-          {errors['phone'] && <p className="error-message">Invalid Phone</p>}
+          {errors['phoneNumber'] && (
+            <p className="error-message">Invalid Phone</p>
+          )}
 
           <input
             placeholder="Password"
@@ -182,6 +195,7 @@ const Register = () => {
           </p>
         </div>
       </Container>
+      {error ? <AlertUser msg={errorMsg} /> : null}
     </>
   );
 };

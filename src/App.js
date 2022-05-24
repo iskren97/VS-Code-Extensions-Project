@@ -12,6 +12,7 @@ import SingleExtension from './components/SingleExtensionPage/SingleExtension';
 
 import ScrollTop from './components/ScrollTop/ScrollTop';
 import Register from './views/Register/Register';
+import AlertUser from './views/Register/AlertUser';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -41,10 +42,12 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       {/* <Main /> */}
-      <SingleExtension />
-      {/* <Register /> */}
+      {/* <SingleExtension /> */}
+      <Register />
+
+      {/* <AlertUser /> */}
 
       <ScrollTop showBelow={250} />
     </div>
