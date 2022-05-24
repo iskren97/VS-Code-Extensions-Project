@@ -8,11 +8,20 @@
   top: 0;
 }
 
+.profilePic {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: white;
+  overflow: visible;
+  object-fit: cover;
+}
+
 .header-buttons-container{
   display: flex;
   flex-direction: row;
-  gap: 0.25em;
-  margin-right: 0.5em;
+  gap: 0.5em;
+  margin: 1em;
 }
 
 

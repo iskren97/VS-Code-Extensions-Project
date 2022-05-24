@@ -1,3 +1,9 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+
+body {
+  padding: 0px !important;
+  overflow-y: visible !important;
+
+}

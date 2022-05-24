@@ -14,7 +14,7 @@ const Main = () => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: '125px' }}>
+      <div style={{ marginTop: '10em' }}>
         <Intro />
 
         <Search />

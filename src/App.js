@@ -45,6 +45,7 @@ const App = () => {
 
   return (
     <div>
+    <AppContext.Provider value={{ ...appState, setContext: setAppState }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
@@ -59,6 +60,7 @@ const App = () => {
 
         <ScrollTop showBelow={250} />
       </BrowserRouter>
+      </AppContext.Provider>
     </div>
   );
 };
