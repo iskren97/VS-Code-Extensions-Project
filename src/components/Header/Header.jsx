@@ -2,6 +2,13 @@ import React from 'react';
 import './Header.css';
 
 import { Grid } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+
+import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Button from '@mui/material/Button';
+
 
 const Header = () => {
   return (
@@ -16,6 +23,8 @@ const Header = () => {
               alignItems: 'center',
               justifyContent: 'center',
               contentAlign: 'center',
+              marginTop: '1em',
+              marginBottom: '1em',
             }}
           >
             <div>
@@ -23,7 +32,6 @@ const Header = () => {
                 src="https://www.elegantthemes.com/blog/wp-content/uploads/2019/01/000-VS-Code.png"
                 style={{
                   width: '120px',
-                  height: '120px',
                   objectFit: 'contain',
                 }}
                 alt="img"
@@ -74,9 +82,8 @@ const Header = () => {
                     textTransform: 'uppercase',
                   }}
                 >
-                  extensions
-                </span>
-                <br />
+                  extensions 
+                </span> <span> </span>
                 <span
                   style={{
                     fontSize: '25px',
@@ -89,9 +96,16 @@ const Header = () => {
           </div>
         </Grid>
 
-        <Grid item>
-          <h3>Sign Up</h3>
-        </Grid>
+        <div className="header-buttons-container" >
+
+            <NavLink to="/register">
+              <Button variant="contained" startIcon={<AccountCircleIcon />} sx={{textDecoration: 'none'}}> Sign Up </Button>
+            </NavLink>
+
+            <NavLink to="/register">
+            <Button variant="contained" startIcon={<LoginIcon />}> Sign In </Button>
+            </NavLink>
+            </div>
       </Grid>
     </>
   );

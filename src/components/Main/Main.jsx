@@ -8,10 +8,14 @@ import Section from './Section/Section';
 import Intro from '../Intro/Intro';
 import Search from '../Search/Search';
 import Categories from '../Categories/Categories';
+import Header from '../Header/Header';
 
 const Main = () => {
   return (
-    <div>
+    <>
+      <Header />
+    <div style={{marginTop:'125px'}}>
+
       <Intro />
 
       <Search />
@@ -102,6 +106,7 @@ const Main = () => {
         </Grid>
       </Container>
     </div>
+    </>
   );
 };
 

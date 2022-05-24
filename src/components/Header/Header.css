@@ -1,8 +1,21 @@
 .header-container {
   background-color: black;
   color: white;
-
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: auto;
+  position: fixed;
+  top: 0;
+}
+
+.header-buttons-container{
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+  margin-right: 0.5em;
+}
+
+
+.header-buttons-container a {
+  text-decoration: none;
 }

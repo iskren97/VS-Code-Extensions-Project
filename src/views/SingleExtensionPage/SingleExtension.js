@@ -3,10 +3,6 @@ import './SingleExtension.css'
 import './Markdown.css'
 
 import { useState, useEffect } from 'react'
-import ReactMarkdown from "react-markdown";
-import { Remark } from 'react-remark';
-import { useRemark } from 'react-remark';
-import remarkGfm from 'remark-gfm'
 import Markdown from 'markdown-to-jsx';
 import { Container, Divider, Grid } from '@mui/material';
 import Rating from '@mui/material/Rating';
