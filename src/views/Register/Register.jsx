@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import './Register.css';
+import { useNavigate } from 'react-router';
 
+import './Register.css';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
@@ -25,6 +26,9 @@ const Register = () => {
   const { setContext } = useContext(AppContext);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [msgType, setMsgType] = useState('');
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -44,13 +48,15 @@ const Register = () => {
             ? (setError(true),
               setErrorMsg(
                 `User with phone number ${data.phoneNumber} already exists!`
-              ))
+              ),
+              setMsgType('error'))
             : null
         );
 
         if (getUser.exists()) {
           setError(true);
           setErrorMsg(`User with username ${data.username} already exists!`);
+          setMsgType('error');
         }
 
         const credential = await registerUser(data.email, data.password);
@@ -70,12 +76,18 @@ const Register = () => {
           });
         }
 
-        // closeOnSubmit();
-        // swal('Success', 'Your account was created!', 'success');
+        setError(true);
+        setErrorMsg(`Account successfully created!`);
+        setMsgType('success');
+
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
       } catch (err) {
         if (err.message.includes('auth/email-already-in-use')) {
           setError(true);
           setErrorMsg(`Email already used!`);
+          setMsgType('error');
         }
       }
     })();
@@ -106,15 +118,12 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
           <input
             placeholder="Username"
+            required
             {...register('username', {
-              required: true,
               minLength: 2,
               maxLength: 20,
             })}
           />
-          {errors?.username?.type === 'required' && (
-            <p>⚠ This field is required</p>
-          )}
 
           {errors?.username?.type === 'minLength' && (
             <p>Username cannot be less than 2 characters</p>
@@ -125,15 +134,12 @@ const Register = () => {
 
           <input
             placeholder="Email"
+            required
             {...register('email', {
               minLength: 2,
               maxLength: 35,
-              required: true,
             })}
           />
-          {errors?.email?.type === 'required' && (
-            <p>⚠ This field is required</p>
-          )}
 
           {errors?.email?.type === 'minLength' && (
             <p>Email cannot be less than 2 characters</p>
@@ -167,15 +173,12 @@ const Register = () => {
           <input
             placeholder="Password"
             type="password"
+            required
             {...register('password', {
-              required: true,
               minLength: 6,
               maxLength: 18,
             })}
           />
-          {errors?.password?.type === 'required' && (
-            <p>⚠ This field is required</p>
-          )}
 
           {errors?.password?.type === 'minLength' && (
             <p>Password cannot be less than 6 characters </p>
@@ -191,11 +194,16 @@ const Register = () => {
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <p>
             Already have an account?{' '}
-            <span style={{ color: 'blue', cursor: 'pointer' }}>Log In</span>
+            <span
+              onClick={() => navigate('/login')}
+              style={{ color: 'blue', cursor: 'pointer' }}
+            >
+              Log In
+            </span>
           </p>
         </div>
       </Container>
-      {error ? <AlertUser msg={errorMsg} /> : null}
+      {error ? <AlertUser msg={errorMsg} type={msgType} /> : null}
     </>
   );
 };
