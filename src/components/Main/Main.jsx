@@ -38,7 +38,16 @@ const Main = () => {
 
           <Grid container direction="row" spacing={2} className="item-grid">
             <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} author={'Prettier Inc'} category={'Code formatter'} rating={3.8} downloadLink={'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'}/>
+              <Items
+                name={'Prettier'}
+                logo={'https://prettier.io/icon.png'}
+                author={'Prettier Inc'}
+                category={'Code formatter'}
+                rating={3.8}
+                downloadLink={
+                  'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
+                }
+              />
             </Grid>
 
             <Grid item>

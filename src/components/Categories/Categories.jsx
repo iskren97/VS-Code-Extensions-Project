@@ -3,6 +3,7 @@ import './Categories.css';
 
 import { Container, Divider, Grid } from '@mui/material';
 import ListCategory from './ListCategory';
+import { NavLink } from 'react-router-dom';
 
 const Categories = () => {
   return (
@@ -26,7 +27,12 @@ const Categories = () => {
 
         <Grid container direction="row" spacing={2} className="item-grid">
           <Grid item>
-            <ListCategory name={'Code Formatters'} bgColor={'#008000'} />
+            <NavLink
+              style={{ all: 'unset', cursor: 'pointer' }}
+              to="/code_formatters"
+            >
+              <ListCategory name={'Code Formatters'} bgColor={'#008000'} />
+            </NavLink>
           </Grid>
 
           <Grid item>

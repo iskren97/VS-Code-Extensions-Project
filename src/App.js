@@ -17,6 +17,7 @@ import SingleExtension from './views/SingleExtensionPage/SingleExtension';
 import Register from './views/Register/Register';
 import AlertUser from './views/Register/AlertUser';
 import Login from './views/Login/Login';
+import Category from './views/SingleCategory/Category';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/home" element={<Main />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/code_formatters" element={<Category />} />
           </Routes>
 
           {/* <Main /> */}
