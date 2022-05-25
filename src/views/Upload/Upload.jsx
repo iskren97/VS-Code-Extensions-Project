@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
+
 import { useNavigate } from 'react-router';
 import './Upload.css';
 
@@ -7,8 +7,7 @@ import AppContext from '../../providers/AppContext';
 
 import { Container, Divider } from '@mui/material';
 
-import { loginUser } from '../../services/auth.service';
-import { getUserData, updateExtensions } from '../../services/users.service';
+
 import AlertUser from '../Register/AlertUser';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -32,11 +31,7 @@ function Upload() {
 
   const [uploadInfo, setUploadInfo] = useState({})
 
-  const handleInvalidData = () => {
-    setError(true);
-    setErrorMsg('One or more fields are invalid');
-    setMsgType('error');
-  };
+
 
 
   
@@ -150,7 +145,6 @@ function Upload() {
     }
   }
 
-  console.log(uploadInfo)
 
   return (
     <>
