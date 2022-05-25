@@ -1,0 +1,95 @@
+.upload-container {
+  height: auto;
+  position: absolute;
+  padding-bottom: 70px;
+  padding-top: 70px;
+  box-shadow: 0 12px 18px 2px rgb(34 0 51 / 4%),
+    0 6px 22px 4px rgb(7 48 114 / 12%), 0 6px 10px -4px rgb(14 13 26 / 12%);
+  background: white;
+  border-radius: 7px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.upload-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.upload-form p {
+  color: red;
+}
+
+.upload-form input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.upload-form input:not([type='button']):hover {
+  background-color: rgb(248, 248, 248);
+}
+
+.upload-form input:not([type='button']):focus {
+  background-color: white;
+}
+
+
+
+.submitButton{
+  cursor: pointer;
+  background: rgba(0, 122, 205, 255);
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 10px;
+}
+
+
+
+.upload-form input:disabled {
+  opacity: 0.4;
+}
+
+
+
+
+.upload-form hr {
+  margin-top: 30px;
+}
+
+.upload-form button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+
+.upload-form-tags input{
+  width: 100% !important;
+  height: 2em;
+  margin-bottom: 0.5em;
+}
+
+.upload-form h2{
+  margin-bottom: 0.25em;
+}
