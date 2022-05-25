@@ -14,10 +14,12 @@ import ScrollTop from './components/ScrollTop/ScrollTop';
 import ScrollPage from './components/ScrollTop/ScrollPage';
 
 import SingleExtension from './views/SingleExtensionPage/SingleExtension';
+import ProfilePage from './views/ProfilePage/ProfilePage';
 import Register from './views/Register/Register';
 import AlertUser from './views/Register/AlertUser';
 import Login from './views/Login/Login';
 import Category from './views/SingleCategory/Category';
+import Upload from './views/Upload/Upload';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -56,6 +58,8 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/code_formatters" element={<Category />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/upload" element={<Upload />} />
           </Routes>
 
           {/* <Main /> */}

@@ -4,7 +4,7 @@ import './Markdown.css'
 
 import { useState, useEffect } from 'react'
 import Markdown from 'markdown-to-jsx';
-import { Container, Divider, Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';

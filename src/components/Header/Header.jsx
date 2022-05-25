@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 
 import LoginIcon from '@mui/icons-material/Login';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Button from '@mui/material/Button';
 import { Tooltip } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
@@ -141,6 +142,18 @@ const Header = () => {
         <div className="header-buttons-container">
         { user ? (
           <>
+          <div style={{display: 'flex', alignItems: 'center'}}>
+          <NavLink to="/upload">
+            <Button
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              sx={{ textDecoration: 'none' }}
+            >
+              Upload
+            </Button>
+          </NavLink>
+          </div>
+
           <h3>{userData?.username}</h3>
           <Tooltip title="Profile">
               <Box
