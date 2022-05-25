@@ -1,5 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
+
+import { Controller, useForm } from 'react-hook-form';
+import AppContext from '../../providers/AppContext';
 
 import './Register.css';
 import PhoneInput from 'react-phone-number-input';
@@ -8,9 +12,8 @@ import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 
 import { Container, Divider } from '@mui/material';
-
-import { Controller, useForm } from 'react-hook-form';
-import AppContext from '../../providers/AppContext';
+import Tooltip from '@mui/material/Tooltip';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { registerUser } from '../../services/auth.service';
 import {
@@ -102,6 +105,15 @@ const Register = () => {
   return (
     <>
       <Container className="register-container" maxWidth="sm">
+        <NavLink to="/home" style={{ all: 'unset', cursor: 'pointer' }}>
+          <Tooltip placement="right-end" title="Back to Home">
+            <ArrowBackIcon
+              fontSize={'medium'}
+              style={{ position: 'absolute', top: '5px', left: '5px' }}
+            />
+          </Tooltip>
+        </NavLink>
+
         <div
           style={{
             textAlign: 'center',

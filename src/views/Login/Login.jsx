@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 import AppContext from '../../providers/AppContext';
 
 import { Container, Divider } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import { loginUser } from '../../services/auth.service';
 import { getUserData } from '../../services/users.service';
 import AlertUser from '../Register/AlertUser';
@@ -61,6 +65,14 @@ const Login = () => {
   return (
     <>
       <Container className="register-container" maxWidth="sm">
+        <NavLink to="/home" style={{ all: 'unset', cursor: 'pointer' }}>
+          <Tooltip placement="right-end" title="Back to Home">
+            <ArrowBackIcon
+              fontSize={'medium'}
+              style={{ position: 'absolute', top: '5px', left: '5px' }}
+            />
+          </Tooltip>
+        </NavLink>
         <div
           style={{
             textAlign: 'center',
