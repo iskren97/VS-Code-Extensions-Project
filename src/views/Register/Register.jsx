@@ -203,7 +203,7 @@ const Register = () => {
           </p>
         </div>
       </Container>
-      {error ? <AlertUser msg={errorMsg} type={msgType} /> : null}
+      {error ? <AlertUser error={error} msg={errorMsg} type={msgType} setError={setError} /> : null}
     </>
   );
 };

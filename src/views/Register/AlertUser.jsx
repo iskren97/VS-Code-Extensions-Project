@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
-const AlertUser = ({ msg, type }) => {
-  const [open, setOpen] = useState(true);
+const AlertUser = ({ error, msg, type , setError}) => {
+  const [open, setOpen] = useState(error);
 
   const handleClose = (_, reason) => {
     if (reason === 'clickaway') {
@@ -11,6 +11,7 @@ const AlertUser = ({ msg, type }) => {
     }
 
     setOpen(false);
+    setError(false);
   };
 
   return (

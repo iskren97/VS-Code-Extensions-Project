@@ -13,9 +13,11 @@ import Main from './components/Main/Main';
 import ScrollTop from './components/ScrollTop/ScrollTop';
 
 import SingleExtension from './views/SingleExtensionPage/SingleExtension';
+import ProfilePage from './views/ProfilePage/ProfilePage';
 import Register from './views/Register/Register';
 import AlertUser from './views/Register/AlertUser';
 import Login from './views/Login/Login';
+import Upload from './views/Upload/Upload';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -43,6 +45,10 @@ const App = () => {
       .catch((e) => alert(e.message));
   }, [user]);
 
+
+  
+
+
   return (
     <div>
     <AppContext.Provider value={{ ...appState, setContext: setAppState }}>
@@ -52,11 +58,14 @@ const App = () => {
           <Route path="/home" element={<Main />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/upload" element={<Upload />} />
         </Routes>
 
         {/* <Main /> */}
-        <SingleExtension />
+        {/* <SingleExtension /> */}
         {/* <Register /> */}
+        {/* <ProfilePage /> */}
 
         <ScrollTop showBelow={250} />
       </BrowserRouter>
