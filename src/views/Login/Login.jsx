@@ -26,8 +26,6 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-
     loginUser(data.email, data.password)
       .then((u) => {
         return getUserData(u.user.uid).then((snapshot) => {
@@ -121,7 +119,14 @@ const Login = () => {
           </p>
         </div>
       </Container>
-      {error ? <AlertUser msg={errorMsg} type={msgType} /> : null}
+      {error ? (
+        <AlertUser
+          msg={errorMsg}
+          type={msgType}
+          err={error}
+          setErr={setError}
+        />
+      ) : null}
     </>
   );
 };

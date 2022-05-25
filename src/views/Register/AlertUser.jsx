@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
-const AlertUser = ({ msg, type }) => {
-  const [open, setOpen] = useState(true);
+const AlertUser = ({ msg, type, err, setErr }) => {
+  const [open, setOpen] = useState(err);
 
   const handleClose = (_, reason) => {
     if (reason === 'clickaway') {
@@ -11,29 +11,28 @@ const AlertUser = ({ msg, type }) => {
     }
 
     setOpen(false);
+    setErr(false);
   };
 
   return (
-    <div>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
+    <Snackbar
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      sx={{ height: '20%' }}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+    >
+      <Alert
         onClose={handleClose}
-        sx={{ height: '20%' }}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
+        severity={type}
+        sx={{ width: '100%', fontSize: '18px' }}
       >
-        <Alert
-          onClose={handleClose}
-          severity={type}
-          sx={{ width: '100%', fontSize: '18px' }}
-        >
-          {msg}
-        </Alert>
-      </Snackbar>
-    </div>
+        {msg}
+      </Alert>
+    </Snackbar>
   );
 };
 

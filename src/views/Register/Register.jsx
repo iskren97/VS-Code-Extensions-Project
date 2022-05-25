@@ -42,22 +42,18 @@ const Register = () => {
       try {
         const getUser = await getUserByHandle(data.username);
 
+        if (getUser.exists()) {
+          throw new Error('username already in use');
+        }
+
         const users = await getAllUsers();
         Object.values(users.val()).map((o) =>
           o.phoneNumber === data.phoneNumber
-            ? (setError(true),
-              setErrorMsg(
-                `User with phone number ${data.phoneNumber} already exists!`
-              ),
-              setMsgType('error'))
+            ? (function () {
+                throw new Error('phone number already in use');
+              })()
             : null
         );
-
-        if (getUser.exists()) {
-          setError(true);
-          setErrorMsg(`User with username ${data.username} already exists!`);
-          setMsgType('error');
-        }
 
         const credential = await registerUser(data.email, data.password);
 
@@ -84,9 +80,19 @@ const Register = () => {
           navigate('/');
         }, 1500);
       } catch (err) {
-        if (err.message.includes('auth/email-already-in-use')) {
+        if (err.message.includes('username already in use')) {
+          setError(true);
+          setErrorMsg(`User with username ${data.username} already exists!`);
+          setMsgType('error');
+        } else if (err.message.includes('auth/email-already-in-use')) {
           setError(true);
           setErrorMsg(`Email already used!`);
+          setMsgType('error');
+        } else if (err.message.includes('phone number already in use')) {
+          setError(true);
+          setErrorMsg(
+            `User with phone number ${data.phoneNumber} already exists!`
+          );
           setMsgType('error');
         }
       }
@@ -148,6 +154,24 @@ const Register = () => {
             <p>Email cannot exceed 20 characters</p>
           )}
 
+          <input
+            placeholder="Password"
+            type="password"
+            required
+            {...register('password', {
+              minLength: 6,
+              maxLength: 18,
+            })}
+          />
+
+          {errors?.password?.type === 'minLength' && (
+            <p>Password cannot be less than 6 characters </p>
+          )}
+
+          {errors?.password?.type === 'maxLength' && (
+            <p>Password cannot exceed 20 characters </p>
+          )}
+
           <Controller
             name="phoneNumber"
             control={control}
@@ -170,24 +194,6 @@ const Register = () => {
             <p className="error-message">Invalid Phone</p>
           )}
 
-          <input
-            placeholder="Password"
-            type="password"
-            required
-            {...register('password', {
-              minLength: 6,
-              maxLength: 18,
-            })}
-          />
-
-          {errors?.password?.type === 'minLength' && (
-            <p>Password cannot be less than 6 characters </p>
-          )}
-
-          {errors?.password?.type === 'maxLength' && (
-            <p>Password cannot exceed 20 characters </p>
-          )}
-
           <input type="submit" />
         </form>
 
@@ -203,7 +209,14 @@ const Register = () => {
           </p>
         </div>
       </Container>
-      {error ? <AlertUser msg={errorMsg} type={msgType} /> : null}
+      {error ? (
+        <AlertUser
+          msg={errorMsg}
+          type={msgType}
+          err={error}
+          setErr={setError}
+        />
+      ) : null}
     </>
   );
 };

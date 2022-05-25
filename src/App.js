@@ -11,6 +11,7 @@ import AppContext from './providers/AppContext';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ScrollTop from './components/ScrollTop/ScrollTop';
+import ScrollPage from './components/ScrollTop/ScrollPage';
 
 import SingleExtension from './views/SingleExtensionPage/SingleExtension';
 import Register from './views/Register/Register';
@@ -45,21 +46,22 @@ const App = () => {
 
   return (
     <div>
-    <AppContext.Provider value={{ ...appState, setContext: setAppState }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/home" element={<Main />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+      <AppContext.Provider value={{ ...appState, setContext: setAppState }}>
+        <BrowserRouter>
+          {/* <ScrollPage /> */}
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/home" element={<Main />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
 
-        {/* <Main /> */}
-        <SingleExtension />
-        {/* <Register /> */}
+          {/* <Main /> */}
+          {/* <SingleExtension /> */}
+          {/* <Register /> */}
 
-        <ScrollTop showBelow={250} />
-      </BrowserRouter>
+          <ScrollTop showBelow={250} />
+        </BrowserRouter>
       </AppContext.Provider>
     </div>
   );
