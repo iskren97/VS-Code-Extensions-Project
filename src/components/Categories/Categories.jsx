@@ -27,44 +27,60 @@ const Categories = () => {
 
         <Grid container direction="row" spacing={2} className="item-grid">
           <Grid item>
-            <NavLink
-              style={{ all: 'unset', cursor: 'pointer' }}
-              to="/code_formatters"
-            >
+            <NavLink to="/category/:code_formatters">
               <ListCategory name={'Code Formatters'} bgColor={'#008000'} />
             </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Linters'} bgColor={'#ff8243'} />
+            <NavLink to="/category/:linters">
+              <ListCategory name={'Linters'} bgColor={'#ff8243'} />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Appearance'} bgColor={'skyblue'} />
+            <NavLink to="/category/:appearance">
+              <ListCategory name={'Appearance'} bgColor={'skyblue'} />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Themes'} bgColor={'#fdc0d1'} />
+            <NavLink to="/category/:themes">
+              <ListCategory name={'Themes'} bgColor={'#fdc0d1'} />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Snippets'} bgColor={'#9400D3'} />
+            <NavLink to="/category/:snippets">
+              <ListCategory name={'Snippets'} bgColor={'#9400D3'} />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Programming Languages'} bgColor={'#ffd700'} />
+            <NavLink to="/category/:programming_languages">
+              <ListCategory
+                name={'Programming Languages'}
+                bgColor={'#ffd700'}
+              />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Azure'} bgColor={'blue'} />
+            <NavLink to="/category/:azure">
+              <ListCategory name={'Azure'} bgColor={'blue'} />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Data Science'} bgColor={'#808080'} />
+            <NavLink to="/category/:data_science">
+              <ListCategory name={'Data Science'} bgColor={'#808080'} />
+            </NavLink>
           </Grid>
 
           <Grid item>
-            <ListCategory name={'Debuggers'} bgColor={'black'} />
+            <NavLink to="/category/:debuggers">
+              <ListCategory name={'Debuggers'} bgColor={'black'} />
+            </NavLink>
           </Grid>
         </Grid>
       </Container>

@@ -5,14 +5,41 @@ import Header from '../../components/Header/Header';
 import { Container, Grid } from '@mui/material';
 import Items from '../../components/Main/Item/Item';
 import Search from '../../components/Search/Search';
+import { useParams } from 'react-router';
 
 const Category = () => {
+  const { category } = useParams();
+
+  let categoryName = '';
+  if (category.includes('_')) {
+    categoryName =
+      category.charAt(1).toUpperCase() +
+      category
+        .slice(2)
+        .replace('_', ' ')
+        .replace(/(^\w{0})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+  } else {
+    categoryName = category.charAt(1).toUpperCase() + category.slice(2);
+  }
+
   return (
     <>
       <Header />
 
       <div style={{ textAlign: 'center', marginTop: '170px' }}>
-        <h1>Code Formatters</h1>
+        <h1>{categoryName}</h1>
+        <p
+          style={{
+            fontSize: '20px',
+            fontStyle: 'normal',
+            fontWeight: '400',
+            margin: '0px',
+            textAlign: 'center',
+            marginBottom: '0.67em',
+          }}
+        >
+          Browse Extensions
+        </p>
         <h2>335 Results</h2>
       </div>
 
