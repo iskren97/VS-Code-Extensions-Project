@@ -51,13 +51,16 @@ const App = () => {
     <div>
       <AppContext.Provider value={{ ...appState, setContext: setAppState }}>
         <BrowserRouter>
-          {/* <ScrollPage /> */}
+          <ScrollPage />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/home" element={<Main />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/code_formatters" element={<Category />} />
+            <Route
+              path="/category/:category"
+              element={<Category key={window.location.pathname} />}
+            />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/upload" element={<Upload />} />
           </Routes>

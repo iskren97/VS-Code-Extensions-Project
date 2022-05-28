@@ -21,7 +21,11 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [msgType, setMsgType] = useState('');
 
-  const { register, handleSubmit } = useForm();
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm();
 
   const handleInvalidData = () => {
     setError(true);
@@ -104,6 +108,12 @@ const Login = () => {
             })}
             onKeyDown={handleKeyEnter}
           />
+          {errors?.email?.type === 'minLength' && (
+            <p>Email cannot be less than 2 characters</p>
+          )}
+          {errors?.email?.type === 'maxLength' && (
+            <p>Email cannot exceed 20 characters</p>
+          )}
 
           <input
             type="password"
@@ -115,6 +125,14 @@ const Login = () => {
             })}
             onKeyDown={handleKeyEnter}
           />
+
+          {errors?.password?.type === 'minLength' && (
+            <p>Password cannot be less than 6 characters </p>
+          )}
+
+          {errors?.password?.type === 'maxLength' && (
+            <p>Password cannot exceed 20 characters </p>
+          )}
 
           <input type="submit" />
         </form>
