@@ -173,25 +173,7 @@ function Upload() {
     'es6',
   ];
 
-  const submitExtension = async () => {
-    if ((await validateData()) === true) {
-      createExtension(
-        uploadInfo.name,
-        uploadInfo.repositoryUrl,
-        uploadInfo.category,
-        userData.username,
-        uploadInfo.file.name,
-        uploadInfo.file,
-        uploadInfo.tags,
-        uploadInfo.logo
-      );
 
-      setError(true);
-      setErrorMsg(`Extension uploaded successfully!`);
-      setMsgType('success');
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
 
 
   const submitExtension = async () =>{

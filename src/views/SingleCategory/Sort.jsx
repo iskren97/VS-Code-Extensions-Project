@@ -148,6 +148,7 @@ const Sort = ({ extensions, search }) => {
                       category={ext.category}
                       rating={3.8}
                       downloadLink={ext.downloadLink}
+                      extId={ext.id}
                     />
                   </Grid>
                 );
