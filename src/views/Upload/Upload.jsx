@@ -36,7 +36,7 @@ function Upload() {
   console.log(uploadInfo)
 
 
-  const validateData = () =>{
+  const validateData = async () =>{
 
 
 
@@ -103,7 +103,7 @@ function Upload() {
 
 
 
-    return getAllExtensions().then(extensions => {
+     return getAllExtensions().then(extensions => {
       extensions.forEach((extension) => {
         if(extension.title === uploadInfo?.name){
           setError(true);
@@ -122,7 +122,10 @@ function Upload() {
       return false;
         } else {
           return true;
+
         }
+
+
 
 
       })
@@ -148,7 +151,7 @@ function Upload() {
 
 
   const submitExtension = async () =>{
-    if((await validateData()) === true){
+    if(await validateData()){
     createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags, uploadInfo.logo)
 
     setError(true);

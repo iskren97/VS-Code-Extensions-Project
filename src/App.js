@@ -61,6 +61,7 @@ const App = () => {
               path="/category/:category"
               element={<Category key={window.location.pathname} />}
             />
+            <Route path="/extensions/:id" element={<SingleExtension />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/upload" element={<Upload />} />
           </Routes>

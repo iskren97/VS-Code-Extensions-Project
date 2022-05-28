@@ -3,6 +3,7 @@ import './SingleExtension.css'
 import './Markdown.css'
 
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import Markdown from 'markdown-to-jsx';
 import { Divider, Grid } from '@mui/material';
 import Rating from '@mui/material/Rating';
@@ -11,24 +12,51 @@ import Chip from '@mui/material/Chip';
 import DownloadIcon from '@mui/icons-material/Download';
 import Stack from '@mui/material/Stack'
 import GitHubIcon from '@mui/icons-material/GitHub';
-
+import { getExtensionById } from '../../services/extensions.service.js'
 
 import markdown from '../../assets/prettierReadMe.md'
 function SingleExtension() {
 
   const [ratingValue, setRatingValue] = useState(null);
   const [readMe, setReadMe] = useState('')
+  const [extensionInfo, setExtensionInfo] = useState('')  
+
+  const { id } = useParams();
+
+
+
+  const getReadMe = async () => {
+    let headersList = {
+      "Accept": "application/vnd.github.v3+json",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+      "Authorization": "Bearer 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"
+     }
+     
+     fetch("https://api.github.com/repos/prettier/prettier-vscode/readme", { 
+       method: "GET",
+       headers: headersList
+     }).then(function(response) {
+       return response.json();
+     }).then(function(data) {
+       console.log(data);
+       setReadMe(atob(data.content));
+      //  setReadMe(data.download_url)
+     })
+
+
+  }
+
+
+
+
+
+  
 
   useEffect(() => {
+    getExtensionById(id).then((data)=> setExtensionInfo(data))
+    getReadMe();
+   
 
-
-
-    fetch(markdown)
-      .then(response => response.text())
-      .then(text => {
-        setReadMe(text);
-      
-      })
   }, [])
 
 
@@ -53,8 +81,8 @@ function SingleExtension() {
         width: 'auto'
       }}
     >
-     <h1 style={{marginLeft:"2em", marginBottom: "0"}}>Prettier</h1> 
-     <p style={{marginLeft:"4em", marginBottom:"1em", marginTop: "0.25em", fontWeight:"bold"}}>by Prettier / v9.5.0 </p>
+     <h1 style={{marginLeft:"2em", marginBottom: "0"}}>{extensionInfo.title}</h1> 
+     <p style={{marginLeft:"4em", marginBottom:"1em", marginTop: "0.25em", fontWeight:"bold"}}>by {extensionInfo.author} / v9.5.0 </p>
 
 
      <Divider sx={{marginLeft: '2em', marginRight: '2em'}} />
@@ -62,7 +90,7 @@ function SingleExtension() {
       <Grid container direction="row" sx={{flexWrap: "wrap", margin: "3em", width: "auto", gap: "1em"}} >
       <Grid container direction="column" sx={{gap: "1em", width: "auto", maxWidth: '18em'}} >
         <Grid item>
-          <img src={'https://prettier.io/icon.png'} alt="Extension logo" style={{maxWidth: '100%', maxHeight: '100%'}} />
+          <img src={extensionInfo.logo} alt="Extension logo" style={{maxWidth: '100%', maxHeight: '100%'}} />
         </Grid>
 
         <Grid item>
@@ -79,16 +107,10 @@ function SingleExtension() {
 
             <h4 style={{marginTop: '0.25em', marginBottom:'0.25em'}}>Tags</h4>
         <Grid container direction="row" sx={{gap: '0.25em'}}>
-        <Chip label="css" /> 
-        <Chip label="styled-jsx" /> 
-        <Chip label="javascript" /> 
-        <Chip label="ts" /> 
-        <Chip label="typescript" />
-        <Chip label="formatter" /> 
-        <Chip label="scss" /> 
-        <Chip label="styled-components" /> 
-        <Chip label="html" /> 
-        <Chip label="php" /> 
+        {extensionInfo?.tags?.map((tag) =>{
+          return <Chip label={tag}  />
+        })}
+
 
         </Grid>
       </Grid>
@@ -96,10 +118,16 @@ function SingleExtension() {
 
         <Grid container direction="column" sx={{gap: "1em", width: "65vw", alignItems: "flex-start"}} >
         <Grid container direction="row" sx={{alignItems: 'center', gap: '1em'}}>
-        <Button variant="outlined" startIcon={<GitHubIcon />}>
+        <Button onClick={(e) =>{
+          e.preventDefault();
+          // window.location.href = extensionInfo.repoUrl
+          window.open(extensionInfo.repoUrl, '_blank');
+        } } variant="outlined" startIcon={<GitHubIcon />}>
           Repository
         </Button>
-        <Button variant="outlined" startIcon={<DownloadIcon />}>
+        <Button onClick={(e)=>{
+          window.location.href = extensionInfo.downloadLink
+        }} variant="outlined" startIcon={<DownloadIcon />}>
           Download
         </Button>
           <p> 1 521 downloads</p>
@@ -140,7 +168,7 @@ function SingleExtension() {
 </Stack>
 
       <article className="markdown-body" style={{maxWidth: '100%', overflow: 'auto'}}>
-        <Markdown children={readMe} />
+        <Markdown children={readMe || ''} />
         </article>
 
 

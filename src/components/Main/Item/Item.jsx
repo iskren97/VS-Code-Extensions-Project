@@ -5,6 +5,9 @@ import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 
+import { useNavigate } from 'react-router-dom';
+
+
 import './Item.css';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -14,8 +17,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const Items = ({ name, logo, author, category, rating, downloadLink }) => {
+const Items = ({name, logo, author, category, rating, downloadLink, extId }) => {
   const [ratingValue, setRatingValue] = useState(rating || 0);
+
+
+  const navigate = useNavigate();
+
 
   return (
     <Item className="item">
@@ -57,7 +64,7 @@ const Items = ({ name, logo, author, category, rating, downloadLink }) => {
             Get
           </Button>
           <Button
-            onClick={() => window.open(downloadLink, '_blank')}
+            onClick={() => navigate(`../extensions/${extId}`)}
             variant="text"
             sx={{ color: 'blue', fontWeight: 'bold', fontSize: '1.25em' }}
           >
