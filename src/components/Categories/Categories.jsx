@@ -39,12 +39,6 @@ const Categories = () => {
           </Grid>
 
           <Grid item>
-            <NavLink to="/category/:appearance">
-              <ListCategory name={'Appearance'} bgColor={'skyblue'} />
-            </NavLink>
-          </Grid>
-
-          <Grid item>
             <NavLink to="/category/:themes">
               <ListCategory name={'Themes'} bgColor={'#fdc0d1'} />
             </NavLink>

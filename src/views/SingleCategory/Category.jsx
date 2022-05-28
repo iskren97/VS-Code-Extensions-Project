@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import Header from '../../components/Header/Header';
 
-import { Container, Grid, Divider } from '@mui/material';
-import Items from '../../components/Main/Item/Item';
+import { Container, Divider, Tooltip } from '@mui/material';
 import Search from '../../components/Search/Search';
 import { useParams } from 'react-router';
 import { getAllExtensions } from '../../services/extensions.service';
+import SortIcon from '@mui/icons-material/Sort';
+import Sort from './Sort';
 
 const Category = () => {
   const { category } = useParams();
   const [extensions, setExtensions] = useState([]);
+  const [search, setSearch] = useState('');
 
   let categoryName = '';
   if (category.includes('_')) {
@@ -72,7 +74,8 @@ const Category = () => {
           >
             Browse Extensions
           </p>
-          <Search />
+
+          <Search setSearch={setSearch} />
 
           <Container
             maxWidth="xl"
@@ -88,23 +91,13 @@ const Category = () => {
               borderRadius: '7px',
             }}
           >
-            <Grid container direction="row" spacing={2} className="item-grid">
-              {extensions.map((ext) => {
-                return (
-                  <Grid key={ext.id} item>
-                    <Items
-                      key={ext.id}
-                      name={ext.title}
-                      logo={'https://prettier.io/icon.png'}
-                      author={ext.author}
-                      category={ext.category}
-                      rating={3.8}
-                      downloadLink={ext.downloadLink}
-                    />
-                  </Grid>
-                );
-              })}
-            </Grid>
+            <div style={{ textAlign: 'center' }}>
+              <Tooltip title="Sort by:" placement="right">
+                <SortIcon />
+              </Tooltip>
+
+              <Sort extensions={extensions} search={search} />
+            </div>
           </Container>
         </div>
       ) : null}
