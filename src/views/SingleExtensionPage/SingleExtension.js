@@ -13,6 +13,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Stack from '@mui/material/Stack'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { getExtensionById } from '../../services/extensions.service.js'
+import {Buffer} from 'buffer';
 
 import markdown from '../../assets/prettierReadMe.md'
 function SingleExtension() {
@@ -39,7 +40,7 @@ function SingleExtension() {
        return response.json();
      }).then(function(data) {
        console.log(data);
-       setReadMe(atob(data.content));
+       setReadMe(Buffer.from(data.content, 'base64'));
       //  setReadMe(data.download_url)
      })
 

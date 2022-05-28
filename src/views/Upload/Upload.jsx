@@ -36,15 +36,12 @@ function Upload() {
 
   const [uploadInfo, setUploadInfo] = useState({});
 
+
+
   console.log(uploadInfo);
 
 
   const validateData = async () =>{
-
-
-
-  
-
 
     if(!uploadInfo.category){
       setError(true);
@@ -110,34 +107,8 @@ function Upload() {
     }
 
 
-
-     return getAllExtensions().then(extensions => {
-      extensions.forEach((extension) => {
-        if (extension.title === uploadInfo?.name) {
-          setError(true);
-          setErrorMsg('This name is already in use');
-          setMsgType('error');
-          return false;
-        } else if (extension.repoUrl === uploadInfo.repositoryUrl) {
-          setError(true);
-          setErrorMsg('This repository is already in use');
-          setMsgType('error');
-          return false;
-        } else if (extension.fileName === uploadInfo.file?.name) {
-          setError(true);
-          setErrorMsg('This file is already uploaded');
-          setMsgType('error');
-          return false;
-        } else {
-          return true;
-
-        }
-
-
-
-
-      })
-    })
+    return true;
+     
 
 
   }
@@ -174,20 +145,59 @@ function Upload() {
   ];
 
 
-
-
+  
+  
   const submitExtension = async () =>{
-    if(await validateData()){
-    createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags, uploadInfo.logo)
+    const isValidData = await validateData();
 
-    setError(true);
-    setErrorMsg(`Extension uploaded successfully!`);
-    setMsgType('success');
-    setTimeout(() => {
-      navigate('/');
-    }, 1500);
 
+
+    getAllExtensions().then(extensions => {
+
+      // console.log(extensions)
+      for(const extension of extensions){
+      if (extension.title === uploadInfo?.name) {
+        setError(true);
+        setErrorMsg('This name is already in use');
+        setMsgType('error');
+        return false;
+      } 
+      
+      if (extension.repoUrl === uploadInfo.repositoryUrl) {
+        setError(true);
+        setErrorMsg('This repository is already in use');
+        setMsgType('error');
+        return false;
+      } 
+      
+      if (extension.fileName === uploadInfo.file?.name) {
+        setError(true);
+        setErrorMsg('This file is already uploaded');
+        setMsgType('error');
+        return false;
+      }
     }
+    if(isValidData){
+      createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags, uploadInfo.logo)
+  
+      setError(true);
+      setErrorMsg(`Extension uploaded successfully!`);
+      setMsgType('success');
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
+    }
+
+  })
+
+
+
+
+
+    
+
+    
+    
   };
 
   return (
