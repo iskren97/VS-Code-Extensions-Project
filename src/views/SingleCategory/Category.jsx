@@ -39,17 +39,6 @@ const Category = () => {
       <div style={{ textAlign: 'center', marginTop: '170px' }}>
         <h1>{categoryName}</h1>
 
-        <Divider
-          sx={{
-            width: '40%',
-            textAlign: 'center',
-            margin: '0 auto',
-            marginBottom: '30px',
-            backgroundColor: 'rgba(0,122,205,255)',
-          }}
-          variant="fullWidth"
-        />
-
         <h2>
           {extensions.length > 0
             ? extensions.length > 1
@@ -85,17 +74,14 @@ const Category = () => {
               marginTop: '50px',
               marginBottom: '50px',
               paddingBottom: '50px',
-              paddingTop: '50px',
               boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
               background: 'white',
               borderRadius: '7px',
             }}
           >
-            <div style={{ textAlign: 'center' }}>
-              <Tooltip title="Sort by:" placement="right">
-                <SortIcon />
-              </Tooltip>
+            <br />
 
+            <div style={{ textAlign: 'center' }}>
               <Sort extensions={extensions} search={search} />
             </div>
           </Container>

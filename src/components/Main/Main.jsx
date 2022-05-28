@@ -17,8 +17,6 @@ const Main = () => {
       <div style={{ marginTop: '10em' }}>
         <Intro />
 
-        <Search />
-
         <Categories />
 
         <Container

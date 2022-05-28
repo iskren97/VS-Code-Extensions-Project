@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 
 import './Sort.css';
 import Items from '../../components/Main/Item/Item';
@@ -112,6 +112,10 @@ const Sort = ({ extensions, search }) => {
           </th>
         </tr>
       </thead>
+
+      <br />
+      <Divider />
+      <br />
 
       <tbody>
         <tr>
