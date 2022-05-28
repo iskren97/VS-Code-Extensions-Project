@@ -38,32 +38,9 @@ function Upload() {
 
   const validateData = () =>{
 
-    getAllExtensions().then(extensions => {
-      extensions.forEach((extension) => {
-        if(extension.title === uploadInfo?.name){
-          setError(true);
-      setErrorMsg('This name is already in use');
-      setMsgType('error');
-      return false;
-        }
-
-        if(extension.repoUrl === uploadInfo.repositoryUrl){
-          setError(true);
-      setErrorMsg('This repository is already in use');
-      setMsgType('error');
-      return false;
-        }
-
-        if(extension.fileName === uploadInfo.file?.name){
-          setError(true);
-      setErrorMsg('This file is already uploaded');
-      setMsgType('error');
-      return false;
-        }
 
 
-      })
-    })
+  
 
 
     if(!uploadInfo.category){
@@ -123,7 +100,35 @@ function Upload() {
       setMsgType('error');
       return false;
     }
-    return true;
+
+
+
+    return getAllExtensions().then(extensions => {
+      extensions.forEach((extension) => {
+        if(extension.title === uploadInfo?.name){
+          setError(true);
+      setErrorMsg('This name is already in use');
+      setMsgType('error');
+      return false;
+        }else if(extension.repoUrl === uploadInfo.repositoryUrl){
+          setError(true);
+      setErrorMsg('This repository is already in use');
+      setMsgType('error');
+      return false;
+        }else if(extension.fileName === uploadInfo.file?.name){
+          setError(true);
+      setErrorMsg('This file is already uploaded');
+      setMsgType('error');
+      return false;
+        } else {
+          return true;
+        }
+
+
+      })
+    })
+
+
   }
 
   const handleKeyEnter = (event) => {
@@ -134,6 +139,7 @@ function Upload() {
         submitExtension(event);
       }
     }
+
   };
 
 
@@ -142,7 +148,7 @@ function Upload() {
 
 
   const submitExtension = async () =>{
-    if(validateData()){
+    if((await validateData()) === true){
     createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags, uploadInfo.logo)
 
     setError(true);
@@ -162,6 +168,7 @@ function Upload() {
 
   return (
     <>
+    <div className="upload-parent">
     <Container className="upload-container" maxWidth="sm">
       <div
         style={{
@@ -302,6 +309,8 @@ function Upload() {
         setErr={setError}
       />
     ) : null}
+
+    </div>
   </>
   )
 }
