@@ -13,9 +13,11 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Stack from '@mui/material/Stack'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { getExtensionById } from '../../services/extensions.service.js'
-import {Buffer} from 'buffer';
+
+
 
 import markdown from '../../assets/prettierReadMe.md'
+
 function SingleExtension() {
 
   const [ratingValue, setRatingValue] = useState(null);
@@ -39,9 +41,10 @@ function SingleExtension() {
      }).then(function(response) {
        return response.json();
      }).then(function(data) {
-       console.log(data);
-       setReadMe(Buffer.from(data.content, 'base64'));
-      //  setReadMe(data.download_url)
+
+       setReadMe(decodeURIComponent(escape(window.atob(data.content))));
+
+       console.log(data)
      })
 
 
@@ -171,7 +174,6 @@ function SingleExtension() {
       <article className="markdown-body" style={{maxWidth: '100%', overflow: 'auto'}}>
         <Markdown children={readMe || ''} />
         </article>
-
 
         </Grid>
       </Grid>

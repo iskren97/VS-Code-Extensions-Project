@@ -16,7 +16,6 @@
     "@types/react-phone-number-input": "^3.0.13",
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
-    "buffer": "^6.0.3",
     "firebase": "^9.8.1",
     "markdown-to-jsx": "^7.1.7",
     "react": "^18.1.0",
