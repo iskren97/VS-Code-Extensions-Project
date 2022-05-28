@@ -36,32 +36,9 @@ function Upload() {
 
   const [uploadInfo, setUploadInfo] = useState({});
 
+  console.log(uploadInfo);
+
   const validateData = () => {
-    getAllExtensions().then((extensions) => {
-      extensions.forEach((extension) => {
-        if (extension.title === uploadInfo?.name) {
-          setError(true);
-          setErrorMsg('This name is already in use');
-          setMsgType('error');
-          return false;
-        }
-
-        if (extension.repoUrl === uploadInfo.repositoryUrl) {
-          setError(true);
-          setErrorMsg('This repository is already in use');
-          setMsgType('error');
-          return false;
-        }
-
-        if (extension.fileName === uploadInfo.file?.name) {
-          setError(true);
-          setErrorMsg('This file is already uploaded');
-          setMsgType('error');
-          return false;
-        }
-      });
-    });
-
     if (!uploadInfo.category) {
       setError(true);
       setErrorMsg('Please select a category');
@@ -124,7 +101,29 @@ function Upload() {
       setMsgType('error');
       return false;
     }
-    return true;
+
+    return getAllExtensions().then((extensions) => {
+      extensions.forEach((extension) => {
+        if (extension.title === uploadInfo?.name) {
+          setError(true);
+          setErrorMsg('This name is already in use');
+          setMsgType('error');
+          return false;
+        } else if (extension.repoUrl === uploadInfo.repositoryUrl) {
+          setError(true);
+          setErrorMsg('This repository is already in use');
+          setMsgType('error');
+          return false;
+        } else if (extension.fileName === uploadInfo.file?.name) {
+          setError(true);
+          setErrorMsg('This file is already uploaded');
+          setMsgType('error');
+          return false;
+        } else {
+          return true;
+        }
+      });
+    });
   };
 
   const handleKeyEnter = (event) => {
@@ -159,7 +158,7 @@ function Upload() {
   ];
 
   const submitExtension = async () => {
-    if (validateData()) {
+    if ((await validateData()) === true) {
       createExtension(
         uploadInfo.name,
         uploadInfo.repositoryUrl,
@@ -177,156 +176,168 @@ function Upload() {
       setTimeout(() => {
         navigate('/');
       }, 1500);
+
+      setError(true);
+      setErrorMsg(`Extension uploaded successfully!`);
+      setMsgType('success');
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
     }
   };
 
   return (
     <>
-      <Container className="upload-container" maxWidth="sm">
-        <div
-          style={{
-            textAlign: 'center',
-            position: 'relative',
-            top: '-25px',
-            fontSize: '22px',
-          }}
-        >
-          <h2>Upload an extension</h2>
-        </div>
-        <br />
-
-        <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
-
-        <br />
-        <form className="upload-form">
-          <div>
-            <input
-              type="text"
-              placeholder="Extension Name"
-              required
-              onChange={(e) =>
-                setUploadInfo({ ...uploadInfo, name: e.target.value })
-              }
-              onKeyDown={handleKeyEnter}
-            />
+      <div className="upload-parent">
+        <Container className="upload-container" maxWidth="sm">
+          <div
+            style={{
+              textAlign: 'center',
+              position: 'relative',
+              top: '-25px',
+              fontSize: '22px',
+            }}
+          >
+            <h2>Upload an extension</h2>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Repository Url"
-              required
-              onChange={(e) =>
-                setUploadInfo({ ...uploadInfo, repositoryUrl: e.target.value })
-              }
-              onKeyDown={handleKeyEnter}
-            />
-          </div>
-          <div>
-            <h2>File</h2>
-
-            <input
-              type="file"
-              accept=".vsix"
-              required
-              onChange={(e) =>
-                setUploadInfo({ ...uploadInfo, file: e.target.files[0] })
-              }
-              onKeyDown={handleKeyEnter}
-            />
-          </div>
-
-          <div>
-            <h2>Logo</h2>
-
-            <input
-              type="file"
-              accept="image/*"
-              required
-              onChange={(e) =>
-                setUploadInfo({ ...uploadInfo, logo: e.target.files[0] })
-              }
-              onKeyDown={handleKeyEnter}
-            />
-          </div>
-          <div>
-            <h2>Category</h2>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={uploadInfo.category || ''}
-              onChange={(e) =>
-                setUploadInfo({ ...uploadInfo, category: e.target.value })
-              }
-              sx={{ width: '100%' }}
-            >
-              <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
-              <MenuItem value={'Linters'}>Linters</MenuItem>
-              <MenuItem value={'Appearance'}>Appearance</MenuItem>
-              <MenuItem value={'Themes'}>Themes</MenuItem>
-              <MenuItem value={'Snippets'}>Snippets</MenuItem>
-              <MenuItem value={'Programming Languages'}>
-                Programming Languages
-              </MenuItem>
-              <MenuItem value={'Azure'}>Azure</MenuItem>
-              <MenuItem value={'Data Science'}>Data Science</MenuItem>
-              <MenuItem value={'Debuggers'}>Debuggers</MenuItem>
-            </Select>
-          </div>
-          <div>
-            <Autocomplete
-              multiple
-              id="tags-filled"
-              options={tags}
-              freeSolo
-              disableClearable
-              className="upload-form-tags"
-              fullWidth
-              onChange={(e, values) =>
-                setUploadInfo({ ...uploadInfo, tags: values })
-              }
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField {...params} variant="filled" placeholder="Tags" />
-              )}
-            />
-          </div>
+          <br />
 
           <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
 
-          <Button
-            onClick={() => submitExtension()}
-            variant="contained"
-            sx={{
-              cursor: 'pointer',
-              background: 'rgba(0, 122, 205, 255)',
-              textTransform: 'uppercase',
-              border: 'none',
-              padding: '20px',
-              fontSize: '18px',
-              fontWeight: 'bold',
-              letterSpacing: '10px',
-            }}
-          >
-            Submit
-          </Button>
-        </form>
-      </Container>
-      {error ? (
-        <AlertUser
-          msg={errorMsg}
-          type={msgType}
-          err={error}
-          setErr={setError}
-        />
-      ) : null}
+          <br />
+          <form className="upload-form">
+            <div>
+              <input
+                type="text"
+                placeholder="Extension Name"
+                required
+                onChange={(e) =>
+                  setUploadInfo({ ...uploadInfo, name: e.target.value })
+                }
+                onKeyDown={handleKeyEnter}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Repository Url"
+                required
+                onChange={(e) =>
+                  setUploadInfo({
+                    ...uploadInfo,
+                    repositoryUrl: e.target.value,
+                  })
+                }
+                onKeyDown={handleKeyEnter}
+              />
+            </div>
+            <div>
+              <h2>File</h2>
+
+              <input
+                type="file"
+                accept=".vsix"
+                required
+                onChange={(e) =>
+                  setUploadInfo({ ...uploadInfo, file: e.target.files[0] })
+                }
+                onKeyDown={handleKeyEnter}
+              />
+            </div>
+
+            <div>
+              <h2>Logo</h2>
+
+              <input
+                type="file"
+                accept="image/*"
+                required
+                onChange={(e) =>
+                  setUploadInfo({ ...uploadInfo, logo: e.target.files[0] })
+                }
+                onKeyDown={handleKeyEnter}
+              />
+            </div>
+            <div>
+              <h2>Category</h2>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={uploadInfo.category || ''}
+                onChange={(e) =>
+                  setUploadInfo({ ...uploadInfo, category: e.target.value })
+                }
+                sx={{ width: '100%' }}
+              >
+                <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
+                <MenuItem value={'Linters'}>Linters</MenuItem>
+                <MenuItem value={'Appearance'}>Appearance</MenuItem>
+                <MenuItem value={'Themes'}>Themes</MenuItem>
+                <MenuItem value={'Snippets'}>Snippets</MenuItem>
+                <MenuItem value={'Programming Languages'}>
+                  Programming Languages
+                </MenuItem>
+                <MenuItem value={'Azure'}>Azure</MenuItem>
+                <MenuItem value={'Data Science'}>Data Science</MenuItem>
+                <MenuItem value={'Debuggers'}>Debuggers</MenuItem>
+              </Select>
+            </div>
+            <div>
+              <Autocomplete
+                multiple
+                id="tags-filled"
+                options={tags}
+                freeSolo
+                disableClearable
+                className="upload-form-tags"
+                fullWidth
+                onChange={(e, values) =>
+                  setUploadInfo({ ...uploadInfo, tags: values })
+                }
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip
+                      variant="outlined"
+                      label={option}
+                      {...getTagProps({ index })}
+                    />
+                  ))
+                }
+                renderInput={(params) => (
+                  <TextField {...params} variant="filled" placeholder="Tags" />
+                )}
+              />
+            </div>
+
+            <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
+
+            <Button
+              onClick={() => submitExtension()}
+              variant="contained"
+              sx={{
+                cursor: 'pointer',
+                background: 'rgba(0, 122, 205, 255)',
+                textTransform: 'uppercase',
+                border: 'none',
+                padding: '20px',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                letterSpacing: '10px',
+              }}
+            >
+              Submit
+            </Button>
+          </form>
+        </Container>
+        {error ? (
+          <AlertUser
+            msg={errorMsg}
+            type={msgType}
+            err={error}
+            setErr={setError}
+          />
+        ) : null}
+      </div>
     </>
   );
 }
