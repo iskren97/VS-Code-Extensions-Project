@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import Header from '../../components/Header/Header';
 
-import { Container, Grid, Divider } from '@mui/material';
-import Items from '../../components/Main/Item/Item';
+import { Container, Divider, Tooltip } from '@mui/material';
 import Search from '../../components/Search/Search';
 import { useParams } from 'react-router';
 import { getAllExtensions } from '../../services/extensions.service';
+import SortIcon from '@mui/icons-material/Sort';
+import Sort from './Sort';
 
 const Category = () => {
   const { category } = useParams();
   const [extensions, setExtensions] = useState([]);
+  const [search, setSearch] = useState('');
 
   let categoryName = '';
   if (category.includes('_')) {
@@ -37,17 +39,6 @@ const Category = () => {
       <div style={{ textAlign: 'center', marginTop: '170px' }}>
         <h1>{categoryName}</h1>
 
-        <Divider
-          sx={{
-            width: '40%',
-            textAlign: 'center',
-            margin: '0 auto',
-            marginBottom: '30px',
-            backgroundColor: 'rgba(0,122,205,255)',
-          }}
-          variant="fullWidth"
-        />
-
         <h2>
           {extensions.length > 0
             ? extensions.length > 1
@@ -72,7 +63,8 @@ const Category = () => {
           >
             Browse Extensions
           </p>
-          <Search />
+
+          <Search setSearch={setSearch} />
 
           <Container
             maxWidth="xl"
@@ -82,30 +74,16 @@ const Category = () => {
               marginTop: '50px',
               marginBottom: '50px',
               paddingBottom: '50px',
-              paddingTop: '50px',
               boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
               background: 'white',
               borderRadius: '7px',
             }}
           >
-            <Grid container direction="row" spacing={2} className="item-grid">
-              {extensions.map((ext) => {
-                return (
-                  <Grid key={ext.id} item>
-                    <Items
-                      key={ext.id}
-                      name={ext.title}
-                      logo={'https://prettier.io/icon.png'}
-                      author={ext.author}
-                      category={ext.category}
-                      rating={3.8}
-                      downloadLink={ext.downloadLink}
-                      extId={ext.id}
-                    />
-                  </Grid>
-                );
-              })}
-            </Grid>
+            <br />
+
+            <div style={{ textAlign: 'center' }}>
+              <Sort extensions={extensions} search={search} />
+            </div>
           </Container>
         </div>
       ) : null}
