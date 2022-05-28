@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router';
 import './Upload.css';
 
 import AppContext from '../../providers/AppContext';
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../config/firebase-config';
 
 import { Container, Divider } from '@mui/material';
 
@@ -31,15 +33,14 @@ function Upload() {
 
   const [uploadInfo, setUploadInfo] = useState({})
 
+  console.log(uploadInfo)
 
 
-
-  
   const validateData = () =>{
 
     getAllExtensions().then(extensions => {
       extensions.forEach((extension) => {
-        if(extension.title === uploadInfo.name){
+        if(extension.title === uploadInfo?.name){
           setError(true);
       setErrorMsg('This name is already in use');
       setMsgType('error');
@@ -53,7 +54,7 @@ function Upload() {
       return false;
         }
 
-        if(extension.fileName === uploadInfo.file.name){
+        if(extension.fileName === uploadInfo.file?.name){
           setError(true);
       setErrorMsg('This file is already uploaded');
       setMsgType('error');
@@ -106,6 +107,15 @@ function Upload() {
       setMsgType('error');
       return false;
     }
+
+
+
+    if(!uploadInfo.logo || (uploadInfo.logo.type !== 'image/jpg' && uploadInfo.logo.type !== 'image/png' && uploadInfo.logo.type !== 'image/jpeg')){
+      setError(true);
+      setErrorMsg('Please upload a jpg or png file');
+      setMsgType('error');
+      return false;
+    }
     
     if(!uploadInfo.repositoryUrl || !uploadInfo.repositoryUrl.startsWith('https://github.com/')){
       setError(true);
@@ -133,7 +143,7 @@ function Upload() {
 
   const submitExtension = async () =>{
     if(validateData()){
-    createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags)
+    createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags, uploadInfo.logo)
 
     setError(true);
     setErrorMsg(`Extension uploaded successfully!`);
@@ -144,6 +154,10 @@ function Upload() {
 
     }
   }
+
+
+
+
 
 
   return (
@@ -166,10 +180,9 @@ function Upload() {
       <br />
       <form className="upload-form">
       <div>
-      <h2>Title</h2>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Extension Name"
           required
           onChange={e => setUploadInfo({...uploadInfo, name: e.target.value})}
           
@@ -177,7 +190,6 @@ function Upload() {
         />
         </div>
         <div>
-      <h2>Repository Url</h2>
 
         <input
           type="text"
@@ -193,8 +205,23 @@ function Upload() {
 
           <input
           type="file"
+          accept='.vsix'
+
           required
           onChange={e => setUploadInfo({...uploadInfo, file: e.target.files[0]})}
+          onKeyDown={handleKeyEnter}
+        />
+        </div>
+
+
+        <div>
+      <h2>Logo</h2>
+
+          <input
+          type="file"
+          accept='image/*'
+          required
+          onChange={e => setUploadInfo({...uploadInfo, logo: e.target.files[0]})}
           onKeyDown={handleKeyEnter}
         />
         </div>
@@ -221,7 +248,6 @@ function Upload() {
         </Select>
         </div>
         <div>
-        <h2>Tags</h2>
 
         <Autocomplete
         multiple
@@ -247,23 +273,15 @@ function Upload() {
       />
       </div>
 
-{/* <input
-  type="text"
-  placeholder="Tags"
-  required
-  onChange={e => setUploadInfo({...uploadInfo, tags: e.target.value})}
-  
-  onKeyDown={handleKeyEnter}
-/> */}
 
 
+      <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
 
         <Button onClick={()=> submitExtension()} variant="contained"  sx={{
           cursor: 'pointer',
     background: 'rgba(0, 122, 205, 255)',
     textTransform: 'uppercase',
     border: 'none',
-    marginTop: '40px',
     padding: '20px',
     fontSize: '18px',
     fontWeight: 'bold',

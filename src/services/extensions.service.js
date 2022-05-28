@@ -6,7 +6,7 @@ import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage
 import { storage } from '../config/firebase-config';
 
 
-export const createExtension = (title, repoUrl, category, author, fileName, file, tags) => {
+export const createExtension = (title, repoUrl, category, author, fileName, file, tags, logo) => {
 
   return push(ref(db, 'extensions'), {
     title,
@@ -14,11 +14,13 @@ export const createExtension = (title, repoUrl, category, author, fileName, file
     repoUrl,
     fileName,
     tags,
+    logo,
+    status: 'pending',	
     createdOn: Date.now(),
     category: category
   }).then((result) => {
 
-    uploadExtensionFile(file, author, fileName, result.key)
+    uploadExtensionFile(file,logo, author, fileName, result.key)
 
     return getExtensionById(result.key);
   });
@@ -75,7 +77,7 @@ export const getAllExtensions = () => {
 
 
 
-export const uploadExtensionFile = (e, username, fileName, extId) => {
+export const uploadExtensionFile = (e, logo, username, fileName, extId) => {
   const file = e
 
   if (!file){
@@ -89,7 +91,8 @@ export const uploadExtensionFile = (e, username, fileName, extId) => {
     .then((snapshot) => {
       return getDownloadURL(snapshot.ref).then((url) => {
         updateExtensionDownloadLink(extId, url)
-          return updateExtensions(username, url, fileName);
+        uploadLogo(logo, username, fileName, extId)
+          return updateExtensions(username, url, fileName, extId);
       });
     })
     // eslint-disable-next-line no-undef
@@ -98,7 +101,36 @@ export const uploadExtensionFile = (e, username, fileName, extId) => {
 };
 
 
-export const updateExtensions = (username, url, fileName) => {
+
+const uploadLogo = (e, username, fileName, extId) => {
+
+  const file = e
+
+
+  if (file['type'].split('/')[0] !== 'image')
+    return 
+
+  const picture = storageRef(storage, `extensions/${username}/${fileName}_logo`);
+
+  uploadBytes(picture, file)
+    .then((snapshot) => {
+      return getDownloadURL(snapshot.ref).then((url) => {
+        return updateExtensionLogo(extId, url)
+      });
+    })
+    // eslint-disable-next-line no-undef
+    .catch(console.error);
+};
+
+
+export const updateExtensionLogo = (extId, url) => {
+  return update(ref(db), {
+    [`extensions/${extId}/logo`]: url
+  });
+};
+
+
+export const updateExtensions = (username, url, fileName, extId) => {
 
   return get(ref(db, `users`)).then((snapshot) => {
     if (!snapshot.exists()) {
@@ -107,9 +139,8 @@ export const updateExtensions = (username, url, fileName) => {
 
     const extensions = [...snapshot.val()[username].extensions || []]
 
-    
 
-    extensions.push({fileName: fileName, downLoadLink: url})
+    extensions.push({fileName: fileName, downLoadLink: url, extensionId: extId})
      return update(ref(db), {
       [`users/${username}/extensions`]: extensions
     });
