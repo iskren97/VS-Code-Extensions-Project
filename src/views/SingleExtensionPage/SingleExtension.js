@@ -15,57 +15,129 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { getExtensionById } from '../../services/extensions.service.js'
 
 
+import Img from './Img'
 
-import markdown from '../../assets/prettierReadMe.md'
 
 function SingleExtension() {
 
   const [ratingValue, setRatingValue] = useState(null);
   const [readMe, setReadMe] = useState('')
-  const [extensionInfo, setExtensionInfo] = useState('')  
+  const [extensionInfo, setExtensionInfo] = useState('')
+  const [repoInfo, setRepoInfo] = useState('')
+  const [pulls, setPulls] = useState('')
+  const [commitInfo, setCommitInfo] = useState('')
+  const [version, setVersion] = useState('')
 
   const { id } = useParams();
 
+  let headersList = {
+    "Accept": "application/vnd.github.v3+json",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Authorization": "Bearer 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"
+   }
+  useEffect(() => {
+
+  
+    getExtensionById(id).then(data => {
+      const target = data.repoUrl.split('/')
+
+      getExtensionById(id).then((data)=> setExtensionInfo(data))
+      getReadMe(target[3], target[4]);
+      getRepoInfo(target[3], target[4]);
+      getPulls(target[3], target[4]);
+      getLastCommit(target[3], target[4]);
+      getVersion(target[3], target[4]);
+    })
+
+  }, [])
 
 
-  const getReadMe = async () => {
-    let headersList = {
-      "Accept": "application/vnd.github.v3+json",
-      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-      "Authorization": "Bearer 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"
-     }
+  const getVersion = async (author, repo) =>{
+
      
-     fetch("https://api.github.com/repos/prettier/prettier-vscode/readme", { 
+     const resp = await fetch(`https://api.github.com/repos/${author}/${repo}/releases/latest`, { 
        method: "GET",
        headers: headersList
-     }).then(function(response) {
-       return response.json();
-     }).then(function(data) {
-
-       setReadMe(decodeURIComponent(escape(window.atob(data.content))));
-
-       console.log(data)
      })
 
+     const data = await resp.json();
 
+     setVersion(data.tag_name)
+
+  }
+
+  const getReadMe = async (author, repo) => {
+      const resp = await fetch(`https://api.github.com/repos/${author}/${repo}/readme`, { 
+         method: "GET",
+         headers: headersList
+       })
+
+        const data = await resp.json();
+        const markdown = await fetch(data.download_url);
+        const text = await markdown.text();
+
+        setReadMe(text)
+
+        // setReadMe(decodeURIComponent(escape(window.atob(data.content))));
+  }
+
+const getPulls = async (author, repo) => {
+    const resp = await fetch("https://api.github.com/repos/prettier/prettier-vscode/pulls", { 
+     method: "GET",
+     headers: headersList
+   })
+  const data = await resp.json();
+  setPulls(data)
+}
+
+
+  const getRepoInfo = async (author, repo) => {
+    const resp = await fetch(`https://api.github.com/repos/${author}/${repo}`, { 
+       method: "GET",
+       headers: headersList
+     })
+     
+     const data = await resp.json();
+
+     setRepoInfo(data)
+     
+  }
+
+
+
+  const getLastCommit = async (author, repo) =>{
+    const resp = await fetch(`https://api.github.com/repos/${author}/${repo}/commits`, { 
+       method: "GET",
+       headers: headersList
+     })
+      const data = await resp.json();
+
+     setCommitInfo(data[0])
+  }
+
+  console.log(repoInfo)
+
+  
+
+  const setDate = (date) => {
+    const newDate = new Date(date);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+      timeZone: 'UTC'
+    };
+    return newDate.toLocaleString('en-US', options);
   }
 
 
 
 
-
-  
-
-  useEffect(() => {
-    getExtensionById(id).then((data)=> setExtensionInfo(data))
-    getReadMe();
-   
-
-  }, [])
-
-
-
-
+ 
 
   return (
     <>
@@ -86,7 +158,7 @@ function SingleExtension() {
       }}
     >
      <h1 style={{marginLeft:"2em", marginBottom: "0"}}>{extensionInfo.title}</h1> 
-     <p style={{marginLeft:"4em", marginBottom:"1em", marginTop: "0.25em", fontWeight:"bold"}}>by {extensionInfo.author} / v9.5.0 </p>
+     <p style={{marginLeft:"4em", marginBottom:"1em", marginTop: "0.25em", fontWeight:"bold"}}>by {extensionInfo.author} {version ? '/ ' + version : null} </p>
 
 
      <Divider sx={{marginLeft: '2em', marginRight: '2em'}} />
@@ -124,7 +196,6 @@ function SingleExtension() {
         <Grid container direction="row" sx={{alignItems: 'center', gap: '1em'}}>
         <Button onClick={(e) =>{
           e.preventDefault();
-          // window.location.href = extensionInfo.repoUrl
           window.open(extensionInfo.repoUrl, '_blank');
         } } variant="outlined" startIcon={<GitHubIcon />}>
           Repository
@@ -148,31 +219,48 @@ function SingleExtension() {
   divider={<Divider orientation="vertical" flexItem />}
   spacing={2}
 >
-  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer'}} onClick={(e)=> {
+    e.preventDefault();
+      window.open(repoInfo.html_url + '/issues', '_blank');
+  }}>
 
   <p style={{fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '0.25em'}}>Open Issues </p>
-  <p style={{fontSize: '1.3rem', fontWeight: 'bold'}}>13</p> 
+  <p style={{fontSize: '1.3rem', fontWeight: 'bold'}}>{repoInfo.open_issues}</p> 
   
   </div>
 
-  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer'}} onClick={(e)=> {
+    e.preventDefault();
+      window.open(repoInfo.html_url + '/pulls', '_blank');
+  }}>
   
   <p style={{fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '0.25em'}}>Pull Requests </p>
-  <p style={{fontSize: '1.3rem', fontWeight: 'bold'}}>78</p> 
+  <p style={{fontSize: '1.3rem', fontWeight: 'bold'}}>{pulls.length}</p> 
   
   </div>
 
-  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', cursor: 'pointer'}} onClick={(e)=> {
+    e.preventDefault();
+      window.open(commitInfo.html_url, '_blank');
+  }} >
   
   <p style={{fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '0.25em'}}>Last Commit</p>
-  <p style={{fontSize: '1.3rem', fontWeight: 'bold'}}> 3 days ago</p> 
+
+  <p style={{fontSize: '1.3rem'}}>{commitInfo?.commit?.message}</p> 
+  <p style={{fontSize: '1.3rem'}}>{setDate(commitInfo?.commit?.committer?.date)}</p> 
   
   </div>
 
 </Stack>
 
       <article className="markdown-body" style={{maxWidth: '100%', overflow: 'auto'}}>
-        <Markdown children={readMe || ''} />
+        <Markdown children={readMe || ''}   options={{
+            overrides: {
+                img: {
+                    component: Img,
+                },
+            },
+        }}/>
         </article>
 
         </Grid>
