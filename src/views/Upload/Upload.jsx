@@ -13,6 +13,9 @@ import { storage } from '../../config/firebase-config';
 
 import { Container, Divider } from '@mui/material';
 
+import Tooltip from '@mui/material/Tooltip';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import AlertUser from '../Register/AlertUser';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -25,6 +28,7 @@ import {
   createExtension,
   getAllExtensions,
 } from '../../services/extensions.service';
+import { NavLink } from 'react-router-dom';
 
 function Upload() {
   const { user, userData, setContext } = useContext(AppContext);
@@ -36,14 +40,10 @@ function Upload() {
 
   const [uploadInfo, setUploadInfo] = useState({});
 
-
-
   console.log(uploadInfo);
 
-
-  const validateData = async () =>{
-
-    if(!uploadInfo.category){
+  const validateData = async () => {
+    if (!uploadInfo.category) {
       setError(true);
       setErrorMsg('Please select a category');
       setMsgType('error');
@@ -106,12 +106,8 @@ function Upload() {
       return false;
     }
 
-
     return true;
-     
-
-
-  }
+  };
 
   const handleKeyEnter = (event) => {
     if (event.key === 'Enter') {
@@ -144,66 +140,67 @@ function Upload() {
     'es6',
   ];
 
-
-  
-  
-  const submitExtension = async () =>{
+  const submitExtension = async () => {
     const isValidData = await validateData();
 
-
-
-    getAllExtensions().then(extensions => {
-
+    getAllExtensions().then((extensions) => {
       // console.log(extensions)
-      for(const extension of extensions){
-      if (extension.title === uploadInfo?.name) {
-        setError(true);
-        setErrorMsg('This name is already in use');
-        setMsgType('error');
-        return false;
-      } 
-      
-      if (extension.repoUrl === uploadInfo.repositoryUrl) {
-        setError(true);
-        setErrorMsg('This repository is already in use');
-        setMsgType('error');
-        return false;
-      } 
-      
-      if (extension.fileName === uploadInfo.file?.name) {
-        setError(true);
-        setErrorMsg('This file is already uploaded');
-        setMsgType('error');
-        return false;
+      for (const extension of extensions) {
+        if (extension.title === uploadInfo?.name) {
+          setError(true);
+          setErrorMsg('This name is already in use');
+          setMsgType('error');
+          return false;
+        }
+
+        if (extension.repoUrl === uploadInfo.repositoryUrl) {
+          setError(true);
+          setErrorMsg('This repository is already in use');
+          setMsgType('error');
+          return false;
+        }
+
+        if (extension.fileName === uploadInfo.file?.name) {
+          setError(true);
+          setErrorMsg('This file is already uploaded');
+          setMsgType('error');
+          return false;
+        }
       }
-    }
-    if(isValidData){
-      createExtension(uploadInfo.name, uploadInfo.repositoryUrl, uploadInfo.category, userData.username, uploadInfo.file.name, uploadInfo.file, uploadInfo.tags, uploadInfo.logo)
-  
-      setError(true);
-      setErrorMsg(`Extension uploaded successfully!`);
-      setMsgType('success');
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
-    }
+      if (isValidData) {
+        createExtension(
+          uploadInfo.name,
+          uploadInfo.repositoryUrl,
+          uploadInfo.category,
+          userData.username,
+          uploadInfo.file.name,
+          uploadInfo.file,
+          uploadInfo.tags,
+          uploadInfo.logo
+        );
 
-  })
-
-
-
-
-
-    
-
-    
-    
+        setError(true);
+        setErrorMsg(`Extension uploaded successfully!`);
+        setMsgType('success');
+        setTimeout(() => {
+          navigate('/');
+        }, 1500);
+      }
+    });
   };
 
   return (
     <>
       <div className="upload-parent">
         <Container className="upload-container" maxWidth="sm">
+          <NavLink to="/home" style={{ all: 'unset', cursor: 'pointer' }}>
+            <Tooltip placement="right-end" title="Back to Home">
+              <ArrowBackIcon
+                fontSize={'medium'}
+                style={{ position: 'absolute', top: '5px', left: '5px' }}
+              />
+            </Tooltip>
+          </NavLink>
           <div
             style={{
               textAlign: 'center',

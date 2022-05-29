@@ -123,7 +123,8 @@ const Sort = ({ extensions, search }) => {
             <Grid container direction="row" spacing={2} className="item-grid">
               {allExtensions.map((ext) => {
                 if (search) {
-                  return ext.title.toLowerCase().includes(search) ? (
+                  return ext.title.toLowerCase().includes(search) ||
+                    ext.tags.includes(search) ? (
                     <Grid key={ext.id} item>
                       <Items
                         key={ext.id}

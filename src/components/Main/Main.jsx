@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Main.css';
 
 import Items from './Item/Item';
@@ -10,7 +10,19 @@ import Search from '../Search/Search';
 import Categories from '../Categories/Categories';
 import Header from '../Header/Header';
 
+import { getAllExtensions } from '../../services/extensions.service';
+
 const Main = () => {
+  const [recommended, setRecommended] = useState([]);
+  const [popular, setPopular] = useState([]);
+  useEffect(() => {
+    getAllExtensions().then((resp) => setRecommended(resp.slice(6, 12)));
+  }, []);
+
+  useEffect(() => {
+    getAllExtensions().then((resp) => setPopular(resp.slice(0, 6)));
+  }, []);
+
   return (
     <>
       <Header />
@@ -35,38 +47,20 @@ const Main = () => {
           <Divider sx={{ marginBottom: '30px' }} />
 
           <Grid container direction="row" spacing={2} className="item-grid">
-            <Grid item>
-              <Items
-                name={'Prettier'}
-                logo={'https://prettier.io/icon.png'}
-                author={'Prettier Inc'}
-                category={'Code formatter'}
-                rating={3.8}
-                downloadLink={
-                  'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                }
-              />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
+            {recommended.map((ext) => {
+              return (
+                <Grid item>
+                  <Items
+                    name={ext.title}
+                    logo={ext.logo}
+                    author={ext.author}
+                    category={ext.category}
+                    rating={3.8}
+                    downloadLink={ext.downloadLink}
+                  />
+                </Grid>
+              );
+            })}
           </Grid>
         </Container>
 
@@ -86,29 +80,20 @@ const Main = () => {
           <Divider sx={{ marginBottom: '30px' }} />
 
           <Grid container direction="row" spacing={2} className="item-grid">
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
-
-            <Grid item>
-              <Items name={'Prettier'} logo={'https://prettier.io/icon.png'} />
-            </Grid>
+            {popular.map((ext) => {
+              return (
+                <Grid item>
+                  <Items
+                    name={ext.title}
+                    logo={ext.logo}
+                    author={ext.author}
+                    category={ext.category}
+                    rating={3.8}
+                    downloadLink={ext.downloadLink}
+                  />
+                </Grid>
+              );
+            })}
           </Grid>
         </Container>
       </div>

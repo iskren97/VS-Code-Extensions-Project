@@ -12,6 +12,7 @@ import Sort from './Sort';
 const Category = () => {
   const { category } = useParams();
   const [extensions, setExtensions] = useState([]);
+  const [popular, setPopular] = useState([]);
   const [search, setSearch] = useState('');
 
   let categoryName = '';
@@ -32,6 +33,10 @@ const Category = () => {
     );
   }, [categoryName]);
 
+  useEffect(() => {
+    getAllExtensions().then((resp) => setPopular(resp));
+  }, [categoryName]);
+
   return (
     <>
       <Header />
@@ -39,17 +44,28 @@ const Category = () => {
       <div style={{ textAlign: 'center', marginTop: '170px' }}>
         <h1>{categoryName}</h1>
 
-        <h2>
-          {extensions.length > 0
-            ? extensions.length > 1
-              ? extensions.length + ' extensions'
-              : extensions.length + ' extension'
-            : 'no extensions'}{' '}
-          found
-        </h2>
+        {categoryName !== 'Most Popular' ? (
+          <h2>
+            {extensions.length > 0
+              ? extensions.length > 1
+                ? extensions.length + ' extensions'
+                : extensions.length + ' extension'
+              : 'no extensions'}{' '}
+            found
+          </h2>
+        ) : (
+          <h2>
+            {popular.length > 0
+              ? popular.length > 1
+                ? popular.length + ' extensions'
+                : popular.length + ' extension'
+              : 'no extensions'}{' '}
+            found
+          </h2>
+        )}
       </div>
 
-      {extensions.length > 0 ? (
+      {extensions.length > 0 && categoryName !== 'Most Popular' ? (
         <div>
           <p
             style={{
@@ -83,6 +99,43 @@ const Category = () => {
 
             <div style={{ textAlign: 'center' }}>
               <Sort extensions={extensions} search={search} />
+            </div>
+          </Container>
+        </div>
+      ) : categoryName === 'Most Popular' ? (
+        <div>
+          <p
+            style={{
+              fontSize: '20px',
+              fontStyle: 'normal',
+              fontWeight: '400',
+              margin: '0px',
+              textAlign: 'center',
+              marginTop: '0.67em',
+            }}
+          >
+            Browse Extensions
+          </p>
+
+          <Search setSearch={setSearch} />
+
+          <Container
+            maxWidth="xl"
+            sx={{
+              height: 'auto',
+              width: 'auto',
+              marginTop: '50px',
+              marginBottom: '50px',
+              paddingBottom: '50px',
+              boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
+              background: 'white',
+              borderRadius: '7px',
+            }}
+          >
+            <br />
+
+            <div style={{ textAlign: 'center' }}>
+              <Sort extensions={popular} search={search} />
             </div>
           </Container>
         </div>
