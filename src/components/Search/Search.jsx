@@ -14,7 +14,7 @@ const Search = ({ setSearch }) => {
           }}
           type="search"
           id="search"
-          placeholder="Find extensions"
+          placeholder="search extension title, tag ..."
         />
       </div>
 
