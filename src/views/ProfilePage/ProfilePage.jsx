@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppContext from '../../providers/AppContext';
 import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,13 +12,27 @@ import UpdatePic from './UpdatePic';
 import { Divider, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import defaultAvatar from '../../assets/avatar.jpg';
+import { getAllExtensions } from '../../services/extensions.service';
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
+
   const [userProfile, setUserProfile] = useState('');
+
+  const [userUploads, setUserUploads] = useState([]);
 
   const { user, userData, setContext } = useContext(AppContext);
   const { username } = useParams();
+
+  useEffect(() => {
+    const getUserUploads = () => {
+      return getAllExtensions().then((ext) => {
+        return ext.filter((ext) => ext.author === username);
+      });
+    };
+
+    getUserUploads().then((data) => setUserUploads(data));
+  });
 
   return (
     <>
@@ -121,111 +135,27 @@ const ProfilePage = () => {
               sx={{ gap: '1em', width: '65vw', alignItems: 'flex-start' }}
             >
               <h1>{activeView}</h1>
+              <Divider flexItem />
 
               <Grid container direction="row" spacing={2} className="item-grid">
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Items
-                    name={'Prettier'}
-                    logo={'https://prettier.io/icon.png'}
-                    author={'Prettier Inc'}
-                    category={'Code formatter'}
-                    rating={3.8}
-                    downloadLink={
-                      'https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode'
-                    }
-                  />
-                </Grid>
+                {activeView === 'Uploads'
+                  ? userUploads.map((upload) => {
+                      return (
+                        <Grid key={upload.id} item>
+                          <Items
+                            key={upload.id}
+                            name={upload.title}
+                            logo={upload.logo}
+                            author={upload.author}
+                            category={upload.category}
+                            rating={3.8}
+                            downloadLink={upload.downloadLink}
+                            extId={upload.id}
+                          />
+                        </Grid>
+                      );
+                    })
+                  : null}
               </Grid>
             </Grid>
           </Grid>
