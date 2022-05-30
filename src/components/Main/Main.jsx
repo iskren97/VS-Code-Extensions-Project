@@ -6,7 +6,6 @@ import Items from './Item/Item';
 import { Container, Divider, Grid } from '@mui/material';
 import Section from './Section/Section';
 import Intro from '../Intro/Intro';
-import Search from '../Search/Search';
 import Categories from '../Categories/Categories';
 import Header from '../Header/Header';
 
@@ -48,18 +47,18 @@ const Main = () => {
 
           <Grid container direction="row" spacing={2} className="item-grid">
             {recommended.map((ext) => {
-              console.log(ext)
+              console.log(ext);
               return (
                 <Grid key={ext.id} item>
                   <Items
-                   key={ext.id}
-                      name={ext.title}
-                      logo={ext.logo}
-                      author={ext.author}
-                      category={ext.category}
-                      rating={3.8}
-                      downloadLink={ext.downloadLink}
-                      extId={ext.id}
+                    key={ext.id}
+                    name={ext.title}
+                    logo={ext.logo}
+                    author={ext.author}
+                    category={ext.category}
+                    rating={3.8}
+                    downloadLink={ext.downloadLink}
+                    extId={ext.id}
                   />
                 </Grid>
               );
@@ -88,13 +87,13 @@ const Main = () => {
                 <Grid item>
                   <Items
                     key={ext.id}
-                      name={ext.title}
-                      logo={ext.logo}
-                      author={ext.author}
-                      category={ext.category}
-                      rating={3.8}
-                      downloadLink={ext.downloadLink}
-                      extId={ext.id}
+                    name={ext.title}
+                    logo={ext.logo}
+                    author={ext.author}
+                    category={ext.category}
+                    rating={3.8}
+                    downloadLink={ext.downloadLink}
+                    extId={ext.id}
                   />
                 </Grid>
               );

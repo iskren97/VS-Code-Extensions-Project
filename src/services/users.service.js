@@ -1,6 +1,13 @@
-import { get, set, ref, query, equalTo, orderByChild, update } from 'firebase/database';
+import {
+  get,
+  set,
+  ref,
+  query,
+  equalTo,
+  orderByChild,
+  update,
+} from 'firebase/database';
 import { db } from '../config/firebase-config';
-
 
 export const createUserHandle = (email, username, uid, phoneNumber) => {
   return set(ref(db, `users/${username}`), {
@@ -9,7 +16,7 @@ export const createUserHandle = (email, username, uid, phoneNumber) => {
     uid,
     createdOn: new Date(),
     phoneNumber,
-    role: 'user'
+    role: 'user',
   });
 };
 
@@ -25,4 +32,8 @@ export const getUserByHandle = (username) => {
   return get(ref(db, `users/${username}`));
 };
 
-
+export const updateUserProfilePicture = (username, url) => {
+  return update(ref(db), {
+    [`users/${username}/avatarUrl`]: url,
+  });
+};
