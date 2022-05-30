@@ -47,7 +47,6 @@ const Main = () => {
 
           <Grid container direction="row" spacing={2} className="item-grid">
             {recommended.map((ext) => {
-              console.log(ext);
               return (
                 <Grid key={ext.id} item>
                   <Items
