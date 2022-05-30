@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import Header from '../../components/Header/Header';
 
-import { Container, Divider, Tooltip } from '@mui/material';
+import { Container } from '@mui/material';
 import Search from '../../components/Search/Search';
 import { useParams } from 'react-router';
 import { getAllExtensions } from '../../services/extensions.service';
-import SortIcon from '@mui/icons-material/Sort';
 import Sort from './Sort';
 
 const Category = () => {

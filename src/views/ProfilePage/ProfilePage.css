@@ -2,5 +2,38 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+}
 
+.upload-pic-form ::-webkit-file-upload-button {
+  background: #1976d2;
+  color: white;
+  cursor: pointer;
+
+  padding: 1em;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.upload-pic-btn {
+  padding: 13px 13px;
+  font-size: 15px;
+  cursor: pointer;
+
+  color: white;
+  background: #1976d2;
+}
+
+.custom-file-upload:hover {
+  transition: 0.15s;
+  opacity: 0.8;
+}
+
+.upload-pic-btn:hover {
+  transition: 0.15s;
+  opacity: 0.8;
+}
+
+.upload-pic-btn:active {
+  background-color: rgb(9, 111, 9);
+  color: white;
 }
