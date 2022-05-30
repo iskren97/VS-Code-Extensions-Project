@@ -16,12 +16,11 @@ import { getAllExtensions } from '../../services/extensions.service';
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
-
   const [userProfile, setUserProfile] = useState('');
-
   const [userUploads, setUserUploads] = useState([]);
 
-  const { user, userData, setContext } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
+
   const { username } = useParams();
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const ProfilePage = () => {
     };
 
     getUserUploads().then((data) => setUserUploads(data));
-  });
+  }, [username]);
 
   return (
     <>
@@ -156,6 +155,26 @@ const ProfilePage = () => {
                       );
                     })
                   : null}
+
+                {activeView === 'Info' ? (
+                  <div className="user-info">
+                    <h3>
+                      Username: <span>{username}</span>{' '}
+                    </h3>
+                    <h3>
+                      Email: <span>{userData.email}</span>{' '}
+                    </h3>
+                    <h3>
+                      Phone Number: <span>{userData.phoneNumber}</span>{' '}
+                    </h3>
+                    <h3>
+                      Role: <span>{userData.role}</span>{' '}
+                    </h3>
+                    <h3>
+                      Total uploads: <span> {userData.extensions.length}</span>
+                    </h3>
+                  </div>
+                ) : null}
               </Grid>
             </Grid>
           </Grid>

@@ -69,7 +69,7 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
     } else {
       setIsProfileOwner(false);
     }
-  }, [userData?.uid, username, userData, userProfile, setUserProfile]);
+  }, [userData?.uid, username, userData]);
 
   const uploadPicture = (e) => {
     e.preventDefault();
@@ -90,32 +90,27 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
       return;
     }
 
-    const picture = storageRef(
-      storage,
-      `images/${userProfile.username}/avatar`
-    );
+    const picture = storageRef(storage, `images/${userData.username}/avatar`);
 
     uploadBytes(picture, file)
       .then((snapshot) => {
         return getDownloadURL(snapshot.ref).then((url) => {
-          return updateUserProfilePicture(userProfile.username, url).then(
-            () => {
-              setContext({
-                user,
-                userData: {
-                  ...userData,
-                  avatarUrl: url,
-                },
-              });
+          return updateUserProfilePicture(userData.username, url).then(() => {
+            setContext({
+              user,
+              userData: {
+                ...userData,
+                avatarUrl: url,
+              },
+            });
 
-              setError(true);
-              setErrorMsg(`Image successfully uploaded!`);
-              setMsgType('success');
+            setError(true);
+            setErrorMsg(`Image successfully uploaded!`);
+            setMsgType('success');
 
-              setUserProfile({ ...userProfile, avatarUrl: url });
-              handleClose();
-            }
-          );
+            setUserProfile({ ...userData, avatarUrl: url });
+            handleClose();
+          });
         });
       })
       .catch(console.error);
