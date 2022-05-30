@@ -37,6 +37,11 @@ export const getExtensionById = (id) => {
     extension.id = id;
     extension.createdOn = new Date(extension.createdOn);
 
+    if (!extension.rating) {
+      extension.rating = [];
+    } else {
+      extension.rating = extension.rating
+    }
 
     return extension;
   });
@@ -149,3 +154,47 @@ export const updateExtensions = (username, url, fileName, extId) => {
   });
   
 };
+
+export const getExtensionRating = (extId) =>{
+  return get(ref(db, `extensions/${extId}/rating`)).then((snapshot) => {
+    if (!snapshot.exists()) {
+      return [];
+    }
+
+    return snapshot.val();
+  });
+}
+
+export const updateExtensionRating = (extId, username, value) => {
+
+  return getExtensionById(extId).then((extension) => {
+    let rating = extension.rating;
+
+    if (!rating) {
+      rating = [];
+    }
+
+    const index = rating.findIndex((r) => r.username === username);
+
+    if (index > -1) {
+      rating[index].value = value;
+    } else {
+      rating.push({ username, value });
+    }
+
+    update(ref(db, `extensions/${extId}`), {
+      rating
+    })
+
+
+    const sum = rating.reduce((acc, curr) => {
+      return acc + curr.value;
+    }, 0);
+
+
+    return sum/rating.length;
+
+  });
+}
+  
+

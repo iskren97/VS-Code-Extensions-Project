@@ -2,8 +2,10 @@ import React from 'react'
 import './SingleExtension.css'
 import './Markdown.css'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom';
+import AppContext from '../../providers/AppContext';
+
 
 import Header from '../../components/Header/Header';
 import Markdown from 'markdown-to-jsx';
@@ -14,7 +16,7 @@ import Chip from '@mui/material/Chip';
 import DownloadIcon from '@mui/icons-material/Download';
 import Stack from '@mui/material/Stack'
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { getExtensionById } from '../../services/extensions.service.js'
+import { getExtensionById, updateExtensionRating, getExtensionRating } from '../../services/extensions.service.js'
 
 
 import Img from './Img'
@@ -31,6 +33,10 @@ function SingleExtension() {
   const [version, setVersion] = useState('')
 
   const { id } = useParams();
+
+  const { user, userData, setContext } = useContext(AppContext);
+
+
 
   let headersList = {
     "Accept": "application/vnd.github.v3+json",
@@ -49,9 +55,26 @@ function SingleExtension() {
       getPulls(target[3], target[4]);
       getLastCommit(target[3], target[4]);
       getVersion(target[3], target[4]);
+      getExtensionRating(id).then((data)=> {
+         const sum = data.reduce((acc, curr) => {
+            return acc + curr.value;
+         }, 0);
+
+      setRatingValue(sum/data.length)})
     })
 
   }, [])
+
+
+
+  const updateRating = (value) => {
+
+    updateExtensionRating(id, userData.username, value).then(data => {
+      setRatingValue(data.toFixed(2))
+    })
+
+  }
+
 
 
   const getVersion = async (author, repo) =>{
@@ -84,7 +107,7 @@ function SingleExtension() {
   }
 
 const getPulls = async (author, repo) => {
-    const resp = await fetch("https://api.github.com/repos/prettier/prettier-vscode/pulls", { 
+    const resp = await fetch(`https://api.github.com/repos/${author}/${repo}/pulls`, { 
      method: "GET",
      headers: headersList
    })
@@ -117,7 +140,7 @@ const getPulls = async (author, repo) => {
      setCommitInfo(data[0])
   }
 
-  console.log(repoInfo)
+  // console.log(repoInfo)
 
   
 
@@ -178,9 +201,10 @@ const getPulls = async (author, repo) => {
             value={ratingValue}
             size="large"
             onChange={(_, newValue) => {
-              setRatingValue(newValue);
+              updateRating(newValue);
             }}
           />
+          <div>{ratingValue}</div>
         </Grid>
 
 
