@@ -62,14 +62,14 @@ const App = () => {
               element={<Category key={window.location.pathname} />}
             />
             <Route path="/extensions/:id" element={<SingleExtension />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/upload" element={<Upload />} />
           </Routes>
 
           {/* <Main /> */}
           {/* <SingleExtension /> */}
           {/* <Register /> */}
-
+          
           <ScrollTop showBelow={250} />
         </BrowserRouter>
       </AppContext.Provider>

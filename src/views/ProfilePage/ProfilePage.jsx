@@ -1,6 +1,8 @@
 import React from 'react'
 import AppContext from '../../providers/AppContext';
 import {useState, useContext} from 'react'
+import { useParams } from 'react-router-dom';
+
 import './ProfilePage.css'
 
 import Header from '../../components/Header/Header'
@@ -17,6 +19,9 @@ function ProfilePage() {
   const [activeView, setActiveView] = useState('Info')
 
   console.log(activeView)
+
+  const { username } = useParams();
+
 
 
   return (

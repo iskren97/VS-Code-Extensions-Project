@@ -48,15 +48,18 @@ const Main = () => {
 
           <Grid container direction="row" spacing={2} className="item-grid">
             {recommended.map((ext) => {
+              console.log(ext)
               return (
-                <Grid item>
+                <Grid key={ext.id} item>
                   <Items
-                    name={ext.title}
-                    logo={ext.logo}
-                    author={ext.author}
-                    category={ext.category}
-                    rating={3.8}
-                    downloadLink={ext.downloadLink}
+                   key={ext.id}
+                      name={ext.title}
+                      logo={ext.logo}
+                      author={ext.author}
+                      category={ext.category}
+                      rating={3.8}
+                      downloadLink={ext.downloadLink}
+                      extId={ext.id}
                   />
                 </Grid>
               );
@@ -84,12 +87,14 @@ const Main = () => {
               return (
                 <Grid item>
                   <Items
-                    name={ext.title}
-                    logo={ext.logo}
-                    author={ext.author}
-                    category={ext.category}
-                    rating={3.8}
-                    downloadLink={ext.downloadLink}
+                    key={ext.id}
+                      name={ext.title}
+                      logo={ext.logo}
+                      author={ext.author}
+                      category={ext.category}
+                      rating={3.8}
+                      downloadLink={ext.downloadLink}
+                      extId={ext.id}
                   />
                 </Grid>
               );

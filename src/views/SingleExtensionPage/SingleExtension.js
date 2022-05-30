@@ -4,6 +4,8 @@ import './Markdown.css'
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+
+import Header from '../../components/Header/Header';
 import Markdown from 'markdown-to-jsx';
 import { Divider, Grid } from '@mui/material';
 import Rating from '@mui/material/Rating';
@@ -141,12 +143,13 @@ const getPulls = async (author, repo) => {
 
   return (
     <>
+    <Header/>
     <Grid container
     direction="column"
       sx={{
         height: 'auto',
         flexWrap: 'nowrap',
-        marginTop: '50px',
+        marginTop: '13em',
         paddingBottom: '50px',
         boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
         background: 'white',
