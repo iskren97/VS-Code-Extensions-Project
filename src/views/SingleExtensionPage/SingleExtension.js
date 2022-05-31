@@ -16,7 +16,7 @@ import Chip from '@mui/material/Chip';
 import DownloadIcon from '@mui/icons-material/Download';
 import Stack from '@mui/material/Stack'
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { getExtensionById, updateExtensionRating, getExtensionRating, getExtensionRatingByUser } from '../../services/extensions.service.js'
+import { getExtensionById, updateExtensionRating, getExtensionRating, getExtensionRatingByUser, updateExtensionDownloads, getExtensionDownloads } from '../../services/extensions.service.js'
 
 
 import Img from './Img'
@@ -32,6 +32,7 @@ function SingleExtension() {
   const [pulls, setPulls] = useState('')
   const [commitInfo, setCommitInfo] = useState('')
   const [version, setVersion] = useState('')
+  const [downloads, setDownloads] = useState(0)
 
   const { id } = useParams();
 
@@ -51,11 +52,9 @@ function SingleExtension() {
   const updateRating = (value) => {
 
     return updateExtensionRating(id, userData.username, value).then(data => {
-      console.log(data)
 
       const average = (data.reduce((sum, current) => sum + current.value, 0)) / data.length;
 
-      console.log(`average is ${average}`)
       setRatingValue(average)
     })
 
@@ -140,6 +139,11 @@ const getPulls = async (author, repo) => {
       getExtensionRatingByUser(id, userData?.username).then(data => {
         setMyRating(data)
       })
+
+      getExtensionDownloads(id).then(data => {
+        const length = data.length
+        setDownloads(length)
+      })
       getExtensionById(id).then((data)=> setExtensionInfo(data))
       getReadMe(target[3], target[4]);
       getRepoInfo(target[3], target[4]);
@@ -147,7 +151,7 @@ const getPulls = async (author, repo) => {
       getLastCommit(target[3], target[4]);
       getVersion(target[3], target[4]);
       getExtensionRating(id).then((data)=> {
-       
+
       let rating = data;
 
       if(rating.length === 0){
@@ -172,7 +176,6 @@ const getPulls = async (author, repo) => {
     };
     return newDate.toLocaleString('en-US', options);
   }
-
 
 
 
@@ -245,11 +248,13 @@ const getPulls = async (author, repo) => {
           Repository
         </Button>
         <Button onClick={(e)=>{
+          updateExtensionDownloads(id, userData.username)
+          setDownloads(downloads => downloads+1)
           window.location.href = extensionInfo.downloadLink
         }} variant="outlined" startIcon={<DownloadIcon />}>
           Download
         </Button>
-          <p> 1 521 downloads</p>
+          <p> {downloads} {downloads === 1 ? 'download' :'downloads'}</p>
 
           
         </Grid>

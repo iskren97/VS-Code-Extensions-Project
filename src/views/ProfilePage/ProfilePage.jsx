@@ -29,6 +29,8 @@ const ProfilePage = () => {
     );
   }, [username]);
 
+
+
   return (
     <>
       <Header />

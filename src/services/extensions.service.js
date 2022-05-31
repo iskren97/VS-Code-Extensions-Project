@@ -43,6 +43,13 @@ export const getExtensionById = (id) => {
       extension.rating = extension.rating
     }
 
+
+    if (!extension.downloads) {
+      extension.downloads = [];
+    } else {
+      extension.downloads = extension.downloads
+    }
+
     return extension;
   });
 };
@@ -161,7 +168,9 @@ export const getExtensionRating = (extId) =>{
       return [];
     }
 
-    const data = snapshot.val()
+    let data = snapshot.val()
+
+    data = data.filter(n => n)
 
     const sum = data.reduce((acc, curr) => {
       return acc + curr.value;
@@ -179,6 +188,7 @@ export const getExtensionRatingByUser = (extId, username) =>{
     }
 
     const data = snapshot.val()
+
 
     const index = data.findIndex((r) => r.username === username);
 
@@ -201,13 +211,13 @@ export const updateExtensionRating = (extId, username, value) => {
       rating = [];
     }
 
-    let newVal = parseInt(value)
-    const index = rating.findIndex((r) => r.username === username);
+   value = parseInt(value)
+    const index = rating.findIndex((r) => r?.username === username);
 
     if (index > -1) {
-      rating[index].value = newVal;
+      rating[index].value = value;
     } else {
-      rating.push({ username, newVal });
+      rating.push({ username, value });
     }
 
    update(ref(db, `extensions/${extId}`), {
@@ -219,3 +229,37 @@ export const updateExtensionRating = (extId, username, value) => {
 }
 
 
+export const updateExtensionDownloads = (extId, username) => {
+  return getExtensionById(extId).then((extension) => {
+    let downloads = extension.downloads;
+
+    if (!downloads) {
+      downloads = [];
+    }
+
+    const index = downloads.findIndex((r) => r.username === username);
+
+    if (index > -1) {
+      return;
+    } else {
+      downloads.push({ username, downloaded: true });
+    }
+
+   update(ref(db, `extensions/${extId}`), {
+      downloads
+    })
+
+    return downloads
+  });
+}
+
+
+export const getExtensionDownloads = (extId) => {
+  return get(ref(db, `extensions/${extId}/downloads`)).then((snapshot) => {
+    if (!snapshot.exists()) {
+      return [];
+    }
+
+    return snapshot.val();
+  });
+}

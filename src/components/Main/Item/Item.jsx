@@ -1,11 +1,14 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../../../providers/AppContext';
+
+import { updateExtensionDownloads } from '../../../services/extensions.service.js';
 
 import './Item.css';
 
@@ -28,6 +31,8 @@ const Items = ({
   const [ratingValue, setRatingValue] = useState(rating || 0);
 
   const navigate = useNavigate();
+
+  const { user, userData, setContext } = useContext(AppContext);
 
   return (
     // <Item className="item">
@@ -100,7 +105,10 @@ const Items = ({
               }}
             >
               <button
-                onClick={() => window.open(downloadLink, '_blank')}
+                onClick={() => {
+                  updateExtensionDownloads(extId, userData.username);
+                  window.open(downloadLink, '_blank');
+                }}
                 className="card_button"
               >
                 Get{' '}
