@@ -47,7 +47,6 @@ const Header = () => {
     });
   };
 
-  
   return (
     <>
       <Grid className="header-container" container>
@@ -153,12 +152,14 @@ const Header = () => {
               </div>
 
               <h3>{userData?.username}</h3>
+
               <Tooltip title="Profile">
                 <Box
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
                     textAlign: 'center',
+                    cursor: 'pointer',
                   }}
                 >
                   {userData.avatarUrl ? (

@@ -40,8 +40,6 @@ function Upload() {
 
   const [uploadInfo, setUploadInfo] = useState({});
 
-  console.log(uploadInfo);
-
   const validateData = async () => {
     if (!uploadInfo.category) {
       setError(true);
