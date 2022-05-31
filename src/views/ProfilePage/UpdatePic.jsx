@@ -69,7 +69,9 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
     } else {
       setIsProfileOwner(false);
     }
-  }, [userData?.uid, username, userData, userProfile, setUserProfile]);
+  }, [userData?.uid, username, userData]);
+
+
 
   const uploadPicture = (e) => {
     e.preventDefault();

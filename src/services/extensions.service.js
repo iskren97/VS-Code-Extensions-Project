@@ -161,12 +161,39 @@ export const getExtensionRating = (extId) =>{
       return [];
     }
 
-    return snapshot.val();
+    const data = snapshot.val()
+
+    const sum = data.reduce((acc, curr) => {
+      return acc + curr.value;
+   }, 0);
+
+    return sum/data.length.toFixed(2);
+  });
+}
+ 
+
+export const getExtensionRatingByUser = (extId, username) =>{
+  return get(ref(db, `extensions/${extId}/rating`)).then((snapshot) => {
+    if (!snapshot.exists()) {
+      return [];
+    }
+
+    const data = snapshot.val()
+
+    const index = data.findIndex((r) => r.username === username);
+
+    if (index > -1) {
+      return data[index].value;
+    } else {
+      return 0;
+    }
+
   });
 }
 
-export const updateExtensionRating = (extId, username, value) => {
 
+
+export const updateExtensionRating = (extId, username, value) => {
   return getExtensionById(extId).then((extension) => {
     let rating = extension.rating;
 
@@ -174,27 +201,21 @@ export const updateExtensionRating = (extId, username, value) => {
       rating = [];
     }
 
+    let newVal = parseInt(value)
     const index = rating.findIndex((r) => r.username === username);
 
     if (index > -1) {
-      rating[index].value = value;
+      rating[index].value = newVal;
     } else {
-      rating.push({ username, value });
+      rating.push({ username, newVal });
     }
 
-    update(ref(db, `extensions/${extId}`), {
+   update(ref(db, `extensions/${extId}`), {
       rating
     })
 
-
-    const sum = rating.reduce((acc, curr) => {
-      return acc + curr.value;
-    }, 0);
-
-
-    return sum/rating.length;
-
+    return rating
   });
 }
-  
+
 

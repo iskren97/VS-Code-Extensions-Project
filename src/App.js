@@ -47,6 +47,9 @@ const App = () => {
       .catch((e) => alert(e.message));
   }, [user]);
 
+
+
+
   return (
     <div>
       <AppContext.Provider value={{ ...appState, setContext: setAppState }}>

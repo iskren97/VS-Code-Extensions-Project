@@ -32,7 +32,10 @@ const ProfilePage = () => {
     };
 
     getUserUploads().then((data) => setUserUploads(data));
-  });
+  },[]);
+
+
+
 
   return (
     <>

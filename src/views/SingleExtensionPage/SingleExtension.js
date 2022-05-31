@@ -16,7 +16,7 @@ import Chip from '@mui/material/Chip';
 import DownloadIcon from '@mui/icons-material/Download';
 import Stack from '@mui/material/Stack'
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { getExtensionById, updateExtensionRating, getExtensionRating } from '../../services/extensions.service.js'
+import { getExtensionById, updateExtensionRating, getExtensionRating, getExtensionRatingByUser } from '../../services/extensions.service.js'
 
 
 import Img from './Img'
@@ -24,7 +24,8 @@ import Img from './Img'
 
 function SingleExtension() {
 
-  const [ratingValue, setRatingValue] = useState(null);
+  const [ratingValue, setRatingValue] = useState(0);
+  const [myRating, setMyRating] = useState(0)
   const [readMe, setReadMe] = useState('')
   const [extensionInfo, setExtensionInfo] = useState('')
   const [repoInfo, setRepoInfo] = useState('')
@@ -43,34 +44,19 @@ function SingleExtension() {
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
     "Authorization": "Bearer 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"
    }
-  useEffect(() => {
-
-  
-    getExtensionById(id).then(data => {
-      const target = data.repoUrl.split('/')
-
-      getExtensionById(id).then((data)=> setExtensionInfo(data))
-      getReadMe(target[3], target[4]);
-      getRepoInfo(target[3], target[4]);
-      getPulls(target[3], target[4]);
-      getLastCommit(target[3], target[4]);
-      getVersion(target[3], target[4]);
-      getExtensionRating(id).then((data)=> {
-         const sum = data.reduce((acc, curr) => {
-            return acc + curr.value;
-         }, 0);
-
-      setRatingValue(sum/data.length)})
-    })
-
-  }, [])
+ 
 
 
 
   const updateRating = (value) => {
 
-    updateExtensionRating(id, userData.username, value).then(data => {
-      setRatingValue(data.toFixed(2))
+    return updateExtensionRating(id, userData.username, value).then(data => {
+      console.log(data)
+
+      const average = (data.reduce((sum, current) => sum + current.value, 0)) / data.length;
+
+      console.log(`average is ${average}`)
+      setRatingValue(average)
     })
 
   }
@@ -142,7 +128,35 @@ const getPulls = async (author, repo) => {
 
   // console.log(repoInfo)
 
+
   
+
+  useEffect(() => {
+
+  
+    getExtensionById(id).then(data => {
+      const target = data.repoUrl.split('/')
+
+      getExtensionRatingByUser(id, userData?.username).then(data => {
+        setMyRating(data)
+      })
+      getExtensionById(id).then((data)=> setExtensionInfo(data))
+      getReadMe(target[3], target[4]);
+      getRepoInfo(target[3], target[4]);
+      getPulls(target[3], target[4]);
+      getLastCommit(target[3], target[4]);
+      getVersion(target[3], target[4]);
+      getExtensionRating(id).then((data)=> {
+       
+      let rating = data;
+
+      if(rating.length === 0){
+        rating = 0
+      }
+      setRatingValue(rating.toFixed(2))})
+    })
+
+  }, [userData])
 
   const setDate = (date) => {
     const newDate = new Date(date);
@@ -200,11 +214,14 @@ const getPulls = async (author, repo) => {
             name="simple-controlled"
             value={ratingValue}
             size="large"
-            onChange={(_, newValue) => {
-              updateRating(newValue);
+            onChange={(e, newValue) => {
+              setMyRating(e.target.value)
+                updateRating(e.target.value)
+             
             }}
           />
-          <div>{ratingValue}</div>
+          <div>Total Rating: {ratingValue}</div>
+          <div>My Rating: {myRating}</div>
         </Grid>
 
 
