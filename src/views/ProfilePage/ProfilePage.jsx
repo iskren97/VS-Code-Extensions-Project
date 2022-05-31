@@ -18,6 +18,9 @@ import {
   getExtensionDownloads,
 } from '../../services/extensions.service';
 
+import Info from './Info/Info'
+
+
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
   const [userProfile, setUserProfile] = useState('');
@@ -34,6 +37,8 @@ const ProfilePage = () => {
       setUserUploads(ext.filter((ext) => ext.author === username))
     );
   }, [username]);
+
+
 
   useEffect(() => {
     const downloadedExtensions = [];
@@ -56,6 +61,9 @@ const ProfilePage = () => {
       })
     );
   }, [username]);
+
+
+  console.log(activeView)
 
   return (
     <>
@@ -174,23 +182,7 @@ const ProfilePage = () => {
                   : null}
 
                 {activeView === 'Info' ? (
-                  <div className="user-info">
-                    <h3>
-                      Username: <span>{username}</span>{' '}
-                    </h3>
-                    <h3>
-                      Email: <span>{userData.email}</span>{' '}
-                    </h3>
-                    <h3>
-                      Phone Number: <span>{userData.phoneNumber}</span>{' '}
-                    </h3>
-                    <h3>
-                      Role: <span>{userData.role}</span>{' '}
-                    </h3>
-                    <h3>
-                      Total uploads: <span> {userData.extensions.length}</span>
-                    </h3>
-                  </div>
+                  <Info userData={userData} />
                 ) : null}
 
                 {activeView === 'Downloads'
@@ -211,6 +203,7 @@ const ProfilePage = () => {
                       );
                     })
                   : null}
+
               </Grid>
             </Grid>
           </Grid>
