@@ -20,15 +20,14 @@ import {
 
 import { getUserByHandle } from '../../services/users.service';
 
-import Info from './Info/Info'
+import Info from './Info/Info';
 import AdminPanel from './AdminPanel/AdminPanel';
-
+import Downloads from './Downloads/Downloads';
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
   const [userProfile, setUserProfile] = useState('');
   const [userUploads, setUserUploads] = useState([]);
-
 
   const [userDownloads, setUserDownloads] = useState([]);
 
@@ -42,12 +41,11 @@ const ProfilePage = () => {
     );
   }, [username]);
 
-useEffect(() => {
-  getUserByHandle(username).then((user) => {
-    setUserProfile(user.val());
-  });
-  
-},[])
+  useEffect(() => {
+    getUserByHandle(username).then((user) => {
+      setUserProfile(user.val());
+    });
+  }, []);
 
   useEffect(() => {
     const downloadedExtensions = [];
@@ -70,7 +68,6 @@ useEffect(() => {
       })
     );
   }, [username]);
-
 
   return (
     <>
@@ -110,7 +107,11 @@ useEffect(() => {
             >
               <Grid item>
                 <img
-                  src={userProfile.avatarUrl ? userProfile.avatarUrl : defaultAvatar}
+                  src={
+                    userProfile.avatarUrl
+                      ? userProfile.avatarUrl
+                      : defaultAvatar
+                  }
                   alt="Profile"
                   style={{
                     maxWidth: '100%',
@@ -155,15 +156,14 @@ useEffect(() => {
                 >
                   Downloads
                 </Button>
-                  {userData?.role === 'admin' ? (
-                    <Button
-                  onClick={() => setActiveView('AdminPanel')}
-                  variant="contained"
-                >
-                  Admin Panel
-                </Button>) : null
-                    }
-                
+                {userData?.role === 'admin' ? (
+                  <Button
+                    onClick={() => setActiveView('AdminPanel')}
+                    variant="contained"
+                  >
+                    Admin Panel
+                  </Button>
+                ) : null}
               </Grid>
             </Grid>
 
@@ -201,28 +201,11 @@ useEffect(() => {
                   <Info userProfile={userProfile} />
                 ) : null}
 
-                {activeView === 'Downloads'
-                  ? userDownloads.map((download) => {
-                      return (
-                        <Grid key={download.id} item>
-                          <Items
-                            key={download.id}
-                            name={download.title}
-                            logo={download.logo}
-                            author={download.author}
-                            category={download.category}
-                            rating={3.8}
-                            downloadLink={download.downloadLink}
-                            extId={download.id}
-                          />
-                        </Grid>
-                      );
-                    })
-                  : null}
+                {activeView === 'Downloads' ? (
+                  <Downloads userDownloads={userDownloads} />
+                ) : null}
 
-
-                  {activeView === 'AdminPanel' ? <AdminPanel/> : null }
-
+                {activeView === 'AdminPanel' ? <AdminPanel /> : null}
               </Grid>
             </Grid>
           </Grid>
