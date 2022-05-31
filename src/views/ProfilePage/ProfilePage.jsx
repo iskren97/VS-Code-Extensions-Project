@@ -12,12 +12,18 @@ import UpdatePic from './UpdatePic';
 import { Divider, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import defaultAvatar from '../../assets/avatar.jpg';
-import { getAllExtensions } from '../../services/extensions.service';
+import {
+  getAllExtensions,
+  getExtensionById,
+  getExtensionDownloads,
+} from '../../services/extensions.service';
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
   const [userProfile, setUserProfile] = useState('');
   const [userUploads, setUserUploads] = useState([]);
+
+  const [userDownloads, setUserDownloads] = useState([]);
 
   const { userData } = useContext(AppContext);
 
@@ -29,7 +35,27 @@ const ProfilePage = () => {
     );
   }, [username]);
 
+  useEffect(() => {
+    const downloadedExtensions = [];
 
+    getAllExtensions().then((resp) =>
+      resp.map((ext) => {
+        return getExtensionDownloads(ext.id).then((resp) => {
+          if (resp.length > 0) {
+            resp.filter((down) =>
+              down.username === username
+                ? getExtensionById(ext.id).then((extension) =>
+                    downloadedExtensions.push(extension)
+                  )
+                : null
+            );
+
+            setUserDownloads(downloadedExtensions);
+          }
+        });
+      })
+    );
+  }, [username]);
 
   return (
     <>
@@ -166,6 +192,25 @@ const ProfilePage = () => {
                     </h3>
                   </div>
                 ) : null}
+
+                {activeView === 'Downloads'
+                  ? userDownloads.map((download) => {
+                      return (
+                        <Grid key={download.id} item>
+                          <Items
+                            key={download.id}
+                            name={download.title}
+                            logo={download.logo}
+                            author={download.author}
+                            category={download.category}
+                            rating={3.8}
+                            downloadLink={download.downloadLink}
+                            extId={download.id}
+                          />
+                        </Grid>
+                      );
+                    })
+                  : null}
               </Grid>
             </Grid>
           </Grid>
