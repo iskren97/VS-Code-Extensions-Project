@@ -80,9 +80,10 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
       setError(true);
       setErrorMsg('Please select a file!');
       setMsgType('error');
+
+      return;
     }
 
-    console.log(file);
     if (file['type'].split('/')[0] !== 'image') {
       setError(true);
       setErrorMsg('Please upload an image!');
