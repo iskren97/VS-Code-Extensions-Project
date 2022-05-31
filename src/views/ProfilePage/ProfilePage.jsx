@@ -33,6 +33,8 @@ const ProfilePage = () => {
     getUserUploads().then((data) => setUserUploads(data));
   }, [username]);
 
+
+
   return (
     <>
       <Header />
