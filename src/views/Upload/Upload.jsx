@@ -144,7 +144,6 @@ function Upload() {
     const isValidData = await validateData();
 
     getAllExtensions().then((extensions) => {
-      // console.log(extensions)
       for (const extension of extensions) {
         if (extension.title === uploadInfo?.name) {
           setError(true);
@@ -201,6 +200,7 @@ function Upload() {
               />
             </Tooltip>
           </NavLink>
+
           <div
             style={{
               textAlign: 'center',
@@ -211,11 +211,13 @@ function Upload() {
           >
             <h2>Upload an extension</h2>
           </div>
+
           <br />
 
           <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
 
           <br />
+
           <form className="upload-form">
             <div>
               <input
@@ -228,6 +230,7 @@ function Upload() {
                 onKeyDown={handleKeyEnter}
               />
             </div>
+
             <div>
               <input
                 type="text"
@@ -242,6 +245,7 @@ function Upload() {
                 onKeyDown={handleKeyEnter}
               />
             </div>
+
             <div>
               <h2>File</h2>
 
@@ -269,8 +273,10 @@ function Upload() {
                 onKeyDown={handleKeyEnter}
               />
             </div>
+
             <div>
               <h2>Category</h2>
+
               <Select
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
@@ -282,7 +288,6 @@ function Upload() {
               >
                 <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
                 <MenuItem value={'Linters'}>Linters</MenuItem>
-                <MenuItem value={'Appearance'}>Appearance</MenuItem>
                 <MenuItem value={'Themes'}>Themes</MenuItem>
                 <MenuItem value={'Snippets'}>Snippets</MenuItem>
                 <MenuItem value={'Programming Languages'}>
@@ -293,6 +298,7 @@ function Upload() {
                 <MenuItem value={'Debuggers'}>Debuggers</MenuItem>
               </Select>
             </div>
+
             <div>
               <Autocomplete
                 multiple

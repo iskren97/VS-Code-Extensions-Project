@@ -82,6 +82,7 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
       setMsgType('error');
     }
 
+    console.log(file);
     if (file['type'].split('/')[0] !== 'image') {
       setError(true);
       setErrorMsg('Please upload an image!');
