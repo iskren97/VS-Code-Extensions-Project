@@ -24,13 +24,9 @@ const ProfilePage = () => {
   const { username } = useParams();
 
   useEffect(() => {
-    const getUserUploads = () => {
-      return getAllExtensions().then((ext) => {
-        return ext.filter((ext) => ext.author === username);
-      });
-    };
-
-    getUserUploads().then((data) => setUserUploads(data));
+    getAllExtensions().then((ext) =>
+      setUserUploads(ext.filter((ext) => ext.author === username))
+    );
   }, [username]);
 
   return (
@@ -108,13 +104,6 @@ const ProfilePage = () => {
                   variant="contained"
                 >
                   Uploads
-                </Button>
-
-                <Button
-                  onClick={() => setActiveView('Likes')}
-                  variant="contained"
-                >
-                  Likes
                 </Button>
 
                 <Button

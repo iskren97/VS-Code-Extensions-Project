@@ -83,7 +83,7 @@ const Main = () => {
           <Grid container direction="row" spacing={2} className="item-grid">
             {popular.map((ext) => {
               return (
-                <Grid item>
+                <Grid key={ext.id} item>
                   <Items
                     key={ext.id}
                     name={ext.title}
