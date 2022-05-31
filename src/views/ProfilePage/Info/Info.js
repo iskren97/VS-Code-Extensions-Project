@@ -5,7 +5,7 @@ import AppContext from '../../../providers/AppContext';
 
 
 
-const Info = () => {
+const Info = ({userProfile}) => {
 
   const { userData } = useContext(AppContext);
 
@@ -14,19 +14,19 @@ const Info = () => {
   return (
     <div className="user-info">
                     <h3>
-                      Username: <span>{userData?.username}</span>{' '}
+                      Username: <span>{userProfile.username}</span>{' '}
                     </h3>
                     <h3>
-                      Email: <span>{userData?.email}</span>{' '}
+                      Email: <span>{userProfile.email}</span>{' '}
                     </h3>
                     <h3>
-                      Phone Number: <span>{userData?.phoneNumber}</span>{' '}
+                      Phone Number: <span>{userProfile.phoneNumber}</span>{' '}
                     </h3>
                     <h3>
-                      Role: <span>{userData?.role}</span>{' '}
+                      Role: <span>{userProfile.role}</span>{' '}
                     </h3>
                     <h3>
-                      Total uploads: <span> {userData?.extensions.length}</span>
+                      Total uploads: <span> {userProfile?.extensions?.length}</span>
                     </h3>
                   </div>
   );

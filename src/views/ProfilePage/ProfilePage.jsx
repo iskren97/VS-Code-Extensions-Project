@@ -18,13 +18,17 @@ import {
   getExtensionDownloads,
 } from '../../services/extensions.service';
 
+import { getUserByHandle } from '../../services/users.service';
+
 import Info from './Info/Info'
+import AdminPanel from './AdminPanel/AdminPanel';
 
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
   const [userProfile, setUserProfile] = useState('');
   const [userUploads, setUserUploads] = useState([]);
+
 
   const [userDownloads, setUserDownloads] = useState([]);
 
@@ -38,7 +42,12 @@ const ProfilePage = () => {
     );
   }, [username]);
 
-
+useEffect(() => {
+  getUserByHandle(username).then((user) => {
+    setUserProfile(user.val());
+  });
+  
+},[])
 
   useEffect(() => {
     const downloadedExtensions = [];
@@ -63,8 +72,6 @@ const ProfilePage = () => {
   }, [username]);
 
 
-  console.log(activeView)
-
   return (
     <>
       <Header />
@@ -87,7 +94,7 @@ const ProfilePage = () => {
             width: 'auto',
           }}
         >
-          <h1 style={{ marginLeft: '2em' }}>{userData?.username}</h1>
+          <h1 style={{ marginLeft: '2em' }}>{username}</h1>
 
           <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
 
@@ -103,7 +110,7 @@ const ProfilePage = () => {
             >
               <Grid item>
                 <img
-                  src={userData?.avatarUrl ? userData.avatarUrl : defaultAvatar}
+                  src={userProfile.avatarUrl ? userProfile.avatarUrl : defaultAvatar}
                   alt="Profile"
                   style={{
                     maxWidth: '100%',
@@ -148,6 +155,15 @@ const ProfilePage = () => {
                 >
                   Downloads
                 </Button>
+                  {userData?.role === 'admin' ? (
+                    <Button
+                  onClick={() => setActiveView('AdminPanel')}
+                  variant="contained"
+                >
+                  Admin Panel
+                </Button>) : null
+                    }
+                
               </Grid>
             </Grid>
 
@@ -182,7 +198,7 @@ const ProfilePage = () => {
                   : null}
 
                 {activeView === 'Info' ? (
-                  <Info userData={userData} />
+                  <Info userProfile={userProfile} />
                 ) : null}
 
                 {activeView === 'Downloads'
@@ -203,6 +219,9 @@ const ProfilePage = () => {
                       );
                     })
                   : null}
+
+
+                  {activeView === 'AdminPanel' ? <AdminPanel/> : null }
 
               </Grid>
             </Grid>
