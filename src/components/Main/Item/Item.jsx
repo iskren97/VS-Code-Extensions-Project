@@ -89,7 +89,7 @@ const Items = ({
         className="card"
         style={{
           background: `url(${logo}) center no-repeat`,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
         }}
       >
         <div className="card_content">
