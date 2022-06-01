@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import './ProfilePage.css';
 
 import Header from '../../components/Header/Header';
-import Items from '../../components/Main/Item/Item';
 import UpdatePic from './UpdatePic';
 
 import { Divider, Grid } from '@mui/material';
@@ -18,11 +17,12 @@ import {
   getExtensionDownloads,
 } from '../../services/extensions.service';
 
-import { getUserByHandle } from '../../services/users.service';
+import { getUserByHandle, getUserData } from '../../services/users.service';
 
 import Info from './Info/Info';
 import AdminPanel from './AdminPanel/AdminPanel';
 import Downloads from './Downloads/Downloads';
+import Uploads from './Uploads/Uploads';
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
@@ -31,9 +31,33 @@ const ProfilePage = () => {
 
   const [userDownloads, setUserDownloads] = useState([]);
 
+  const [isProfileOwner, setIsProfileOwner] = useState(false);
+
   const { userData } = useContext(AppContext);
 
   const { username } = useParams();
+
+  useEffect(() => {
+    if (username) {
+      getUserByHandle(username).then((res) => {
+        setUserProfile(res.val());
+      });
+    } else {
+      getUserData(userData?.uid).then((user) => {
+        if (userProfile === '') {
+          setUserProfile(user.val()[Object.keys(user.val())[0]]);
+        }
+      });
+    }
+
+    if (!userData) {
+      setIsProfileOwner(false);
+    } else if (userData?.username === username) {
+      setIsProfileOwner(true);
+    } else {
+      setIsProfileOwner(false);
+    }
+  }, [username, userData]);
 
   useEffect(() => {
     getAllExtensions().then((ext) =>
@@ -45,7 +69,7 @@ const ProfilePage = () => {
     getUserByHandle(username).then((user) => {
       setUserProfile(user.val());
     });
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     const downloadedExtensions = [];
@@ -175,27 +199,13 @@ const ProfilePage = () => {
               sx={{ gap: '1em', width: '65vw', alignItems: 'flex-start' }}
             >
               <h1>{activeView}</h1>
+
               <Divider flexItem />
 
               <Grid container direction="row" spacing={2} className="item-grid">
-                {activeView === 'Uploads'
-                  ? userUploads.map((upload) => {
-                      return (
-                        <Grid key={upload.id} item>
-                          <Items
-                            key={upload.id}
-                            name={upload.title}
-                            logo={upload.logo}
-                            author={upload.author}
-                            category={upload.category}
-                            rating={3.8}
-                            downloadLink={upload.downloadLink}
-                            extId={upload.id}
-                          />
-                        </Grid>
-                      );
-                    })
-                  : null}
+                {activeView === 'Uploads' ? (
+                  <Uploads userUploads={userUploads} isOwner={isProfileOwner} />
+                ) : null}
 
                 {activeView === 'Info' ? (
                   <Info userProfile={userProfile} />
