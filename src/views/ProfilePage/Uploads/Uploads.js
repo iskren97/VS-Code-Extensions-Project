@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from 'react';
+
+
 import { Grid, Tooltip } from '@mui/material';
 import Items from '../../../components/Main/Item/Item';
 
@@ -6,7 +9,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteExtension } from '../../../services/extensions.service';
 
 const Uploads = ({ userUploads, isOwner }) => {
-  return userUploads.map((upload) => {
+
+  const [uploaded, setUploaded] = useState(userUploads);
+
+  return uploaded.map((upload) => {
     return (
       <Grid key={upload.id} item>
         <Items
@@ -26,6 +32,8 @@ const Uploads = ({ userUploads, isOwner }) => {
             placement="right"
             onClick={() => {
               deleteExtension(upload.id);
+              setUploaded(uploaded => uploaded.filter(extension => extension.id !== upload.id))
+
             }}
           >
             <DeleteIcon sx={{ cursor: 'pointer' }} />

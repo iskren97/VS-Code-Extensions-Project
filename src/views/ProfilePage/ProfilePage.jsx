@@ -91,7 +91,9 @@ const ProfilePage = () => {
         });
       })
     );
-  }, [username]);
+  }, [username])
+  
+
 
   return (
     <>

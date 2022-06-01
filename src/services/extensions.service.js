@@ -263,10 +263,7 @@ export const deleteExtension = async (extId) =>{
   
   getUserByHandle(extension.author).then((snapshot) => {
     const user = snapshot.val()
-
-    const userExtensions = user.extensions
-    const newExtensions = userExtensions.filter( r => r.extensionId !== extId)
-
+    const newExtensions = user.extensions.filter( r => r.extensionId !== extId)
 
   update(ref(db), {
     [`/users/${extension.author}/extensions/`]: newExtensions
@@ -278,8 +275,11 @@ export const deleteExtension = async (extId) =>{
   });
   })
   
-  
+}
 
-  
 
+export const setExtensionStatus = (extId, status) =>{
+  return update(ref(db), {
+    [`extensions/${extId}/status`]: status
+  });
 }
