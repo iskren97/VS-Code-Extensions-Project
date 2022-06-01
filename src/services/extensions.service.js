@@ -7,6 +7,8 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { storage } from '../config/firebase-config';
+import { getUserByHandle } from './users.service.js'
+
 
 export const createExtension = (
   title,
@@ -252,3 +254,32 @@ export const getExtensionDownloads = (extId) => {
     return snapshot.val();
   });
 };
+
+
+
+export const deleteExtension = async (extId) =>{
+  const extension = await getExtensionById(extId);
+
+  
+  getUserByHandle(extension.author).then((snapshot) => {
+    const user = snapshot.val()
+
+    const userExtensions = user.extensions
+    const newExtensions = userExtensions.filter( r => r.extensionId !== extId)
+
+
+  update(ref(db), {
+    [`/users/${extension.author}/extensions/`]: newExtensions
+    });
+
+
+  return update(ref(db), {
+    [`/extensions/${extId}`]: null
+  });
+  })
+  
+  
+
+  
+
+}

@@ -11,6 +11,7 @@ import {
   getAllExtensions,
   getExtensionById,
   getExtensionDownloads,
+  deleteExtension,
 } from '../../../services/extensions.service';
 
 function AdminPanel() {
@@ -122,7 +123,7 @@ function AdminPanel() {
                   variant="contained"
                   color="error"
                   onClick={() => {
-                    window.location.href = `/extensions/${ext.id}`;
+                    deleteExtension(ext.id);
                   }}
                 >
                   Delete
