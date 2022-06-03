@@ -7,21 +7,17 @@ import { Divider, Grid } from '@mui/material';
 
 import Button from '@mui/material/Button';
 
-import './AdminPanel.css'
+import './AdminPanel.css';
 
-import {
-  getAllExtensions,
-  getExtensionById,
-  getExtensionDownloads,
-  deleteExtension,
-  setExtensionStatus
-} from '../../../services/extensions.service';
+import { getAllExtensions } from '../../../services/extensions.service';
 
-function AdminPanel() {
+import Extensions from './Extensions/Extensions';
+import Users from './Users/Users';
+
+const AdminPanel = () => {
   const [allExtensions, setAllExtensions] = useState([]);
-
-
-
+  const [extensionsView, setExtensionsView] = useState(true);
+  const [usersView, setUsersView] = useState(false);
 
   useEffect(() => {
     getAllExtensions().then((ext) => setAllExtensions(ext));
@@ -29,6 +25,7 @@ function AdminPanel() {
 
   const setDate = (date) => {
     const newDate = new Date(date);
+
     const options = {
       year: 'numeric',
       month: 'numeric',
@@ -39,10 +36,9 @@ function AdminPanel() {
       hour12: true,
       timeZone: 'UTC',
     };
+
     return newDate.toLocaleString('en-US', options);
   };
-
-
 
   return (
     <>
@@ -60,150 +56,44 @@ function AdminPanel() {
             margin: '1em',
           }}
         >
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setExtensionsView(true);
+              setUsersView(false);
+            }}
+          >
             Extensions{' '}
           </Button>
 
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setExtensionsView(false);
+              setUsersView(true);
+            }}
+          >
             Users{' '}
-          </Button>
-
-          <Button variant="contained" color="primary">
-            Pending Requests{' '}
           </Button>
         </div>
 
         <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
 
-        <div style={{display: 'flex', flexDirection: 'row', gap: '1em', justifyContent: 'center', marginTop: '0.5em', marginBottom: '0.5em'}}>
-          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.25em'}}><span className="legendPending"></span>Pending</div> 
-          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.25em'}}><span className="legendApproved"></span>Approved</div> 
-          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.25em'}}><span className="legendRejected"></span>Rejected</div> 
+        {extensionsView ? (
+          <Extensions
+            allExtensions={allExtensions}
+            setAllExtensions={setAllExtensions}
+            setDate={setDate}
+            extensionsView={extensionsView}
+          />
+        ) : null}
 
-
-        </div> 
-        {allExtensions.map((ext) => {
-
-          let rowColor = ''
-
-          switch(ext.status){
-            case 'pending':
-              rowColor = 'rgb(229, 255, 0)'
-              break;
-            case 'approved':
-              rowColor = 'rgb(0, 255, 42)'
-              break;
-            case 'rejected':
-              rowColor = 'rgb(255, 102, 0)'
-              break;
-              default:
-              break;
-          }
-
-          return (
-            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-            <Grid
-              container
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{
-                margin: '0.25em',
-                padding: '0.5em',
-                backgroundColor: 'lightGray',
-                borderRadius: '0.5em',
-                
-              }}
-            >
-            <div style ={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1em', flex: '1', justifyContent: 'space-between', marginRight: '1em'}}>
-              <Grid item>
-                <img
-                  src={ext.logo}
-                  alt="extension"
-                  width="35rem"
-                  height="35rem"
-                />
-              </Grid>
-
-              <Grid item>{ext.title}</Grid>
-
-              <Grid item>{ext.author}</Grid>
-
-              <Grid item sx={{width:'11em'}}>{setDate(ext.createdOn)}</Grid>
-              </div>
-              <Grid
-                item
-                sx={{ display: 'flex', flexDirection: 'row', gap: '0.25em' }}
-              >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    window.location.href = `/extensions/${ext.id}`;
-                  }}
-                >
-                  View
-                </Button>
-               
-                  <Button
-                  variant="contained"
-                  color="success"
-                  disabled={ext.status === 'approved'}
-                  onClick={() => {
-
-                    setExtensionStatus(ext.id, 'approved')
-
-
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                     extension.status = 'approved' 
-                    }
-                    return extension
-                  }))
-                  }
-                  }
-                >
-                  APPROVE
-                </Button>
-
-
-                <Button
-                  variant="contained"
-                  color="warning"
-                  disabled={ext.status === 'rejected'}
-
-                  onClick={() => {
-                    setExtensionStatus(ext.id, 'rejected')
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                      extension.status = 'rejected'
-                    }
-                    return extension
-                  }))               
-                  }
-                  }
-                >
-                  REJECT
-                </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => {
-                    deleteExtension(ext.id);
-                    setAllExtensions(allExtensions => allExtensions.filter(extension => extension.id !== ext.id))
-                  }}
-                >
-                  Delete
-                </Button>
-              </Grid>
-            </Grid>
-                <span className="legendPending" style={{backgroundColor: rowColor }}></span>
-                </div>
-          );
-        })}
+        {usersView ? <Users /> : null}
       </Grid>
     </>
   );
-}
+};
 
 export default AdminPanel;

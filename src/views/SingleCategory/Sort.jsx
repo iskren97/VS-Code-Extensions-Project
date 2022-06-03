@@ -103,8 +103,8 @@ const Sort = ({ extensions, search }) => {
           <th>
             <button
               type="button"
-              onClick={() => requestSort('rating')}
-              className={getClassNamesFor('rating')}
+              onClick={() => requestSort('averageRating')}
+              className={getClassNamesFor('averageRating')}
               style={{ backgroundColor: 'black' }}
             >
               Rating
@@ -122,6 +122,12 @@ const Sort = ({ extensions, search }) => {
           <td>
             <Grid container direction="row" spacing={2} className="item-grid">
               {allExtensions.map((ext) => {
+                ext.averageRating =
+                  ext?.rating?.reduce(
+                    (sum, current) => sum + current.value,
+                    0
+                  ) / ext?.rating?.length || 0;
+
                 if (search) {
                   return ext.title.toLowerCase().includes(search) ||
                     ext.tags.includes(search) ? (
