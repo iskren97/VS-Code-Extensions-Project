@@ -14,9 +14,12 @@ import { getAllExtensions } from '../../../services/extensions.service';
 import Extensions from './Extensions/Extensions';
 import Users from './Users/Users';
 import Search from '../../../components/Search/Search';
+import { getAllUsers } from '../../../services/users.service';
 
 const AdminPanel = () => {
   const [allExtensions, setAllExtensions] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+
   const [extensionsView, setExtensionsView] = useState(true);
   const [usersView, setUsersView] = useState(false);
 
@@ -24,6 +27,10 @@ const AdminPanel = () => {
 
   useEffect(() => {
     getAllExtensions().then((ext) => setAllExtensions(ext));
+  }, []);
+
+  useEffect(() => {
+    getAllUsers().then((resp) => setAllUsers(Object.values(resp.val())));
   }, []);
 
   const setDate = (date) => {
@@ -82,7 +89,11 @@ const AdminPanel = () => {
             Users{' '}
           </Button>
 
-          <div>{extensionsView ? <Search setSearch={setSearch} /> : null}</div>
+          {extensionsView ? <Search setSearch={setSearch} /> : null}
+
+          {usersView ? (
+            <Search setSearch={setSearch} searchType={'search username ...'} />
+          ) : null}
         </div>
 
         <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
@@ -97,7 +108,7 @@ const AdminPanel = () => {
           />
         ) : null}
 
-        {usersView ? <Users /> : null}
+        {usersView ? <Users allUsers={allUsers} search={search} /> : null}
       </Grid>
     </>
   );

@@ -35,55 +35,6 @@ const Items = ({
   const { user, userData, setContext } = useContext(AppContext);
 
   return (
-    // <Item className="item">
-    //   <div className="category-preview">
-    //     <div>
-    //       <img className="general-img" src={logo} alt="img"></img>
-    //     </div>
-    //     <div className="category-info">
-    //       <h2>{name}</h2>
-    //       <h3 style={{ color: 'grey' }}>{author}</h3>
-    //       <h3 style={{ color: 'grey' }}>{category}</h3>
-    //     </div>
-    //     <div
-    //       style={{
-    //         display: 'flex',
-    //         flexDirection: 'row',
-    //         alignItems: 'center',
-    //       }}
-    //     >
-    //       <Rating
-    //         name="simple-controlled"
-    //         value={ratingValue}
-    //         size="medium"
-    //         onChange={(_, newValue) => {
-    //           setRatingValue(newValue);
-    //         }}
-    //       />
-    //       <div style={{ fontWeight: 'bold', fontSize: '1.25em' }}>
-    //         {rating ?? null}
-    //       </div>
-    //     </div>
-    //     <div></div>
-    //     <div style={{ display: 'flex', flexDirection: 'row' }}>
-    //       <Button
-    //         onClick={() => window.open(downloadLink, '_blank')}
-    //         variant="text"
-    //         sx={{ color: 'blue', fontWeight: 'bold', fontSize: '1.25em' }}
-    //       >
-    //         Get
-    //       </Button>
-    //       <Button
-    //         onClick={() => navigate(`../extensions/${extId}`)}
-    //         variant="text"
-    //         sx={{ color: 'blue', fontWeight: 'bold', fontSize: '1.25em' }}
-    //       >
-    //         Details
-    //       </Button>
-    //     </div>
-    //   </div>
-    // </Item>
-
     <div>
       <article
         className="card"

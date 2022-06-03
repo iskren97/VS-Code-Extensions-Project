@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Divider, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
 import './SortExt.css';
 
