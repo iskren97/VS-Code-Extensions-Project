@@ -1,12 +1,7 @@
-import { Button, Grid } from '@mui/material';
 import React from 'react';
-import {
-  deleteExtension,
-  setExtensionStatus,
-} from '../../../../services/extensions.service';
 import SortExt from './SortExt/SortExt';
 
-const Extensions = ({ allExtensions, setAllExtensions, setDate }) => {
+const Extensions = ({ allExtensions, setAllExtensions, setDate, search }) => {
   return (
     <>
       <div
@@ -53,10 +48,13 @@ const Extensions = ({ allExtensions, setAllExtensions, setDate }) => {
         </div>
       </div>
 
+      <br />
+
       <SortExt
         extensions={allExtensions}
         setAllExtensions={setAllExtensions}
         setDate={setDate}
+        search={search}
       />
     </>
   );

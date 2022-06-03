@@ -13,11 +13,14 @@ import { getAllExtensions } from '../../../services/extensions.service';
 
 import Extensions from './Extensions/Extensions';
 import Users from './Users/Users';
+import Search from '../../../components/Search/Search';
 
 const AdminPanel = () => {
   const [allExtensions, setAllExtensions] = useState([]);
   const [extensionsView, setExtensionsView] = useState(true);
   const [usersView, setUsersView] = useState(false);
+
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getAllExtensions().then((ext) => setAllExtensions(ext));
@@ -54,6 +57,7 @@ const AdminPanel = () => {
             flexDirection: 'row',
             gap: '1em',
             margin: '1em',
+            alignItems: 'center',
           }}
         >
           <Button
@@ -77,6 +81,8 @@ const AdminPanel = () => {
           >
             Users{' '}
           </Button>
+
+          <div>{extensionsView ? <Search setSearch={setSearch} /> : null}</div>
         </div>
 
         <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
@@ -87,6 +93,7 @@ const AdminPanel = () => {
             setAllExtensions={setAllExtensions}
             setDate={setDate}
             extensionsView={extensionsView}
+            search={search}
           />
         ) : null}
 
