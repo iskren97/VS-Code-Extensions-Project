@@ -115,6 +115,7 @@ function AdminPanel() {
                 
               }}
             >
+            <div style ={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1em', flex: '1', justifyContent: 'space-between', marginRight: '1em'}}>
               <Grid item>
                 <img
                   src={ext.logo}
@@ -128,8 +129,8 @@ function AdminPanel() {
 
               <Grid item>{ext.author}</Grid>
 
-              <Grid item>{setDate(ext.createdOn)}</Grid>
-
+              <Grid item sx={{width:'11em'}}>{setDate(ext.createdOn)}</Grid>
+              </div>
               <Grid
                 item
                 sx={{ display: 'flex', flexDirection: 'row', gap: '0.25em' }}
@@ -143,99 +144,47 @@ function AdminPanel() {
                 >
                   View
                 </Button>
-                {ext.status === 'pending' ? (
-                  <>
-                  <Button
-                  variant="contained"
-                  color="success"
-                  onClick={() => {
-
-                    setExtensionStatus(ext.id, 'approved')
-
-
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                     extension.status = 'approved' 
-                    }
-                    return extension
-                  }))
-                  }
-                  }
-                >
-                  APPROVE
-                </Button>
-
-
-                <Button
-                  variant="contained"
-                  color="warning"
-                  onClick={() => {
-                    setExtensionStatus(ext.id, 'rejected')
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                      extension.status = 'rejected'
-                    }
-                    return extension
-                  }))               
-                  }
-                  }
-                >
-                  REJECT
-                </Button>
-                </>
-                 ) : null
-                  
-                  }
-
-                  {ext.status === 'rejected' ? (
-                  <>
-                  <Button
-                  variant="contained"
-                  color="success"
-                  onClick={() => {
-
-                    setExtensionStatus(ext.id, 'approved')
-
-
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                     extension.status = 'approved' 
-                    }
-                    return extension
-                  }))
-                  }
-                  }
-                >
-                  APPROVE
-                </Button>
-                </>
-                 ) : null
-                  }
-
-                  {ext.status === 'approved' ? (
-                  <>
-                <Button
-                  variant="contained"
-                  color="warning"
-                  onClick={() => {
-                    setExtensionStatus(ext.id, 'rejected')
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                      extension.status = 'rejected'
-                    }
-                    return extension
-                  }))               
-                  }
-                  }
-                >
-                  REJECT
-                </Button>
-                </>
-                 ) : null
-                  
-                  }
                
+                  <Button
+                  variant="contained"
+                  color="success"
+                  disabled={ext.status === 'approved'}
+                  onClick={() => {
 
+                    setExtensionStatus(ext.id, 'approved')
+
+
+                  setAllExtensions(allExtensions.map((extension) => {
+                    if(extension.id === ext.id) {
+                     extension.status = 'approved' 
+                    }
+                    return extension
+                  }))
+                  }
+                  }
+                >
+                  APPROVE
+                </Button>
+
+
+                <Button
+                  variant="contained"
+                  color="warning"
+                  disabled={ext.status === 'rejected'}
+
+                  onClick={() => {
+                    setExtensionStatus(ext.id, 'rejected')
+                  setAllExtensions(allExtensions.map((extension) => {
+                    if(extension.id === ext.id) {
+                      extension.status = 'rejected'
+                    }
+                    return extension
+                  }))               
+                  }
+                  }
+                >
+                  REJECT
+                </Button>
                 <Button
                   variant="contained"
                   color="error"
