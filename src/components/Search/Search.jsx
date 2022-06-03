@@ -3,7 +3,7 @@ import './Search.css';
 
 import SearchIcon from '@mui/icons-material/Search';
 
-const Search = ({ setSearch }) => {
+const Search = ({ setSearch, searchType }) => {
   return (
     <div className="search-container">
       <div>
@@ -14,7 +14,9 @@ const Search = ({ setSearch }) => {
           }}
           type="search"
           id="search"
-          placeholder="search extension title, tag ..."
+          placeholder={
+            searchType ? searchType : 'search extension title, tag ...'
+          }
         />
       </div>
 
