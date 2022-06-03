@@ -63,6 +63,26 @@ export const getExtensionById = (id) => {
   });
 };
 
+
+
+export const updateExtensionInfo = (id, newInfo) => {
+   getExtensionById(id).then((extension) => {
+    // if (!extension.exists()) {
+    //   throw new Error(`Extension with id ${id} does not exist!`);
+    // }
+
+    if(extension.logo == newInfo.logo && extension.downloadLink === newInfo.downloadLink){
+      return update(ref(db), {
+    [`/extensions/${id}`]: newInfo
+  });
+    }
+  })
+
+
+
+  
+}
+
 export const updateExtensionDownloadLink = (extId, url) => {
   return update(ref(db, `extensions/${extId}`), {
     downloadLink: url,

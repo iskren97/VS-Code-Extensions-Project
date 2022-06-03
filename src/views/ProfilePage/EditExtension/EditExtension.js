@@ -1,22 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
-import { useNavigate } from 'react-router';
-import './Upload.css';
+import { useNavigate, useParams } from 'react-router';
 
-import AppContext from '../../providers/AppContext';
+
+import AppContext from '../../../providers/AppContext';
 import {
   ref as storageRef,
   uploadBytes,
   getDownloadURL,
 } from 'firebase/storage';
-import { storage } from '../../config/firebase-config';
+import { storage } from '../../../config/firebase-config';
 
 import { Container, Divider } from '@mui/material';
 
 import Tooltip from '@mui/material/Tooltip';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-import AlertUser from '../Register/AlertUser';
+import AlertUser from '../../Register/AlertUser';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -24,13 +24,16 @@ import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
+
 import {
   createExtension,
   getAllExtensions,
-} from '../../services/extensions.service';
+  getExtensionById,
+  updateExtensionInfo
+} from '../../../services/extensions.service';
 import { NavLink } from 'react-router-dom';
 
-function Upload() {
+function EditExtension() {
   const { user, userData, setContext } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -38,7 +41,25 @@ function Upload() {
   const [errorMsg, setErrorMsg] = useState('');
   const [msgType, setMsgType] = useState('');
 
-  const [uploadInfo, setUploadInfo] = useState({});
+  const [uploadInfo, setUploadInfo] = useState({tags: []});
+  const [currentExtension, setCurrentExtension] = useState({});
+  const { id } = useParams();
+
+
+
+  // const [extension, setExtension] = useState('')
+
+  useEffect(() => {
+    getExtensionById(id).then((ext) => {
+      setCurrentExtension(ext);
+      setUploadInfo(ext);
+    });
+
+    
+  },[])
+
+
+  console.log(uploadInfo)
 
 
 
@@ -49,30 +70,16 @@ function Upload() {
       setMsgType('error');
       return false;
     }
-    if (!uploadInfo.name) {
+    if (!uploadInfo.title) {
       setError(true);
       setErrorMsg('Please enter a name for your extension');
       setMsgType('error');
       return false;
     }
 
-    if (uploadInfo.name.length < 2 || uploadInfo.name.length > 30) {
+    if (uploadInfo.title.length < 2 || uploadInfo.title.length > 30) {
       setError(true);
       setErrorMsg('Please enter a name between 3 and 30 characters');
-      setMsgType('error');
-      return false;
-    }
-
-    if (!uploadInfo.file) {
-      setError(true);
-      setErrorMsg('Please upload a file');
-      setMsgType('error');
-      return false;
-    }
-
-    if (!uploadInfo.file.name.includes('vsix')) {
-      setError(true);
-      setErrorMsg('Please upload a valid extension - .vsix format');
       setMsgType('error');
       return false;
     }
@@ -84,17 +91,7 @@ function Upload() {
       return false;
     }
 
-    if (
-      !uploadInfo.logo ||
-      (uploadInfo.logo.type !== 'image/jpg' &&
-        uploadInfo.logo.type !== 'image/png' &&
-        uploadInfo.logo.type !== 'image/jpeg')
-    ) {
-      setError(true);
-      setErrorMsg('Please upload a jpg or png file');
-      setMsgType('error');
-      return false;
-    }
+
 
     if (
       !uploadInfo.repositoryUrl ||
@@ -114,7 +111,7 @@ function Upload() {
       if (error === true) {
         setError(false);
       } else {
-        submitExtension(event);
+        editExtension(event);
       }
     }
   };
@@ -140,19 +137,19 @@ function Upload() {
     'es6',
   ];
 
-  const submitExtension = async () => {
+  const editExtension = async () => {
     const isValidData = await validateData();
 
     getAllExtensions().then((extensions) => {
       for (const extension of extensions) {
-        if (extension.title === uploadInfo?.name) {
+        if (extension.title === uploadInfo?.title && extension.title !== currentExtension.title) {
           setError(true);
           setErrorMsg('This name is already in use');
           setMsgType('error');
           return false;
         }
 
-        if (extension.repoUrl === uploadInfo.repositoryUrl) {
+        if (extension.repoUrl === uploadInfo.repoUrl && extension.repoUrl !== currentExtension.repoUrl) {
           setError(true);
           setErrorMsg('This repository is already in use');
           setMsgType('error');
@@ -167,16 +164,7 @@ function Upload() {
         }
       }
       if (isValidData) {
-        createExtension(
-          uploadInfo.name,
-          uploadInfo.repositoryUrl,
-          uploadInfo.category,
-          userData.username,
-          uploadInfo.file.name,
-          uploadInfo.file,
-          uploadInfo.tags,
-          uploadInfo.logo
-        );
+        updateExtensionInfo(uploadInfo.id, uploadInfo)
 
         setError(true);
         setErrorMsg(`Extension uploaded successfully!`);
@@ -209,7 +197,7 @@ function Upload() {
               fontSize: '22px',
             }}
           >
-            <h2>Upload an extension</h2>
+            <h2>Edit {currentExtension.title}</h2>
           </div>
 
           <br />
@@ -223,19 +211,23 @@ function Upload() {
               <input
                 type="text"
                 placeholder="Extension Name"
+                defaultValue={uploadInfo.title}
                 required
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, name: e.target.value })
+                onChange={(e) =>{
+                  setUploadInfo({ ...uploadInfo, title: e.target.value })}
                 }
                 onKeyDown={handleKeyEnter}
               />
             </div>
+           
 
             <div>
               <input
                 type="text"
                 placeholder="Repository Url"
                 required
+                defaultValue={uploadInfo.repoUrl}
+
                 onChange={(e) =>
                   setUploadInfo({
                     ...uploadInfo,
@@ -246,33 +238,7 @@ function Upload() {
               />
             </div>
 
-            <div>
-              <h2>File</h2>
-
-              <input
-                type="file"
-                accept=".vsix"
-                required
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, file: e.target.files[0] })
-                }
-                onKeyDown={handleKeyEnter}
-              />
-            </div>
-
-            <div>
-              <h2>Logo</h2>
-
-              <input
-                type="file"
-                accept="image/*"
-                required
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, logo: e.target.files[0] })
-                }
-                onKeyDown={handleKeyEnter}
-              />
-            </div>
+          
 
             <div>
               <h2>Category</h2>
@@ -308,8 +274,9 @@ function Upload() {
                 disableClearable
                 className="upload-form-tags"
                 fullWidth
-                onChange={(e, values) =>
-                  setUploadInfo({ ...uploadInfo, tags: values })
+                value={[...uploadInfo?.tags]}
+                onChange={(e, values) =>{
+                  setUploadInfo({ ...uploadInfo, tags: values })}
                 }
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
@@ -329,7 +296,7 @@ function Upload() {
             <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
 
             <Button
-              onClick={() => submitExtension()}
+              onClick={() => editExtension()}
               variant="contained"
               sx={{
                 cursor: 'pointer',
@@ -342,7 +309,7 @@ function Upload() {
                 letterSpacing: '10px',
               }}
             >
-              Submit
+              Update
             </Button>
           </form>
         </Container>
@@ -359,4 +326,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+export default EditExtension;

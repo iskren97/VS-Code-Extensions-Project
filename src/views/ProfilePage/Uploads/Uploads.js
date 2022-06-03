@@ -6,6 +6,7 @@ import Items from '../../../components/Main/Item/Item';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 
 import {
@@ -13,13 +14,15 @@ import {
   getExtensionById,
   getExtensionDownloads,
   deleteExtension,
-  setExtensionStatus
+  setExtensionStatus,
+  updateExtensionInfo
 } from '../../../services/extensions.service';
 
 const Uploads = ({ userUploads, isOwner }) => {
 
   const [uploaded, setUploaded] = useState(userUploads);
-  const [allExtensions, setAllExtensions] = useState([]);
+  const navigate = useNavigate();
+
 
 
   const setDate = (date) => {
@@ -74,7 +77,6 @@ const Uploads = ({ userUploads, isOwner }) => {
         alignItems="stretch"
       >
        
-        <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
 
         <div style={{display: 'flex', flexDirection: 'row', gap: '1em', justifyContent: 'center', marginTop: '0.5em', marginBottom: '0.5em'}}>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.25em'}}><span className="legendPending"></span>Pending</div> 
@@ -152,14 +154,8 @@ const Uploads = ({ userUploads, isOwner }) => {
                   variant="contained"
                   color="warning"
                   onClick={() => {
-                    setExtensionStatus(ext.id, 'rejected')
-                  setAllExtensions(allExtensions.map((extension) => {
-                    if(extension.id === ext.id) {
-                      extension.status = 'rejected'
-                    }
-                    return extension
-                  }))               
-                  }
+                    navigate(`../extensions/edit/${ext.id}`)}
+                  
                   }
                 >
                   Edit
@@ -169,7 +165,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                   color="error"
                   onClick={() => {
                     deleteExtension(ext.id);
-                    setAllExtensions(allExtensions => allExtensions.filter(extension => extension.id !== ext.id))
+                    setUploaded(allExtensions => allExtensions.filter(extension => extension.id !== ext.id))
                   }}
                 >
                   Delete
