@@ -3,7 +3,7 @@ import './SingleExtension.css';
 import './Markdown.css';
 
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import AppContext from '../../providers/AppContext';
 
 import Header from '../../components/Header/Header';
@@ -34,6 +34,7 @@ function SingleExtension() {
   const [repoInfo, setRepoInfo] = useState('');
   const [pulls, setPulls] = useState('');
   const [commitInfo, setCommitInfo] = useState('');
+  const [commitDate, setCommitDate] = useState('')
   const [version, setVersion] = useState('');
   const [downloads, setDownloads] = useState(0);
 
@@ -121,7 +122,15 @@ function SingleExtension() {
     );
     const data = await resp.json();
 
-    setCommitInfo(data[0]);
+      if(data[0]?.commit?.message.length < 50){
+    setCommitInfo(data[0]?.commit?.message);
+      } else{
+    setCommitInfo(data[0]?.commit?.message.substring(0, 50) + '...');
+      }
+
+
+      setCommitDate(data[0]?.commit?.author?.date);
+
   };
 
   useEffect(() => {
@@ -168,6 +177,8 @@ function SingleExtension() {
     return newDate.toLocaleString('en-US', options);
   };
 
+
+
   return (
     <>
       <Header />
@@ -199,7 +210,11 @@ function SingleExtension() {
             fontWeight: 'bold',
           }}
         >
-          by {extensionInfo.author} {version ? '/ ' + version : null}{' '}
+          by {' '}
+          <NavLink to={`/profile/${extensionInfo.author}`}>
+          {extensionInfo.author}
+          </NavLink> {' '}
+           {version ? '/ ' + version : null}{' '}
         </p>
 
         <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
@@ -365,10 +380,10 @@ function SingleExtension() {
                 </p>
 
                 <p style={{ fontSize: '1.3rem' }}>
-                  {commitInfo?.commit?.message}
+                  {commitInfo}
                 </p>
                 <p style={{ fontSize: '1.3rem' }}>
-                  {setDate(commitInfo?.commit?.committer?.date)}
+                  {setDate(commitDate)}
                 </p>
               </div>
             </Stack>

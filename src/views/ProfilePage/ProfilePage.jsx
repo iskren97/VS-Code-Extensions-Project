@@ -162,12 +162,15 @@ const ProfilePage = () => {
                   Info
                 </Button>
 
-                <Button
+                {userData.uid === userProfile.uid ? (
+                  <Button
                   onClick={() => setActiveView('Inbox')}
                   variant="contained"
                 >
                   Inbox
                 </Button>
+                ) : null}
+                
 
                 <Button
                   onClick={() => setActiveView('Uploads')}
