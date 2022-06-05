@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Users.css';
 
@@ -6,7 +6,7 @@ import DisplayUser from './DisplayUser';
 
 import defaultPic from '../../../../assets/avatar.jpg';
 
-const Users = ({ allUsers, search }) => {
+const Users = ({ allUsers, setAllUsers, search }) => {
   return (
     <>
       <br />
@@ -17,26 +17,28 @@ const Users = ({ allUsers, search }) => {
             return user.username.toLowerCase().includes(search) ||
               user.email.toLowerCase().includes(search) ? (
               <DisplayUser
-                key={user.uid}
                 username={user.username}
                 email={user.email}
                 phoneNumber={user.phoneNumber}
                 uid={user.uid}
                 avatar={user.avatarUrl ?? defaultPic}
                 role={user.role}
+                allUsers={allUsers}
+                setUsers={setAllUsers}
               />
             ) : null;
           }
 
           return (
             <DisplayUser
-              key={user.uid}
               username={user.username}
               email={user.email}
               phoneNumber={user.phoneNumber}
               uid={user.uid}
               avatar={user.avatarUrl ?? defaultPic}
               role={user.role}
+              allUsers={allUsers}
+              setUsers={setAllUsers}
             />
           );
         })

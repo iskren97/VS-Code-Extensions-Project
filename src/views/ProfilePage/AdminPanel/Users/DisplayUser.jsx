@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { Button, Grid } from '@mui/material';
@@ -6,7 +6,16 @@ import { updateUserRole } from '../../../../services/users.service';
 
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
-const DisplayUser = ({ username, email, phoneNumber, uid, avatar, role }) => {
+const DisplayUser = ({
+  username,
+  email,
+  phoneNumber,
+  uid,
+  avatar,
+  role,
+  allUsers,
+  setUsers,
+}) => {
   const navigate = useNavigate();
 
   const [isUserBlocked, setIsUserBlocked] = useState(role === 'blocked');
@@ -22,8 +31,6 @@ const DisplayUser = ({ username, email, phoneNumber, uid, avatar, role }) => {
       });
     }
   };
-
-  console.log('ax');
 
   return (
     <>
@@ -104,13 +111,25 @@ const DisplayUser = ({ username, email, phoneNumber, uid, avatar, role }) => {
                   variant="contained"
                   color="error"
                   disabled={role === 'blocked'}
-                  onClick={() => handleBlockUser()}
+                  onClick={() => {
+                    handleBlockUser();
+                    const blocked = allUsers.find((user) => user.uid === uid);
+                    blocked.role = 'blocked';
+
+                    setUsers((allUsers) =>
+                      [...allUsers, blocked].filter(
+                        (user, index) => allUsers.indexOf(user) === index
+                      )
+                    );
+                  }}
                 >
                   Block
                 </Button>
               ) : (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <p style={{ fontWeight: 'bold', fontSize: '20px' }}>Admin</p>
+                  <p style={{ fontWeight: 'bold', fontSize: '19.5px' }}>
+                    Admin
+                  </p>
 
                   <AdminPanelSettingsIcon color="success" />
                 </div>
@@ -119,7 +138,17 @@ const DisplayUser = ({ username, email, phoneNumber, uid, avatar, role }) => {
               <Button
                 variant="contained"
                 color="success"
-                onClick={() => handleBlockUser()}
+                onClick={() => {
+                  handleBlockUser();
+                  const blocked = allUsers.find((user) => user.uid === uid);
+                  blocked.role = 'user';
+
+                  setUsers((allUsers) =>
+                    [...allUsers, blocked].filter(
+                      (user, index) => allUsers.indexOf(user) === index
+                    )
+                  );
+                }}
               >
                 Unblock
               </Button>

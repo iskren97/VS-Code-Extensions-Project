@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import AppContext from '../../../providers/AppContext';
-import { useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 import { Divider, Grid } from '@mui/material';
 
@@ -110,7 +108,13 @@ const AdminPanel = () => {
           />
         ) : null}
 
-        {usersView ? <Users allUsers={allUsers} search={search} /> : null}
+        {usersView ? (
+          <Users
+            allUsers={allUsers}
+            setAllUsers={setAllUsers}
+            search={search}
+          />
+        ) : null}
       </Grid>
     </>
   );

@@ -91,9 +91,7 @@ const ProfilePage = () => {
         });
       })
     );
-  }, [username])
-  
-
+  }, [username]);
 
   return (
     <>
@@ -134,8 +132,8 @@ const ProfilePage = () => {
               <Grid item>
                 <img
                   src={
-                    userProfile.avatarUrl
-                      ? userProfile.avatarUrl
+                    userProfile?.avatarUrl
+                      ? userProfile?.avatarUrl
                       : defaultAvatar
                   }
                   alt="Profile"
@@ -162,15 +160,14 @@ const ProfilePage = () => {
                   Info
                 </Button>
 
-                {userData.uid === userProfile.uid ? (
+                {userData?.uid === userProfile?.uid ? (
                   <Button
-                  onClick={() => setActiveView('Inbox')}
-                  variant="contained"
-                >
-                  Inbox
-                </Button>
+                    onClick={() => setActiveView('Inbox')}
+                    variant="contained"
+                  >
+                    Inbox
+                  </Button>
                 ) : null}
-                
 
                 <Button
                   onClick={() => setActiveView('Uploads')}
