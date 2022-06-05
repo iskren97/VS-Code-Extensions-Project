@@ -25,7 +25,7 @@ const Main = () => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: '10em' }}>
+      <div style={{ marginTop: '11em' }}>
         <Intro />
 
         <Categories />

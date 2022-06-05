@@ -179,6 +179,53 @@ function SingleExtension() {
 
 
 
+  const commitRow = {
+    '@media (max-width: 480px)' : {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      gap: '1em',
+      margin: '0px',
+
+    }
+  }
+
+  const mainWidth = {
+    '@media (max-width: 2048px)' :{
+      gap: '1em',
+      width: '63%',
+      alignItems: 'flex-start' 
+    },
+
+  
+    '@media (max-width: 1024px)' :{
+      width: '50%',
+    },
+
+    '@media (max-width:768px)' : {
+      width: '100%',
+    },
+
+  }
+
+  const infoColumn = {
+    '@media (max-width: 2048px)' :{
+      gap: '1em', 
+      width: 'auto', 
+      maxWidth: '18em'
+    },
+
+
+    '@media (max-width:768px)' : {
+      width: '100%',
+      maxWidth: 'none',
+    },
+
+  }
+
+
+
+  console.log(window.innerWidth)
+
   return (
     <>
       <Header />
@@ -227,7 +274,7 @@ function SingleExtension() {
           <Grid
             container
             direction="column"
-            sx={{ gap: '1em', width: 'auto', maxWidth: '18em' }}
+            sx={infoColumn}
           >
             <Grid item>
               <img
@@ -261,12 +308,12 @@ function SingleExtension() {
               })}
             </Grid>
           </Grid>
-          <Divider orientation="vertical" flexItem />
+          <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'}  flexItem sx={{width: 'auto', height:'auto'}} />
 
           <Grid
             container
             direction="column"
-            sx={{ gap: '1em', width: '65vw', alignItems: 'flex-start' }}
+            sx={mainWidth}
           >
             <Grid
               container
@@ -302,8 +349,11 @@ function SingleExtension() {
 
             <Stack
               direction="row"
-              divider={<Divider orientation="vertical" flexItem />}
+              divider={<Divider orientation={window.matchMedia('(max-device-width: 480px)').matches ? "horizontal" : 'vertical'} flexItem />}
               spacing={2}
+              sx={commitRow}
+
+
             >
               <div
                 style={{
@@ -311,6 +361,7 @@ function SingleExtension() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   cursor: 'pointer',
+                  marginLeft: '16px'
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -322,6 +373,7 @@ function SingleExtension() {
                     fontSize: '1.3rem',
                     fontWeight: 'bold',
                     marginBottom: '0.25em',
+
                   }}
                 >
                   Open Issues{' '}
@@ -337,6 +389,7 @@ function SingleExtension() {
                   flexDirection: 'column',
                   alignItems: 'center',
                   cursor: 'pointer',
+
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -348,6 +401,8 @@ function SingleExtension() {
                     fontSize: '1.3rem',
                     fontWeight: 'bold',
                     marginBottom: '0.25em',
+
+
                   }}
                 >
                   Pull Requests{' '}
@@ -363,6 +418,7 @@ function SingleExtension() {
                   flexDirection: 'column',
                   alignItems: 'flex-start',
                   cursor: 'pointer',
+
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -374,15 +430,17 @@ function SingleExtension() {
                     fontSize: '1.3rem',
                     fontWeight: 'bold',
                     marginBottom: '0.25em',
+
+
                   }}
                 >
                   Last Commit
                 </p>
 
-                <p style={{ fontSize: '1.3rem' }}>
+                <p style={{ fontSize: '1.3rem'}}>
                   {commitInfo}
                 </p>
-                <p style={{ fontSize: '1.3rem' }}>
+                <p style={{ fontSize: '1.3rem'}}>
                   {setDate(commitDate)}
                 </p>
               </div>

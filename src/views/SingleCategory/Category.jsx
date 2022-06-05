@@ -40,7 +40,7 @@ const Category = () => {
     <>
       <Header />
 
-      <div style={{ textAlign: 'center', marginTop: '170px' }}>
+      <div style={{ textAlign: 'center', marginTop: '12em' }}>
         <h1>{categoryName}</h1>
 
         {categoryName !== 'Most Popular' ? (
