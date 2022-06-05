@@ -119,6 +119,9 @@ const Category = () => {
             Browse Extensions
           </p>
 
+          <br />
+          <br />
+
           <Search setSearch={setSearch} />
 
           <Container

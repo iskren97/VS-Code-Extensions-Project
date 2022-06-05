@@ -92,7 +92,10 @@ const AdminPanel = () => {
           {extensionsView ? <Search setSearch={setSearch} /> : null}
 
           {usersView ? (
-            <Search setSearch={setSearch} searchType={'search username ...'} />
+            <Search
+              setSearch={setSearch}
+              searchType={'search username, email ...'}
+            />
           ) : null}
         </div>
 
@@ -103,7 +106,6 @@ const AdminPanel = () => {
             allExtensions={allExtensions}
             setAllExtensions={setAllExtensions}
             setDate={setDate}
-            extensionsView={extensionsView}
             search={search}
           />
         ) : null}
