@@ -93,11 +93,46 @@ const ProfilePage = () => {
     );
   }, [username]);
 
+
+
+  const tabStyle = {
+   
+
+    '@media (max-width: 1024px)' : {
+      gap: '1em', 
+      width: '55vw',
+      alignItems: 'flex-start'
+
+    },
+    '@media (max-width: 768px)' : {
+      gap: '1em', 
+      width: '40vw',
+      alignItems: 'flex-start'
+
+    },
+    '@media (max-width: 425px)' : {
+      gap: '1em', 
+      width: 'auto',
+      alignItems: 'flex-start'
+
+    },
+
+    '@media (min-width: 1280px)' : {
+      gap: '1em', 
+      width: '65vw',
+      alignItems: 'flex-start'
+
+    },
+
+
+  }
+
+
   return (
     <>
       <Header />
 
-      <div style={{ marginTop: '10em' }}>
+      <div style={{ marginTop: '13em' }}>
         <Grid
           container
           direction="column"
@@ -117,7 +152,7 @@ const ProfilePage = () => {
         >
           <h1 style={{ marginLeft: '2em' }}>{username}</h1>
 
-          <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
+          <Divider sx={{ marginLeft: '2em', marginRight: '2em'}} />
 
           <Grid
             container
@@ -193,16 +228,16 @@ const ProfilePage = () => {
               </Grid>
             </Grid>
 
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'} flexItem />
 
             <Grid
               container
               direction="column"
-              sx={{ gap: '1em', width: '65vw', alignItems: 'flex-start' }}
+              sx={tabStyle}
             >
               <h1>{activeView}</h1>
 
-              <Divider flexItem />
+              <Divider flexItem  sx={{width: 'auto', marginBottom: '1em'}}/>
 
               <Grid container direction="row" spacing={2} className="item-grid">
                 {activeView === 'Uploads' ? (

@@ -61,6 +61,7 @@ const AdminPanel = () => {
             display: 'flex',
             flexDirection: 'row',
             gap: '1em',
+            flexWrap: 'wrap',
             margin: '1em',
             alignItems: 'center',
           }}

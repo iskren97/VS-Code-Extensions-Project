@@ -26,6 +26,8 @@ const Uploads = ({ userUploads, isOwner }) => {
     return newDate.toLocaleString('en-US', options);
   };
 
+
+
   return (
     <>
       <Grid
@@ -33,16 +35,18 @@ const Uploads = ({ userUploads, isOwner }) => {
         direction="column"
         justifyContent="center"
         alignItems="stretch"
+        wrap="nowrap"
+        sx={{width: '100%'}}
       >
         <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '1em',
-            justifyContent: 'center',
-            marginTop: '0.5em',
-            marginBottom: '0.5em',
-          }}
+          style={{      display: 'flex',
+      flexDirection: 'row',
+      width: 'auto',
+      gap: '1em',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-start',
+      marginTop: '0.5em',
+      marginBottom: '0.5em',}}
         >
           <div
             style={{
@@ -109,17 +113,17 @@ const Uploads = ({ userUploads, isOwner }) => {
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    sx={{
-                      margin: '0.25em',
+                    sx={{width: '100%',
+      margin: '0.25em',
                       padding: '0.5em',
                       backgroundColor: 'lightGray',
-                      borderRadius: '0.5em',
-                    }}
+                      borderRadius: '0.5em',}}
                   >
                     <div
                       style={{
                         display: 'flex',
                         flexDirection: 'row',
+                        flexWrap: 'wrap',
                         alignItems: 'center',
                         gap: '1em',
                         flex: '1',
@@ -150,6 +154,8 @@ const Uploads = ({ userUploads, isOwner }) => {
                       sx={{
                         display: 'flex',
                         flexDirection: 'row',
+                        flexWrap: 'wrap',
+
                         gap: '0.25em',
                       }}
                     >
@@ -192,7 +198,7 @@ const Uploads = ({ userUploads, isOwner }) => {
 
                   <span
                     className="legendPending"
-                    style={{ backgroundColor: rowColor }}
+                    style={{ backgroundColor: rowColor, minWidth: '24px', minHeight: '24px' }}
                   ></span>
                 </div>
               );
@@ -241,6 +247,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                           display: 'flex',
                           flexDirection: 'row',
                           alignItems: 'center',
+                          flexWrap: 'wrap',
                           gap: '1em',
                           flex: '1',
                           justifyContent: 'space-between',
@@ -270,6 +277,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                         sx={{
                           display: 'flex',
                           flexDirection: 'row',
+                          flexWrap: 'wrap',
                           gap: '0.25em',
                         }}
                       >
