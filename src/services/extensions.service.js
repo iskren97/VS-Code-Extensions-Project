@@ -248,20 +248,25 @@ export const updateExtensionDownloads = (extId, username) => {
     if (!downloads) {
       downloads = [];
     }
+    if(username !== null){
+      const index = downloads.findIndex((r) => r.username === username);
 
-    const index = downloads.findIndex((r) => r.username === username);
-
-    if (index > -1) {
+      if (index > -1) {
+        return;
+      } else {
+        downloads.push({ username, downloaded: true });
+      }
+  
+      update(ref(db, `extensions/${extId}`), {
+        downloads,
+      });
+  
+      return downloads;
+    }else{
       return;
-    } else {
-      downloads.push({ username, downloaded: true });
     }
 
-    update(ref(db, `extensions/${extId}`), {
-      downloads,
-    });
 
-    return downloads;
   });
 };
 

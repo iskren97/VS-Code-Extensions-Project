@@ -57,7 +57,7 @@ const Items = ({
             >
               <button
                 onClick={() => {
-                  updateExtensionDownloads(extId, userData.username);
+                  updateExtensionDownloads(extId, userData?.username);
                   window.open(downloadLink, '_blank');
                 }}
                 className="card_button"
