@@ -33,7 +33,13 @@ const Category = () => {
   }, [categoryName]);
 
   useEffect(() => {
-    getAllExtensions().then((resp) => setPopular(resp));
+    getAllExtensions().then((resp) =>
+      setPopular(
+        resp
+          .map((ext) => ({ ...ext, popularity: ext.downloads?.length || 0 }))
+          .sort((a, b) => b.popularity - a.popularity)
+      )
+    );
   }, [categoryName]);
 
   return (
