@@ -50,7 +50,77 @@ const AdminPanel = () => {
 
   return (
     <>
-      <Grid
+      <Grid item>
+        <Grid
+          container
+          direction="row"
+          spacing={2}
+          sx={{ alignItems: 'center' }}
+        >
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setExtensionsView(true);
+                setUsersView(false);
+              }}
+            >
+              Extensions{' '}
+            </Button>
+          </Grid>
+
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setExtensionsView(false);
+                setUsersView(true);
+              }}
+            >
+              Users{' '}
+            </Button>
+          </Grid>
+
+          <Grid item>
+            {extensionsView ? <Search setSearch={setSearch} /> : null}
+
+            {usersView ? (
+              <Search
+                setSearch={setSearch}
+                searchType={'search username, email ...'}
+              />
+            ) : null}
+          </Grid>
+
+          <Grid item xs={12}>
+            <Divider sx={{ marginTop: '18px' }} />
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" spacing={2}>
+          <Grid item xs={12}>
+            {extensionsView ? (
+              <Extensions
+                allExtensions={allExtensions}
+                setAllExtensions={setAllExtensions}
+                setDate={setDate}
+                search={search}
+              />
+            ) : null}
+
+            {usersView ? (
+              <Users
+                allUsers={allUsers}
+                setAllUsers={setAllUsers}
+                search={search}
+              />
+            ) : null}
+          </Grid>
+        </Grid>
+      </Grid>
+      {/* <Grid
         container
         direction="column"
         justifyContent="center"
@@ -116,7 +186,7 @@ const AdminPanel = () => {
             search={search}
           />
         ) : null}
-      </Grid>
+      </Grid> */}
     </>
   );
 };
