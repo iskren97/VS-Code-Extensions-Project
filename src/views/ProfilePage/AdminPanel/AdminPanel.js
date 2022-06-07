@@ -13,6 +13,7 @@ import Extensions from './Extensions/Extensions';
 import Users from './Users/Users';
 import Search from '../../../components/Search/Search';
 import { getAllUsers } from '../../../services/users.service';
+import Legend from '../StatusLegend/Legend';
 
 const AdminPanel = () => {
   const [allExtensions, setAllExtensions] = useState([]);
@@ -99,17 +100,22 @@ const AdminPanel = () => {
           </Grid>
         </Grid>
 
+        <br />
+
         <Grid container direction="row" spacing={2}>
-          <Grid item xs={12}>
-            {extensionsView ? (
+          {extensionsView ? (
+            <Grid item xs={12}>
+              <Legend />
               <Extensions
-                allExtensions={allExtensions}
+                extensions={allExtensions}
                 setAllExtensions={setAllExtensions}
                 setDate={setDate}
                 search={search}
               />
-            ) : null}
+            </Grid>
+          ) : null}
 
+          <Grid item xs={12}>
             {usersView ? (
               <Users
                 allUsers={allUsers}

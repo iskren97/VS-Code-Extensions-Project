@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import './Users.css';
 
@@ -9,8 +9,6 @@ import defaultPic from '../../../../assets/avatar.jpg';
 const Users = ({ allUsers, setAllUsers, search }) => {
   return (
     <>
-      <br />
-
       {allUsers.length !== 0 ? (
         allUsers.map((user) => {
           if (search) {
