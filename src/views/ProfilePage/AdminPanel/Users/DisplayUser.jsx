@@ -38,7 +38,7 @@ const DisplayUser = ({
         container
         direction="row"
         alignItems="center"
-        justifyContent="space-between"
+        justify="space-around"
         className="users-container"
         sx={{
           margin: '0.45em',
@@ -53,24 +53,38 @@ const DisplayUser = ({
             alt="userPic"
             width="35rem"
             height="35rem"
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', marginRight: '55px' }}
           />
         </Grid>
 
-        <Grid item>
-          Username: <span>{username}</span>
+        <Grid item xs>
+          <Grid container direction="row" spacing={1}>
+            <Grid item>Username:</Grid>
+            <Grid item>
+              <span>{username}</span>
+            </Grid>
+          </Grid>
         </Grid>
 
-        <Grid item>
-          Phone: <span>{phoneNumber}</span>
+        <Grid item xs>
+          <Grid container direction="row" spacing={1}>
+            <Grid item>Phone:</Grid>
+            <Grid item>
+              <span>{phoneNumber}</span>
+            </Grid>
+          </Grid>
         </Grid>
 
-        <Grid item>
-          Email: <span>{email}</span>
+        <Grid item xs>
+          <Grid container direction="row" spacing={1}>
+            <Grid item>Email:</Grid>
+            <Grid item>
+              <span>{email}</span>
+            </Grid>
+          </Grid>
         </Grid>
 
         <Grid
-          key={uid}
           item
           sx={{
             display: 'flex',

@@ -33,7 +33,7 @@ const DisplayExt = ({
               borderRadius: '0.5em',
             }}
           >
-            <Grid item xs>
+            <Grid item>
               <img
                 src={ext.logo}
                 alt="extension"
