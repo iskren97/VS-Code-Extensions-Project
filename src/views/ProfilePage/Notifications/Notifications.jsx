@@ -79,10 +79,10 @@ function Notifications({userProfile}) {
           </div>
 </div>
 
-      {notifications.filter(notification => notification?.author === userProfile.username || notification?.recipient === userProfile.username || (userProfile.role === 'admin' && notification?.recipient === 'Admins'))
+      {notifications.filter(notification => notification?.author === userProfile.username || notification?.recipient === userProfile.username || (userProfile.role === 'admin' && (notification?.recipient === 'Admins' || notification?.author === 'Admins')))
               .map((notif) => {
                 let rowColor = '';
-                if(userProfile.username === notif.author){
+                if(userProfile.username === notif.author || userProfile.role === 'admin' && (notif?.recipient === 'Admins' || notif?.author === 'Admins') ){
                   switch (notif.statusAuthor) {
                   case 'unseen':
                     rowColor = 'rgb(0, 149, 255)';
@@ -173,9 +173,8 @@ function Notifications({userProfile}) {
                           variant="contained"
                           color="primary"
                           onClick={()=> {
-                            console.log(notif)
 
-                            if(notif.author === userProfile.username){
+                            if(notif.author === userProfile.username || (userProfile.role == 'admin' && notif.author === 'Admins')){
                           notif.statusAuthor === 'unseen' ? setNotificationStatus(notif.id, 'seen', 'author') : setNotificationStatus(notif.id, 'unseen', 'author')
                             }else{
                           notif.statusRecipient === 'unseen' ? setNotificationStatus(notif.id, 'seen', 'recipient') : setNotificationStatus(notif.id, 'unseen', 'recipient')
@@ -184,7 +183,7 @@ function Notifications({userProfile}) {
                           
                           setNotifications(notifications.map(curr => {
                             if(curr.id === notif.id){
-                              if(notif.author === userProfile.username){
+                              if(notif.author === userProfile.username || (userProfile.role == 'admin' && notif.author === 'Admins')){
                               curr.statusAuthor = notif.statusAuthor === 'unseen' ? 'seen' : 'unseen'
 
                               }else{
