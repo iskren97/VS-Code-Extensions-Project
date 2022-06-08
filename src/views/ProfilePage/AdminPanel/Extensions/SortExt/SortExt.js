@@ -418,4 +418,4 @@ const SortExt = ({ extensions, setAllExtensions, setDate, search }) => {
     </table>
   );
 };
-export default SortExt;
+export default useSortableData;
