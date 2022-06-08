@@ -103,6 +103,7 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
               return ext.title.toLowerCase().includes(search) ||
                 ext.tags.includes(search) ? (
                 <DisplayExt
+                  key={ext.id}
                   ext={ext}
                   setDate={setDate}
                   setExtensionStatus={setExtensionStatus}
@@ -116,6 +117,7 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
 
             return (
               <DisplayExt
+                key={ext.id}
                 ext={ext}
                 setDate={setDate}
                 setExtensionStatus={setExtensionStatus}
@@ -131,29 +133,6 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
         <h3>There are no extensions yet.</h3>
       )}
     </>
-
-    // return (
-    //   <>
-    //     {allExtensions.map((ext) => {
-    //       return (
-    //         <DisplayExt
-    //           ext={ext}
-    //           setDate={setDate}
-    //           setExtensionStatus={setExtensionStatus}
-    //           setAllExtensions={setAllExtensions}
-    //           allExtensions={allExtensions}
-    //           deleteExtension={deleteExtension}
-    //           rowColor={'black'}
-    //         />
-    //       );
-    //     })}
-
-    //     {/* <SortExt
-    //       extensions={allExtensions}
-    //       setAllExtensions={setAllExtensions}
-    //       setDate={setDate}
-    //       search={search}
-    //     /> */}
   );
 };
 

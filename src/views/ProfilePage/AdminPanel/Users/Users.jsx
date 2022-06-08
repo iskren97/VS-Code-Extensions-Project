@@ -15,6 +15,7 @@ const Users = ({ allUsers, setAllUsers, search }) => {
             return user.username.toLowerCase().includes(search) ||
               user.email.toLowerCase().includes(search) ? (
               <DisplayUser
+                key={user.uid}
                 username={user.username}
                 email={user.email}
                 phoneNumber={user.phoneNumber}
@@ -29,6 +30,7 @@ const Users = ({ allUsers, setAllUsers, search }) => {
 
           return (
             <DisplayUser
+              key={user.uid}
               username={user.username}
               email={user.email}
               phoneNumber={user.phoneNumber}

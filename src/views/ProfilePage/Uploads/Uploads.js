@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-
-import { Grid } from '@mui/material';
-
-import Button from '@mui/material/Button';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Grid, Tooltip } from '@mui/material';
+import Button from '@mui/material/Button';
+
 import { deleteExtension } from '../../../services/extensions.service';
+
+import Legend from '../StatusLegend/Legend';
+import AppContext from '../../../providers/AppContext';
 
 const Uploads = ({ userUploads, isOwner }) => {
   const [uploaded, setUploaded] = useState(userUploads);
   const navigate = useNavigate();
+  const { user, userData, setContext } = useContext(AppContext);
 
   const setDate = (date) => {
     const newDate = new Date(date);
@@ -36,51 +39,7 @@ const Uploads = ({ userUploads, isOwner }) => {
         wrap="nowrap"
         sx={{ width: '100%' }}
       >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            width: 'auto',
-            gap: '1em',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            marginTop: '0.5em',
-            marginBottom: '0.5em',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '0.25em',
-            }}
-          >
-            <span className="legendPending"></span>Pending
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '0.25em',
-            }}
-          >
-            <span className="legendApproved"></span>Approved
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '0.25em',
-            }}
-          >
-            <span className="legendRejected"></span>Rejected
-          </div>
-        </div>
+        <Legend />
 
         {isOwner
           ? uploaded.map((ext) => {
@@ -171,15 +130,28 @@ const Uploads = ({ userUploads, isOwner }) => {
                         View
                       </Button>
 
-                      <Button
-                        variant="contained"
-                        color="warning"
-                        onClick={() => {
-                          navigate(`../extensions/edit/${ext.id}`);
-                        }}
-                      >
-                        Edit
-                      </Button>
+                      {userData.role !== 'blocked' ? (
+                        <Button
+                          variant="contained"
+                          color="warning"
+                          onClick={() => {
+                            navigate(`../extensions/edit/${ext.id}`);
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      ) : (
+                        <Tooltip
+                          title="You don't have permission to do this!"
+                          placement="top"
+                        >
+                          <span>
+                            <Button variant="contained" disabled>
+                              Edit
+                            </Button>
+                          </span>
+                        </Tooltip>
+                      )}
 
                       <Button
                         variant="contained"
