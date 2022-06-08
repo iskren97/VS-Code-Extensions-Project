@@ -12,7 +12,7 @@ import AppContext from '../../../providers/AppContext';
 const Uploads = ({ userUploads, isOwner }) => {
   const [uploaded, setUploaded] = useState(userUploads);
   const navigate = useNavigate();
-  const { user, userData, setContext } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
 
   const setDate = (date) => {
     const newDate = new Date(date);

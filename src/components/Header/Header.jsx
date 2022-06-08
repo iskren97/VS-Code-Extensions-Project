@@ -20,7 +20,6 @@ import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 
 import { logoutUser } from '../../services/auth.service';
-import { getUserData } from '../../services/users.service';
 
 import avatar from '../../assets/avatar.jpg';
 import vscodelogo from '../../assets/vscodelogo.png';

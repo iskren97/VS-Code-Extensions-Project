@@ -24,8 +24,8 @@ const DisplayExt = ({
           <Grid
             container
             direction="row"
-            justifyContent="space-between"
             alignItems="center"
+            justify="space-around"
             sx={{
               margin: '0.25em',
               padding: '0.5em',
@@ -33,7 +33,7 @@ const DisplayExt = ({
               borderRadius: '0.5em',
             }}
           >
-            <Grid item>
+            <Grid item xs>
               <img
                 src={ext.logo}
                 alt="extension"
@@ -43,11 +43,15 @@ const DisplayExt = ({
               />
             </Grid>
 
-            <Grid item>{ext.title}</Grid>
+            <Grid item xs>
+              {ext.title}
+            </Grid>
 
-            <Grid item>{ext.author}</Grid>
+            <Grid item xs>
+              {ext.author}
+            </Grid>
 
-            <Grid item sx={{ width: '11em' }}>
+            <Grid item xs sx={{ width: '11em' }}>
               {setDate(ext.createdOn)}
             </Grid>
 
