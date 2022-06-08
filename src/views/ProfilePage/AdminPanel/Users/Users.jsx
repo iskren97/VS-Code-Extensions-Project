@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import './Users.css';
 
@@ -9,14 +9,13 @@ import defaultPic from '../../../../assets/avatar.jpg';
 const Users = ({ allUsers, setAllUsers, search }) => {
   return (
     <>
-      <br />
-
       {allUsers.length !== 0 ? (
         allUsers.map((user) => {
           if (search) {
             return user.username.toLowerCase().includes(search) ||
               user.email.toLowerCase().includes(search) ? (
               <DisplayUser
+                key={user.uid}
                 username={user.username}
                 email={user.email}
                 phoneNumber={user.phoneNumber}
@@ -31,6 +30,7 @@ const Users = ({ allUsers, setAllUsers, search }) => {
 
           return (
             <DisplayUser
+              key={user.uid}
               username={user.username}
               email={user.email}
               phoneNumber={user.phoneNumber}

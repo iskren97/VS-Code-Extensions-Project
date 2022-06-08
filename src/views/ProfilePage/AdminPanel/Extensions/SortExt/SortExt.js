@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState, useContext } from 'react';
 import { Button, Grid } from '@mui/material';
 import AppContext from '../../../../../providers/AppContext';
 
-import './SortExt.css';
+import '../SortExt.css';
 
 import {
   deleteExtension,

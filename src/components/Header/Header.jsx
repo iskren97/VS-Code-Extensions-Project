@@ -20,7 +20,6 @@ import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 
 import { logoutUser } from '../../services/auth.service';
-import { getUserData } from '../../services/users.service';
 
 import avatar from '../../assets/avatar.jpg';
 import vscodelogo from '../../assets/vscodelogo.png';
@@ -140,15 +139,34 @@ const Header = () => {
           {user ? (
             <>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <NavLink to="/upload">
-                  <Button
-                    variant="contained"
-                    startIcon={<CloudUploadIcon />}
-                    sx={{ textDecoration: 'none' }}
+                {userData.role !== 'blocked' ? (
+                  <NavLink to="/upload">
+                    <Button
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                      sx={{ textDecoration: 'none' }}
+                    >
+                      Upload
+                    </Button>
+                  </NavLink>
+                ) : (
+                  <Tooltip
+                    title="You don't have permission to do this!"
+                    followCursor
                   >
-                    Upload
-                  </Button>
-                </NavLink>
+                    <Button
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                      sx={{
+                        color: 'rgba(0, 0, 0, 0.26) !important',
+                        backgroundColor: 'white !important',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Upload
+                    </Button>
+                  </Tooltip>
+                )}
               </div>
 
               <h3>{userData?.username}</h3>

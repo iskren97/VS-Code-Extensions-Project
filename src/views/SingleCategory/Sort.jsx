@@ -1,46 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Divider, Grid } from '@mui/material';
 
 import './Sort.css';
 import Items from '../../components/Main/Item/Item';
-
-const useSortableData = (items, config = null) => {
-  const [sortConfig, setSortConfig] = useState(config);
-
-  const sortedItems = useMemo(() => {
-    const sortableItems = [...items];
-
-    if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-
-    return sortableItems;
-  }, [items, sortConfig]);
-
-  const requestSort = (key) => {
-    let direction = 'ascending';
-
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === 'ascending'
-    ) {
-      direction = 'descending';
-    }
-
-    setSortConfig({ key, direction });
-  };
-
-  return { items: sortedItems, requestSort, sortConfig };
-};
+import useSortableData from '../ProfilePage/AdminPanel/Extensions/SortExt/SortExt';
 
 const Sort = ({ extensions, search }) => {
   const { items, requestSort, sortConfig } = useSortableData(extensions);
