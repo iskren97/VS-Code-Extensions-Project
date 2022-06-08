@@ -9,6 +9,8 @@ import {
 import { storage } from '../config/firebase-config';
 import { getUserByHandle } from './users.service.js'
 
+import {createNotification} from './notifications.service.js'
+
 
 export const createExtension = (
   title,
@@ -32,6 +34,8 @@ export const createExtension = (
     category: category,
   }).then((result) => {
     uploadExtensionFile(file, logo, author, fileName, result.key);
+    createNotification(author, 'Admins', `${author} uploaded a new extension - ${title} `, result.key);
+
 
     return getExtensionById(result.key);
   });
@@ -67,9 +71,10 @@ export const getExtensionById = (id) => {
 
 export const updateExtensionInfo = (id, newInfo) => {
    getExtensionById(id).then((extension) => {
-    // if (!extension.exists()) {
-    //   throw new Error(`Extension with id ${id} does not exist!`);
-    // }
+
+    createNotification(newInfo.author, 'Admins', `${newInfo.author} updated an extension - ${newInfo.title} `, id);
+
+
 
     if(extension.logo == newInfo.logo && extension.downloadLink === newInfo.downloadLink){
       return update(ref(db), {
@@ -290,6 +295,9 @@ export const deleteExtension = async (extId) =>{
     const user = snapshot.val()
     const newExtensions = user.extensions.filter( r => r.extensionId !== extId)
 
+    createNotification(extension.author, 'Admins', `${extension.author} deleted an extension - ${extension.title} `, extId);
+
+
   update(ref(db), {
     [`/users/${extension.author}/extensions/`]: newExtensions
     });
@@ -304,7 +312,12 @@ export const deleteExtension = async (extId) =>{
 
 
 export const setExtensionStatus = (extId, status) =>{
+
+
+
   return update(ref(db), {
     [`extensions/${extId}/status`]: status
   });
 }
+
+

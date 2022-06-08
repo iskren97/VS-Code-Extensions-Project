@@ -224,7 +224,7 @@ function SingleExtension() {
 
 
 
-  console.log(window.innerWidth)
+
 
   return (
     <>

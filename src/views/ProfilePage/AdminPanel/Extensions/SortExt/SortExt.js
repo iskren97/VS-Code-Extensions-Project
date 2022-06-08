@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useContext } from 'react';
 import { Button, Grid } from '@mui/material';
+import AppContext from '../../../../../providers/AppContext';
 
 import './SortExt.css';
 
@@ -8,9 +9,13 @@ import {
   setExtensionStatus,
 } from '../../../../../services/extensions.service';
 
+import {
+  createNotification
+} from '../../../../../services/notifications.service';
+
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
-
+  
   const sortedItems = useMemo(() => {
     const sortableItems = [...items];
 
@@ -49,6 +54,7 @@ const useSortableData = (items, config = null) => {
 const SortExt = ({ extensions, setAllExtensions, setDate, search }) => {
   const { items, requestSort, sortConfig } = useSortableData(extensions);
   const [allExtensions, setExtensions] = useState(items);
+  const { userData } = useContext(AppContext);
 
   useEffect(() => {
     setExtensions(items);
@@ -214,6 +220,7 @@ const SortExt = ({ extensions, setAllExtensions, setDate, search }) => {
                           onClick={() => {
                             setExtensionStatus(ext.id, 'approved');
 
+
                             setAllExtensions(
                               allExtensions.map((extension) => {
                                 if (extension.id === ext.id) {
@@ -346,7 +353,7 @@ const SortExt = ({ extensions, setAllExtensions, setDate, search }) => {
                         disabled={ext.status === 'approved'}
                         onClick={() => {
                           setExtensionStatus(ext.id, 'approved');
-
+                          createNotification('Admins', ext.author, `${userData.username} approved an extension - ${ext.title} `, ext.id);
                           setAllExtensions(
                             allExtensions.map((extension) => {
                               if (extension.id === ext.id) {
@@ -366,6 +373,7 @@ const SortExt = ({ extensions, setAllExtensions, setDate, search }) => {
                         disabled={ext.status === 'rejected'}
                         onClick={() => {
                           setExtensionStatus(ext.id, 'rejected');
+                          createNotification('Admins', ext.author, `${userData.username} rejected an extension - ${ext.title} `, ext.id);
                           setAllExtensions(
                             allExtensions.map((extension) => {
                               if (extension.id === ext.id) {

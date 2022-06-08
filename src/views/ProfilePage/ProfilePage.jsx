@@ -23,6 +23,7 @@ import Info from './Info/Info';
 import AdminPanel from './AdminPanel/AdminPanel';
 import Downloads from './Downloads/Downloads';
 import Uploads from './Uploads/Uploads';
+import Notifications from './Notifications/Notifications';
 
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
@@ -197,10 +198,10 @@ const ProfilePage = () => {
 
                 {userData?.uid === userProfile?.uid ? (
                   <Button
-                    onClick={() => setActiveView('Inbox')}
+                    onClick={() => setActiveView('Notifications')}
                     variant="contained"
                   >
-                    Inbox
+                    Notifications
                   </Button>
                 ) : null}
 
@@ -242,6 +243,10 @@ const ProfilePage = () => {
               <Grid container direction="row" spacing={2} className="item-grid">
                 {activeView === 'Uploads' ? (
                   <Uploads userUploads={userUploads} isOwner={isProfileOwner} />
+                ) : null}
+
+                {activeView === 'Notifications' ? (
+                  <Notifications userProfile={userProfile} />
                 ) : null}
 
                 {activeView === 'Info' ? (

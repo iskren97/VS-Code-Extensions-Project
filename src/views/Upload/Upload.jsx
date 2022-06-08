@@ -28,6 +28,8 @@ import {
   createExtension,
   getAllExtensions,
 } from '../../services/extensions.service';
+
+
 import { NavLink } from 'react-router-dom';
 
 function Upload() {
@@ -177,6 +179,7 @@ function Upload() {
           uploadInfo.tags,
           uploadInfo.logo
         );
+
 
         setError(true);
         setErrorMsg(`Extension uploaded successfully!`);
