@@ -21,6 +21,7 @@ import Login from './views/Login/Login';
 import Category from './views/SingleCategory/Category';
 import Upload from './views/Upload/Upload';
 import EditExtension from './views/ProfilePage/EditExtension/EditExtension';
+import About from './views/About/About';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -66,11 +67,8 @@ const App = () => {
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/extensions/edit/:id" element={<EditExtension />} />
+            <Route path="/about" element={<About />} />
           </Routes>
-
-          {/* <Main /> */}
-          {/* <SingleExtension /> */}
-          {/* <Register /> */}
 
           <ScrollTop showBelow={250} />
         </BrowserRouter>
