@@ -22,6 +22,7 @@ import Category from './views/SingleCategory/Category';
 import Upload from './views/Upload/Upload';
 import EditExtension from './views/ProfilePage/EditExtension/EditExtension';
 import About from './views/About/About';
+import ErrorPage from './views/Error/ErrorPage';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -68,6 +69,7 @@ const App = () => {
             <Route path="/upload" element={<Upload />} />
             <Route path="/extensions/edit/:id" element={<EditExtension />} />
             <Route path="/about" element={<About />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
 
           <ScrollTop showBelow={250} />
