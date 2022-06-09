@@ -144,7 +144,13 @@ const Header = () => {
                     <Button
                       variant="contained"
                       startIcon={<CloudUploadIcon />}
-                      sx={{ textDecoration: 'none' }}
+                      sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }}
                     >
                       Upload
                     </Button>
