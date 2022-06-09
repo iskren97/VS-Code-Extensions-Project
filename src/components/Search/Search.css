@@ -11,15 +11,25 @@
   width: 50vw;
   height: 50px;
 
-  outline: none;
-  background-color: white;
-  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);
+  font-weight: bold;
+  font-size: 16px;
 
-  box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);
-  border: 1px solid #d4d4d5;
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
 }
 
 .search-container input {
   border-radius: 7px;
+}
+
+::placeholder {
+  color: white;
+}
+
+#search:active {
+  font-size: 20px;
 }

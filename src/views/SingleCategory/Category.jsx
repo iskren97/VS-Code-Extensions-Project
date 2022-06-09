@@ -44,113 +44,119 @@ const Category = () => {
 
   return (
     <>
-      <Header />
+      <div className="glass-container">
+        <Header />
 
-      <div style={{ textAlign: 'center', marginTop: '12em' }}>
-        <h1>{categoryName}</h1>
+        <div style={{ textAlign: 'center', marginTop: '8em' }}>
+          <h1>{categoryName}</h1>
 
-        {categoryName !== 'Most Popular' ? (
-          <h2>
-            {extensions.length > 0
-              ? extensions.length > 1
-                ? extensions.length + ' extensions'
-                : extensions.length + ' extension'
-              : 'no extensions'}{' '}
-            found
-          </h2>
-        ) : (
-          <h2>
-            {popular.length > 0
-              ? popular.length > 1
-                ? popular.length + ' extensions'
-                : popular.length + ' extension'
-              : 'no extensions'}{' '}
-            found
-          </h2>
-        )}
+          {categoryName !== 'Most Popular' ? (
+            <h2>
+              {extensions.length > 0
+                ? extensions.length > 1
+                  ? extensions.length + ' extensions'
+                  : extensions.length + ' extension'
+                : 'no extensions'}{' '}
+              found
+            </h2>
+          ) : (
+            <h2>
+              {popular.length > 0
+                ? popular.length > 1
+                  ? popular.length + ' extensions'
+                  : popular.length + ' extension'
+                : 'no extensions'}{' '}
+              found
+            </h2>
+          )}
+        </div>
+
+        {extensions.length > 0 && categoryName !== 'Most Popular' ? (
+          <div>
+            <p
+              style={{
+                fontSize: '20px',
+                fontStyle: 'normal',
+                fontWeight: '400',
+                margin: '0px',
+                textAlign: 'center',
+                marginTop: '0.67em',
+              }}
+            >
+              Browse Extensions
+            </p>
+
+            <br />
+            <br />
+
+            <Search setSearch={setSearch} />
+
+            <Container
+              maxWidth="xl"
+              sx={{
+                height: 'auto',
+                width: 'auto',
+                marginTop: '50px',
+                marginBottom: '50px',
+                paddingBottom: '50px',
+
+                background: 'rgba(255, 255, 255, 0.2)',
+
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '16px',
+              }}
+            >
+              <br />
+
+              <div style={{ textAlign: 'center' }}>
+                <Sort extensions={extensions} search={search} />
+              </div>
+            </Container>
+          </div>
+        ) : categoryName === 'Most Popular' ? (
+          <div>
+            <p
+              style={{
+                fontSize: '20px',
+                fontStyle: 'normal',
+                fontWeight: '400',
+                margin: '0px',
+                textAlign: 'center',
+                marginTop: '0.67em',
+              }}
+            >
+              Browse Extensions
+            </p>
+
+            <br />
+            <br />
+
+            <Search setSearch={setSearch} />
+
+            <Container
+              maxWidth="xl"
+              sx={{
+                height: 'auto',
+                width: 'auto',
+                marginTop: '50px',
+                marginBottom: '50px',
+                paddingBottom: '50px',
+
+                background: 'rgba(255, 255, 255, 0.2)',
+
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '16px',
+              }}
+            >
+              <br />
+
+              <div style={{ textAlign: 'center' }}>
+                <Sort extensions={popular} search={search} />
+              </div>
+            </Container>
+          </div>
+        ) : null}
       </div>
-
-      {extensions.length > 0 && categoryName !== 'Most Popular' ? (
-        <div>
-          <p
-            style={{
-              fontSize: '20px',
-              fontStyle: 'normal',
-              fontWeight: '400',
-              margin: '0px',
-              textAlign: 'center',
-              marginTop: '0.67em',
-            }}
-          >
-            Browse Extensions
-          </p>
-
-          <br />
-          <br />
-
-          <Search setSearch={setSearch} />
-
-          <Container
-            maxWidth="xl"
-            sx={{
-              height: 'auto',
-              width: 'auto',
-              marginTop: '50px',
-              marginBottom: '50px',
-              paddingBottom: '50px',
-              boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-              background: 'white',
-              borderRadius: '7px',
-            }}
-          >
-            <br />
-
-            <div style={{ textAlign: 'center' }}>
-              <Sort extensions={extensions} search={search} />
-            </div>
-          </Container>
-        </div>
-      ) : categoryName === 'Most Popular' ? (
-        <div>
-          <p
-            style={{
-              fontSize: '20px',
-              fontStyle: 'normal',
-              fontWeight: '400',
-              margin: '0px',
-              textAlign: 'center',
-              marginTop: '0.67em',
-            }}
-          >
-            Browse Extensions
-          </p>
-
-          <br />
-          <br />
-
-          <Search setSearch={setSearch} />
-
-          <Container
-            maxWidth="xl"
-            sx={{
-              height: 'auto',
-              width: 'auto',
-              marginTop: '50px',
-              marginBottom: '50px',
-              paddingBottom: '50px',
-              boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-              background: 'white',
-              borderRadius: '7px',
-            }}
-          >
-            <br />
-
-            <div style={{ textAlign: 'center' }}>
-              <Sort extensions={popular} search={search} />
-            </div>
-          </Container>
-        </div>
-      ) : null}
     </>
   );
 };

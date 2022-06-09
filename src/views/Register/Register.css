@@ -3,14 +3,22 @@
   position: absolute;
   padding-bottom: 70px;
   padding-top: 70px;
-  box-shadow: 0 12px 18px 2px rgb(34 0 51 / 4%),
-    0 6px 22px 4px rgb(7 48 114 / 12%), 0 6px 10px -4px rgb(14 13 26 / 12%);
-  background: white;
-  border-radius: 7px;
+
   top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+
+  color: white;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .register-form {
@@ -19,45 +27,56 @@
 }
 
 .register-form p {
-  color: red;
+  font-weight: bold;
 }
 
 .register-form input {
   display: block;
   box-sizing: border-box;
   width: 100%;
-  border-radius: 4px;
-  border: 1px solid black;
+
   padding: 10px 15px;
   margin-top: 10px;
   font-size: 18px;
   font-weight: bold;
+
+  background: rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
 }
 
-.register-form input:not([type='submit']):hover {
-  background-color: rgb(248, 248, 248);
+.register-form input:active {
+  border: none !important;
+  outline: none !important;
+}
+
+.register-form input:hover {
+  background: rgba(255, 255, 255, 0.295);
 }
 
 .register-form input:not([type='submit']):focus {
-  background-color: white;
+  border: none;
+  outline: none;
 }
 
 .register-form button[type='submit'],
 input[type='submit'] {
   cursor: pointer;
-  background: rgba(0, 122, 205, 255);
   text-transform: uppercase;
-  border: none;
+  color: white;
+
   margin-top: 40px;
   padding: 20px;
+
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 10px;
-}
 
-.register-form button[type='submit']:hover,
-input[type='submit']:hover {
-  color: white;
+  background: rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
 }
 
 .register-form button[type='submit']:active,
@@ -66,7 +85,7 @@ input[type='submit']:active {
   transition: 0.3s all;
   transform: translateY(3px);
   border: 1px solid transparent;
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .register-form input:disabled {
@@ -90,15 +109,4 @@ input[type='submit'] {
 
 .register-form hr {
   margin-top: 30px;
-}
-
-.register-form button {
-  display: block;
-  appearance: none;
-  margin-top: 40px;
-  border: 1px solid #333;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
 }

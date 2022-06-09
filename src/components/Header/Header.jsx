@@ -264,7 +264,13 @@ const Header = () => {
                 <Button
                   variant="contained"
                   startIcon={<VpnKeyIcon />}
-                  sx={{ textDecoration: 'none' }}
+                  sx={{
+                    textDecoration: 'none',
+                    background: 'transparent',
+
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                  }}
                 >
                   {' '}
                   Sign Up{' '}
@@ -272,7 +278,17 @@ const Header = () => {
               </NavLink>
 
               <NavLink to="/login">
-                <Button variant="contained" startIcon={<LoginIcon />}>
+                <Button
+                  variant="contained"
+                  startIcon={<LoginIcon />}
+                  sx={{
+                    textDecoration: 'none',
+                    background: 'transparent',
+
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                  }}
+                >
                   {' '}
                   Sign In{' '}
                 </Button>

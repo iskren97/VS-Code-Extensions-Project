@@ -50,116 +50,135 @@ const Main = () => {
 
   return (
     <>
-      <Header />
-      <div style={{ marginTop: '11em' }}>
-        <Intro />
+      <div className="glass-container">
+        <Header />
+        <div style={{ marginTop: '8em' }}>
+          <Intro />
 
-        <Categories />
+          <Categories />
 
-        <Container
-          maxWidth="xl"
-          sx={{
-            height: 'auto',
-            marginTop: '50px',
-            paddingBottom: '50px',
-            boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-            background: 'white',
-            borderRadius: '7px',
-          }}
-        >
-          <Section category={'New'} />
+          <Container
+            maxWidth="xl"
+            sx={{
+              height: 'auto',
+              marginTop: '50px',
+              paddingBottom: '50px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '16px',
+            }}
+          >
+            <Section category={'New'} />
 
-          <Divider sx={{ marginBottom: '30px' }} />
+            <Divider
+              sx={{
+                marginBottom: '30px',
 
-          <Grid container direction="row" spacing={2} className="item-grid">
-            {newAddons.map((ext) => {
-              return (
-                <Grid key={ext.id} item>
-                  <Items
-                    key={ext.id}
-                    name={ext.title}
-                    logo={ext.logo}
-                    author={ext.author}
-                    category={ext.category}
-                    rating={3.8}
-                    downloadLink={ext.downloadLink}
-                    extId={ext.id}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Container>
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+              }}
+            />
 
-        <Container
-          maxWidth="xl"
-          sx={{
-            height: 'auto',
-            marginTop: '50px',
-            paddingBottom: '50px',
-            boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-            background: 'white',
-            borderRadius: '7px',
-          }}
-        >
-          <Section category={'Recommended'} />
+            <Grid container direction="row" spacing={2} className="item-grid">
+              {newAddons.map((ext) => {
+                return (
+                  <Grid key={ext.id} item>
+                    <Items
+                      key={ext.id}
+                      name={ext.title}
+                      logo={ext.logo}
+                      author={ext.author}
+                      category={ext.category}
+                      rating={3.8}
+                      downloadLink={ext.downloadLink}
+                      extId={ext.id}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Container>
 
-          <Divider sx={{ marginBottom: '30px' }} />
+          <Container
+            maxWidth="xl"
+            sx={{
+              height: 'auto',
+              marginTop: '50px',
+              paddingBottom: '50px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '16px',
+            }}
+          >
+            <Section category={'Recommended'} />
 
-          <Grid container direction="row" spacing={2} className="item-grid">
-            {recommended.map((ext) => {
-              return (
-                <Grid key={ext.id} item>
-                  <Items
-                    key={ext.id}
-                    name={ext.title}
-                    logo={ext.logo}
-                    author={ext.author}
-                    category={ext.category}
-                    rating={3.8}
-                    downloadLink={ext.downloadLink}
-                    extId={ext.id}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Container>
+            <Divider
+              sx={{
+                marginBottom: '30px',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+              }}
+            />
 
-        <Container
-          maxWidth="xl"
-          sx={{
-            height: 'auto',
-            marginTop: '50px',
-            paddingBottom: '50px',
-            boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-            background: 'white',
-            borderRadius: '7px',
-          }}
-        >
-          <Section category={'Most Popular'} />
+            <Grid container direction="row" spacing={2} className="item-grid">
+              {recommended.map((ext) => {
+                return (
+                  <Grid key={ext.id} item>
+                    <Items
+                      key={ext.id}
+                      name={ext.title}
+                      logo={ext.logo}
+                      author={ext.author}
+                      category={ext.category}
+                      rating={3.8}
+                      downloadLink={ext.downloadLink}
+                      extId={ext.id}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Container>
 
-          <Divider sx={{ marginBottom: '30px' }} />
+          <Container
+            maxWidth="xl"
+            sx={{
+              height: 'auto',
+              marginTop: '50px',
+              marginBottom: '50px',
+              paddingBottom: '50px',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '16px',
+              background: 'rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <Section category={'Most Popular'} />
 
-          <Grid container direction="row" spacing={2} className="item-grid">
-            {popular.map((ext) => {
-              return (
-                <Grid key={ext.id} item>
-                  <Items
-                    key={ext.id}
-                    name={ext.title}
-                    logo={ext.logo}
-                    author={ext.author}
-                    category={ext.category}
-                    rating={3.8}
-                    downloadLink={ext.downloadLink}
-                    extId={ext.id}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Container>
+            <Divider
+              sx={{
+                marginBottom: '30px',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+              }}
+            />
+
+            <Grid container direction="row" spacing={2} className="item-grid">
+              {popular.map((ext) => {
+                return (
+                  <Grid key={ext.id} item>
+                    <Items
+                      key={ext.id}
+                      name={ext.title}
+                      logo={ext.logo}
+                      author={ext.author}
+                      category={ext.category}
+                      rating={3.8}
+                      downloadLink={ext.downloadLink}
+                      extId={ext.id}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Container>
+        </div>
       </div>
     </>
   );

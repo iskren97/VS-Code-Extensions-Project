@@ -7,23 +7,30 @@ import { NavLink } from 'react-router-dom';
 
 const Categories = () => {
   return (
-    <div>
+    <>
       <Container
         maxWidth="xl"
         sx={{
           height: 'auto',
           marginTop: '50px',
           paddingBottom: '55px',
-          boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-          background: 'white',
-          borderRadius: '7px',
+
+          background: 'rgba(255, 255, 255, 0.2)',
+
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+          borderRadius: '16px',
         }}
       >
         <div className="extensions-category">
           <h3>Categories</h3>
         </div>
 
-        <Divider sx={{ marginBottom: '30px' }} />
+        <Divider
+          sx={{
+            marginBottom: '30px',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+          }}
+        />
 
         <Grid container direction="row" spacing={2} className="item-grid">
           <Grid item>
@@ -78,7 +85,7 @@ const Categories = () => {
           </Grid>
         </Grid>
       </Container>
-    </div>
+    </>
   );
 };
 

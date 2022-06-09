@@ -48,9 +48,6 @@ const App = () => {
       .catch((e) => alert(e.message));
   }, [user]);
 
-
-
-
   return (
     <div>
       <AppContext.Provider value={{ ...appState, setContext: setAppState }}>
@@ -74,7 +71,7 @@ const App = () => {
           {/* <Main /> */}
           {/* <SingleExtension /> */}
           {/* <Register /> */}
-          
+
           <ScrollTop showBelow={250} />
         </BrowserRouter>
       </AppContext.Provider>

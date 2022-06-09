@@ -77,7 +77,11 @@ const Sort = ({ extensions, search }) => {
       </thead>
 
       <br />
-      <Divider />
+      <Divider
+        sx={{
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+        }}
+      />
       <br />
 
       <tbody>

@@ -1,21 +1,10 @@
-import React, { useEffect, useMemo, useState, useContext } from 'react';
-import { Button, Grid } from '@mui/material';
-import AppContext from '../../../../../providers/AppContext';
+import { useMemo, useState } from 'react';
 
 import '../SortExt.css';
 
-import {
-  deleteExtension,
-  setExtensionStatus,
-} from '../../../../../services/extensions.service';
-
-import {
-  createNotification
-} from '../../../../../services/notifications.service';
-
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
-  
+
   const sortedItems = useMemo(() => {
     const sortableItems = [...items];
 

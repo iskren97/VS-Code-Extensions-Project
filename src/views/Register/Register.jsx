@@ -129,7 +129,13 @@ const Register = () => {
 
         <br />
 
-        <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
+        <Divider
+          sx={{
+            background: 'rgba(255, 255, 255, 0.2)',
+
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+          }}
+        />
 
         <br />
 

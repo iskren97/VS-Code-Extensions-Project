@@ -9,6 +9,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: rgb(248, 248, 248);
+
+  background: url(assets/background.jpg) center / cover no-repeat fixed;
+  min-height: 100vh;
 }
 
 code {

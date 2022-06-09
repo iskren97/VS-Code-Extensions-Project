@@ -12,15 +12,17 @@ thead th {
 }
 
 thead button {
-  border: 0;
-  border-radius: none;
+  background: none !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
 
   font-family: inherit;
   font-weight: 700;
   font-size: inherit;
 
   padding: 0.5em;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 
   color: white;
 

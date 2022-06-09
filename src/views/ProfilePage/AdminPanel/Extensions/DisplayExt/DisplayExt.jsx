@@ -1,11 +1,9 @@
 import { Button, Grid } from '@mui/material';
 import React from 'react';
-import { useEffect, useMemo, useState, useContext } from 'react';
+import { useContext } from 'react';
 import AppContext from '../../../../../providers/AppContext';
 
-import {
-  createNotification
-} from '../../../../../services/notifications.service';
+import { createNotification } from '../../../../../services/notifications.service';
 
 const DisplayExt = ({
   ext,
@@ -16,7 +14,6 @@ const DisplayExt = ({
   deleteExtension,
   rowColor,
 }) => {
-  
   const { userData } = useContext(AppContext);
   return (
     <>
@@ -91,7 +88,12 @@ const DisplayExt = ({
                     disabled={ext.status === 'approved'}
                     onClick={() => {
                       setExtensionStatus(ext.id, 'approved');
-                      createNotification('Admins', ext.author, `${userData.username} approved an extension - ${ext.title} `, ext.id);
+                      createNotification(
+                        'Admins',
+                        ext.author,
+                        `${userData.username} approved an extension - ${ext.title} `,
+                        ext.id
+                      );
 
                       setAllExtensions(
                         allExtensions.map((extension) => {
@@ -114,7 +116,12 @@ const DisplayExt = ({
                     disabled={ext.status === 'rejected'}
                     onClick={() => {
                       setExtensionStatus(ext.id, 'rejected');
-                      createNotification('Admins', ext.author, `${userData.username} rejected an extension - ${ext.title} `, ext.id);
+                      createNotification(
+                        'Admins',
+                        ext.author,
+                        `${userData.username} rejected an extension - ${ext.title} `,
+                        ext.id
+                      );
 
                       setAllExtensions(
                         allExtensions.map((extension) => {
