@@ -227,18 +227,19 @@ function SingleExtension() {
 
 
   return (
-    <>
+    <div className="glass-container-single">
+
+    
       <Header />
       <Grid
         container
         direction="column"
         sx={{
           height: 'auto',
+          background: 'rgba(255, 255, 255, 0.6)',
           flexWrap: 'nowrap',
-          marginTop: '13em',
           paddingBottom: '50px',
-          boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-          background: 'white',
+          boxShadow: '0 1px 6px rgba(0,0,0,0.25)',
           borderRadius: '20px',
           marginBottom: '50px',
           marginLeft: '1em',
@@ -264,7 +265,7 @@ function SingleExtension() {
            {version ? '/ ' + version : null}{' '}
         </p>
 
-        <Divider sx={{ marginLeft: '2em', marginRight: '2em' }} />
+        <Divider sx={{ marginLeft: '2em', marginRight: '2em', background: 'hsla(210,18%,87%,1)' }} />
 
         <Grid
           container
@@ -308,7 +309,7 @@ function SingleExtension() {
               })}
             </Grid>
           </Grid>
-          <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'}  flexItem sx={{width: 'auto', height:'auto'}} />
+          <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'}  flexItem sx={{width: 'auto', height:'auto', background: 'hsla(210,18%,87%,1)'}} />
 
           <Grid
             container
@@ -325,7 +326,15 @@ function SingleExtension() {
                   e.preventDefault();
                   window.open(extensionInfo.repoUrl, '_blank');
                 }}
-                variant="outlined"
+                variant="contained"
+                sx={{ textDecoration: 'none',
+                    background: 'transparent',
+
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                    color: 'black'
+                    
+                    }}
                 startIcon={<GitHubIcon />}
               >
                 Repository
@@ -336,7 +345,13 @@ function SingleExtension() {
                   setDownloads((downloads) => downloads + 1);
                   window.location.href = extensionInfo.downloadLink;
                 }}
-                variant="outlined"
+                variant="contained"
+                sx={{ textDecoration: 'none',
+                    background: 'transparent',
+
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                    color: 'black'}}
                 startIcon={<DownloadIcon />}
               >
                 Download
@@ -464,7 +479,7 @@ function SingleExtension() {
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }
 

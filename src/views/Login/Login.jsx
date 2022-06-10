@@ -108,7 +108,7 @@ const Login = () => {
         />
 
         <br />
-        <form onSubmit={handleSubmit(onSubmit)} className="register-form">
+        <form onSubmit={handleSubmit(onSubmit)} autocomplete="off" className="register-form">
           <input
             type="email"
             placeholder="Email"
