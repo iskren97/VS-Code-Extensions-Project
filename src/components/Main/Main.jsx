@@ -10,6 +10,7 @@ import Categories from '../Categories/Categories';
 import Header from '../Header/Header';
 
 import { getAllExtensions } from '../../services/extensions.service';
+import Footer from '../Footer/Footer';
 
 const Main = () => {
   const [newAddons, setNewAddons] = useState([]);
@@ -52,11 +53,9 @@ const Main = () => {
     <>
       <div className="glass-container">
         <Header />
-        <div style={{ marginTop: '8em' }}>
+        <div style={{ marginTop: '8em', marginBottom: '8em' }}>
           <Intro />
-
           <Categories />
-
           <Container
             maxWidth="xl"
             sx={{
@@ -97,7 +96,6 @@ const Main = () => {
               })}
             </Grid>
           </Container>
-
           <Container
             maxWidth="xl"
             sx={{
@@ -137,7 +135,6 @@ const Main = () => {
               })}
             </Grid>
           </Container>
-
           <Container
             maxWidth="xl"
             sx={{
@@ -179,6 +176,7 @@ const Main = () => {
             </Grid>
           </Container>
         </div>
+        <Footer />
       </div>
     </>
   );

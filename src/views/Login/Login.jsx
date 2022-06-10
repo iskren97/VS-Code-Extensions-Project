@@ -137,6 +137,13 @@ const Login = () => {
             onKeyDown={handleKeyEnter}
           />
 
+          <p
+            onClick={() => navigate('/password_reset')}
+            style={{ cursor: 'pointer' }}
+          >
+            Forgot your password?
+          </p>
+
           {errors?.password?.type === 'minLength' && (
             <p>Password cannot be less than 6 characters </p>
           )}

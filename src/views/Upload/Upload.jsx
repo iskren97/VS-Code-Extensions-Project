@@ -4,12 +4,6 @@ import { useNavigate } from 'react-router';
 import './Upload.css';
 
 import AppContext from '../../providers/AppContext';
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage';
-import { storage } from '../../config/firebase-config';
 
 import { Container, Divider } from '@mui/material';
 
@@ -29,11 +23,10 @@ import {
   getAllExtensions,
 } from '../../services/extensions.service';
 
-
 import { NavLink } from 'react-router-dom';
 
 function Upload() {
-  const { user, userData, setContext } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [error, setError] = useState(false);
@@ -41,8 +34,6 @@ function Upload() {
   const [msgType, setMsgType] = useState('');
 
   const [uploadInfo, setUploadInfo] = useState({});
-
-
 
   const validateData = async () => {
     if (!uploadInfo.category) {
@@ -180,7 +171,6 @@ function Upload() {
           uploadInfo.logo
         );
 
-
         setError(true);
         setErrorMsg(`Extension uploaded successfully!`);
         setMsgType('success');
@@ -217,37 +207,37 @@ function Upload() {
 
           <br />
 
-          <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
+          <Divider
+            sx={{
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+            }}
+          />
 
           <br />
 
           <form className="upload-form">
-            <div>
-              <input
-                type="text"
-                placeholder="Extension Name"
-                required
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, name: e.target.value })
-                }
-                onKeyDown={handleKeyEnter}
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Extension Name"
+              required
+              onChange={(e) =>
+                setUploadInfo({ ...uploadInfo, name: e.target.value })
+              }
+              onKeyDown={handleKeyEnter}
+            />
 
-            <div>
-              <input
-                type="text"
-                placeholder="Repository Url"
-                required
-                onChange={(e) =>
-                  setUploadInfo({
-                    ...uploadInfo,
-                    repositoryUrl: e.target.value,
-                  })
-                }
-                onKeyDown={handleKeyEnter}
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Repository Url"
+              required
+              onChange={(e) =>
+                setUploadInfo({
+                  ...uploadInfo,
+                  repositoryUrl: e.target.value,
+                })
+              }
+              onKeyDown={handleKeyEnter}
+            />
 
             <div>
               <h2>File</h2>
@@ -329,22 +319,7 @@ function Upload() {
               />
             </div>
 
-            <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
-
-            <Button
-              onClick={() => submitExtension()}
-              variant="contained"
-              sx={{
-                cursor: 'pointer',
-                background: 'rgba(0, 122, 205, 255)',
-                textTransform: 'uppercase',
-                border: 'none',
-                padding: '20px',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                letterSpacing: '10px',
-              }}
-            >
+            <Button onClick={() => submitExtension()} variant="contained">
               Submit
             </Button>
           </form>

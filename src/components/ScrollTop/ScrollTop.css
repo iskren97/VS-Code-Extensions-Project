@@ -13,3 +13,9 @@
 
   padding-right: 1.5em;
 }
+
+@media only screen and (max-width: 768px) {
+  [class*='scroll-holder'] {
+    opacity: 0;
+  }
+}
