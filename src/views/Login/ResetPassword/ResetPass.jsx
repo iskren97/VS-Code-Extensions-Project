@@ -1,20 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
 
-import AppContext from '../../providers/AppContext';
-
-import { Container, Divider } from '@mui/material';
-import Tooltip from '@mui/material/Tooltip';
+import { Container, Divider, Tooltip } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { resetPassword } from '../../../services/auth.service';
+import AlertUser from '../../Register/AlertUser';
 
-import { loginUser } from '../../services/auth.service';
-import { getUserData } from '../../services/users.service';
-import AlertUser from '../Register/AlertUser';
-
-const Login = () => {
-  const { setContext } = useContext(AppContext);
+const ResetPass = () => {
   const navigate = useNavigate();
 
   const [error, setError] = useState(false);
@@ -22,37 +17,27 @@ const Login = () => {
   const [msgType, setMsgType] = useState('');
 
   const {
-    formState: { errors },
     register,
     handleSubmit,
+    formState: { errors },
   } = useForm();
 
-  const handleInvalidData = () => {
-    setError(true);
-    setErrorMsg('Incorrect email or password');
-    setMsgType('error');
-  };
-
   const onSubmit = (data) => {
-    loginUser(data.email, data.password)
-      .then((u) => {
-        return getUserData(u.user.uid).then((snapshot) => {
-          if (snapshot.exists()) {
-            setContext({
-              user: u.user.email,
-              userData: snapshot.val()[Object.keys(snapshot.val())[0]],
-            });
-          }
-          setError(true);
-          setErrorMsg(`You are now logged in!`);
-          setMsgType('success');
+    resetPassword(data.email)
+      .then(() => {
+        return (
+          setError(true),
+          setErrorMsg(`Password reset email sent!`),
+          setMsgType('success'),
           setTimeout(() => {
             navigate('/');
-          }, 1500);
-        });
+          }, 3000)
+        );
       })
-      .catch(() => {
-        handleInvalidData();
+      .catch((err) => {
+        return (
+          setError(true), setErrorMsg(`${err.message}`), setMsgType('error')
+        );
       });
   };
 
@@ -77,6 +62,7 @@ const Login = () => {
             />
           </Tooltip>
         </NavLink>
+
         <div
           style={{
             textAlign: 'center',
@@ -85,12 +71,10 @@ const Login = () => {
             fontSize: '22px',
           }}
         >
-          <h2>Log In</h2>
+          <h2>Enter your email</h2>
         </div>
 
-        <p style={{ textAlign: 'center' }}>
-          Sign in with your email and password
-        </p>
+        <p style={{ textAlign: 'center' }}>Please enter your email address</p>
 
         <br />
 
@@ -126,43 +110,17 @@ const Login = () => {
             <p>Email cannot exceed 20 characters</p>
           )}
 
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            {...register('password', {
-              minLength: 6,
-              maxLength: 18,
-            })}
-            onKeyDown={handleKeyEnter}
-          />
-
-          <p
-            onClick={() => navigate('/password_reset')}
-            style={{ cursor: 'pointer' }}
-          >
-            Forgot your password?
-          </p>
-
-          {errors?.password?.type === 'minLength' && (
-            <p>Password cannot be less than 6 characters </p>
-          )}
-
-          {errors?.password?.type === 'maxLength' && (
-            <p>Password cannot exceed 20 characters </p>
-          )}
-
           <input type="submit" />
         </form>
 
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <p>
-            Don't have an account?{' '}
+            Go back to Log In?{' '}
             <span
-              onClick={() => navigate('/register')}
+              onClick={() => navigate('/login')}
               style={{ color: 'blue', cursor: 'pointer' }}
             >
-              Sign Up
+              Log In
             </span>
           </p>
         </div>
@@ -179,4 +137,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPass;

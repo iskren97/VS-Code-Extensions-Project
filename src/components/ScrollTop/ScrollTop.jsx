@@ -31,7 +31,7 @@ const ScrollTop = ({ showBelow }) => {
       {show && (
         <IconButton
           className="icon-btn"
-          sx={{ backgroundColor: 'rgba(0,122,205,255)', fontSize: '1.7rem' }}
+          sx={{ backgroundColor: 'rgb(234 234 234)', fontSize: '1.7rem' }}
           onClick={handleClick}
           aria-label="to top"
           component="span"

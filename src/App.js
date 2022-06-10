@@ -23,6 +23,7 @@ import Upload from './views/Upload/Upload';
 import EditExtension from './views/ProfilePage/EditExtension/EditExtension';
 import About from './views/About/About';
 import ErrorPage from './views/Error/ErrorPage';
+import ResetPass from './views/Login/ResetPassword/ResetPass';
 
 const App = () => {
   const [appState, setAppState] = useState({
@@ -60,6 +61,7 @@ const App = () => {
             <Route path="/home" element={<Main />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/password_reset" element={<ResetPass />} />
             <Route
               path="/category/:category"
               element={<Category key={window.location.pathname} />}

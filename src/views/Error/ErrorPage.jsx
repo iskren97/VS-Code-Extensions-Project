@@ -15,7 +15,7 @@ const ErrorPage = () => {
   const [errors, setErrors] = useState([]);
   useEffect(() => {
     fetch(
-      'https://api.giphy.com/v1/gifs/search?api_key=L6yFCUcFk8wlKFtQK3IemTQQd7JLiHv5&q=error&limit=5&offset=0&rating=g&lang=en'
+      'https://api.giphy.com/v1/gifs/search?api_key=L6yFCUcFk8wlKFtQK3IemTQQd7JLiHv5&q=error&limit=6&offset=0&rating=g&lang=en'
     )
       .then((resp) => resp.json())
       .then(({ data }) => setErrors(data));
