@@ -5,6 +5,12 @@
   border: none;
 
   font-family: 'Inter', sans-serif !important;
+
+  transition: background-color 0.25s !important;
+}
+
+.category-item:hover {
+  background-color: rgba(255, 255, 255, 0.295) !important;
 }
 
 a {

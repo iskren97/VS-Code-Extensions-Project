@@ -44,6 +44,8 @@
 
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
+
+  transition: background-color 0.25s;
 }
 
 .register-form input:active {

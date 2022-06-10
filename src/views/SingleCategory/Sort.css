@@ -27,6 +27,12 @@ thead button {
   color: white;
 
   cursor: pointer;
+
+  transition: background-color 0.25s;
+}
+
+thead button:hover {
+  background: rgba(255, 255, 255, 0.295) !important;
 }
 
 thead button.ascending::after {

@@ -71,7 +71,7 @@ const ResetPass = () => {
             fontSize: '22px',
           }}
         >
-          <h2>Enter your email</h2>
+          <h2>Reset password</h2>
         </div>
 
         <p style={{ textAlign: 'center' }}>Please enter your email address</p>

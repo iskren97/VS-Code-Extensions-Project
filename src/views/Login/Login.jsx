@@ -139,7 +139,7 @@ const Login = () => {
 
           <p
             onClick={() => navigate('/password_reset')}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', fontSize: '13px', marginTop: '2px' }}
           >
             Forgot your password?
           </p>

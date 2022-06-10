@@ -14,9 +14,7 @@ const Categories = () => {
           height: 'auto',
           marginTop: '50px',
           paddingBottom: '55px',
-
           background: 'rgba(255, 255, 255, 0.2)',
-
           border: '1px solid rgba(255, 255, 255, 0.3)',
           borderRadius: '16px',
         }}
@@ -35,7 +33,7 @@ const Categories = () => {
         <Grid container direction="row" spacing={2} className="item-grid">
           <Grid item>
             <NavLink to="/category/:code_formatters">
-              <ListCategory name={'Code Formatters'} bgColor={'#008000'} />
+              <ListCategory name={'Code Formatters'} bgColor={'transparent'} />
             </NavLink>
           </Grid>
 
