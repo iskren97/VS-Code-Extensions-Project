@@ -237,6 +237,8 @@ const Header = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
+              {/* Dont delete next line - overwrites focus on button */}
+                <input type="text" style={{display: 'none'}}></input>
                 <MenuItem
                   onClick={() => navigate(`/profile/${userData.username}`)}
 
