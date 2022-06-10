@@ -371,13 +371,8 @@ function SingleExtension() {
 
             >
               <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  marginLeft: '16px'
-                }}
+              className="git_field"
+                style={{marginLeft: '16px'}}
                 onClick={(e) => {
                   e.preventDefault();
                   window.open(repoInfo.html_url + '/issues', '_blank');
@@ -399,13 +394,8 @@ function SingleExtension() {
               </div>
 
               <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  cursor: 'pointer',
+              className="git_field"
 
-                }}
                 onClick={(e) => {
                   e.preventDefault();
                   window.open(repoInfo.html_url + '/pulls', '_blank');
@@ -428,13 +418,7 @@ function SingleExtension() {
               </div>
 
               <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  cursor: 'pointer',
-
-                }}
+              className="git_field"
                 onClick={(e) => {
                   e.preventDefault();
                   window.open(commitInfo.html_url, '_blank');
