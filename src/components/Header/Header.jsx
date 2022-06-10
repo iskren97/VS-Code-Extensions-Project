@@ -220,24 +220,17 @@ const Header = () => {
                     overflow: 'visible',
                     filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                     mt: 1.5,
+                    background: 'rgba(255, 255, 255, 0.2)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '16px',
+              color: 'white',
+
+
                     '& .MuiAvatar-root': {
                       width: 32,
                       height: 32,
                       ml: -0.5,
                       mr: 1,
-                    },
-
-                    '&:before': {
-                      content: '""',
-                      display: 'block',
-                      position: 'absolute',
-                      top: 0,
-                      right: 14,
-                      width: 10,
-                      height: 10,
-                      bgcolor: 'background.paper',
-                      transform: 'translateY(-50%) rotate(45deg)',
-                      zIndex: 0,
                     },
                   },
                 }}
@@ -246,19 +239,19 @@ const Header = () => {
               >
                 <MenuItem
                   onClick={() => navigate(`/profile/${userData.username}`)}
-                  sx={{ bgcolor: 'white' }}
+
                 >
                   <ListItemIcon>
-                    <VpnKeyIcon fontSize="medium" />
+                    <VpnKeyIcon fontSize="medium" sx={{color: 'white'}}/>
                   </ListItemIcon>
                   My Profile
                 </MenuItem>
 
-                <Divider />
+                <Divider sx={{background: 'rgba(255, 255, 255, 0.3)'}}/>
 
                 <MenuItem onClick={logout}>
                   <ListItemIcon>
-                    <Logout fontSize="medium" />
+                    <Logout fontSize="medium" sx={{color: 'white'}} />
                   </ListItemIcon>
                   Logout
                 </MenuItem>

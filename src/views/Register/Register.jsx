@@ -142,6 +142,7 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
           <input
             placeholder="Username"
+            autocomplete="off"
             required
             {...register('username', {
               minLength: 2,
@@ -158,6 +159,7 @@ const Register = () => {
 
           <input
             placeholder="Email"
+            autocomplete="off"
             required
             {...register('email', {
               minLength: 2,
@@ -200,7 +202,7 @@ const Register = () => {
             render={({ field: { onChange, value } }) => (
               <PhoneInput
                 placeholder="Enter phone number"
-                international
+                international        
                 value={value}
                 onChange={onChange}
                 id="phoneNumber"

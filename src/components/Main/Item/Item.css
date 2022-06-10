@@ -74,10 +74,11 @@ h2 {
   bottom: 0;
   width: 100%;
   padding: 8px;
-  background-color: rgb(234 234 234);
+  background-color: rgb(219, 219, 219);
   border-top-left-radius: 20px;
   transform: translateY(70px);
   transition: transform 0.25s;
+
 }
 
 .card_content::before {
@@ -89,13 +90,14 @@ h2 {
   height: 100px;
   transform: rotate(-175deg);
   border-radius: 50%;
-  box-shadow: inset 48px 48px rgb(234 234 234);
+  box-shadow: inset 48px 48px rgb(219, 219, 219);
   z-index: -1;
 }
 
 .card_title {
   color: #252525;
   line-height: 15px;
+  font-size: 17px;
   margin-left: 0.5em;
 }
 
@@ -113,9 +115,6 @@ h2 {
   margin-left: 0.5em;
 }
 
-.card_description button {
-  cursor: pointer;
-}
 
 .card:hover .card_content {
   transform: translateY(0);
@@ -137,20 +136,21 @@ h2 {
   display: inline-block;
   padding: 0.5em 1.7em;
   margin: 0 0.1em 0.1em 0;
-  border: 0.16em solid #718bf7;
-  border-radius: 2em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
   font-size: 13px;
   box-sizing: border-box;
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  color: rgb(48, 48, 48);
+  color: black;
   text-shadow: 0 0.04em 0.04em rgba(255, 255, 255, 0.253);
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
   text-align: center;
   transition: all 0.2s;
 }
 
 .card_button:hover {
   color: black;
-  background-color: #718bf7;
+  background-color: #1565c0;
 }

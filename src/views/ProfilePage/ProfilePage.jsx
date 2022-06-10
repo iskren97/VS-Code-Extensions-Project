@@ -130,30 +130,31 @@ const ProfilePage = () => {
 
 
   return (
-    <>
-      <Header />
+    <div className="glass-container">
+    
+    <Header />
 
-      <div style={{ marginTop: '13em' }}>
+      <div>
         <Grid
           container
           direction="column"
           sx={{
             height: 'auto',
-            flexWrap: 'nowrap',
-            marginTop: '50px',
-            paddingBottom: '50px',
-            boxShadow: '0 1px 6px rgba(0,0,0,0.2)',
-            background: 'white',
-            borderRadius: '20px',
-            marginBottom: '50px',
-            marginLeft: '1em',
-            marginRight: '1em',
-            width: 'auto',
+          background: 'rgba(255, 255, 255, 0.6)',
+          flexWrap: 'nowrap',
+          paddingBottom: '50px',
+          boxShadow: '0 1px 6px rgba(0,0,0,0.25)',
+          borderRadius: '20px',
+          marginBottom: '50px',
+          marginLeft: '1em',
+          marginRight: '1em',
+          width: 'auto',
+          color: 'black'
           }}
         >
           <h1 style={{ marginLeft: '2em' }}>{username}</h1>
 
-          <Divider sx={{ marginLeft: '2em', marginRight: '2em'}} />
+          <Divider sx={{ marginLeft: '2em', marginRight: '2em', background: 'hsla(210,18%,87%,1)'}} />
 
           <Grid
             container
@@ -229,7 +230,7 @@ const ProfilePage = () => {
               </Grid>
             </Grid>
 
-            <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'} flexItem />
+            <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'} flexItem sx={{background: 'hsla(210,18%,87%,1)'}} />
 
             <Grid
               container
@@ -238,7 +239,7 @@ const ProfilePage = () => {
             >
               <h1>{activeView}</h1>
 
-              <Divider flexItem  sx={{width: 'auto', marginBottom: '1em'}}/>
+              <Divider flexItem  sx={{width: 'auto', marginBottom: '1em', background: 'hsla(210,18%,87%,1)'}}/>
 
               <Grid container direction="row" spacing={2} className="item-grid">
                 {activeView === 'Uploads' ? (
@@ -263,7 +264,8 @@ const ProfilePage = () => {
           </Grid>
         </Grid>
       </div>
-    </>
+      </div>
+    
   );
 };
 

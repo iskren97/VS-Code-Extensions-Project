@@ -46,6 +46,7 @@
   border-radius: 16px;
 
   transition: background-color 0.25s;
+  color: white;
 }
 
 .register-form input:active {
