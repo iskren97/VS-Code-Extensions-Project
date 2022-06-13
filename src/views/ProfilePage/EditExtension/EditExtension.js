@@ -23,7 +23,7 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-
+import '../../Upload/Upload.css'
 
 import {
   createExtension,
@@ -202,7 +202,9 @@ function EditExtension() {
 
           <br />
 
-          <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
+          <Divider sx={{
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+            }} />
 
           <br />
 
@@ -250,7 +252,7 @@ function EditExtension() {
                 onChange={(e) =>
                   setUploadInfo({ ...uploadInfo, category: e.target.value })
                 }
-                sx={{ width: '100%' }}
+                sx={{ width: '100%', color: 'white !important', fontWeight: 'bold' }}
               >
                 <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
                 <MenuItem value={'Linters'}>Linters</MenuItem>
@@ -282,6 +284,7 @@ function EditExtension() {
                   value.map((option, index) => (
                     <Chip
                       variant="outlined"
+                      sx={{color: 'white'}}
                       label={option}
                       {...getTagProps({ index })}
                     />
@@ -293,7 +296,9 @@ function EditExtension() {
               />
             </div>
 
-            <Divider sx={{ bgcolor: 'rgba(0,122,205,255)' }} />
+            <Divider  sx={{
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+            }} />
 
             <Button
               onClick={() => editExtension()}

@@ -131,7 +131,7 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
             }}
           >
             <Tooltip title="Change profile picture" placement="right-end">
-              <EditIcon sx={{ cursor: 'pointer', color: 'black' }} />
+              <EditIcon sx={{ cursor: 'pointer', color: 'white' }} />
             </Tooltip>
           </a>
         ) : null}

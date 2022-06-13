@@ -101,3 +101,12 @@
   margin-bottom: 0.25em;
   font-size: 1.25em;
 }
+
+
+.upload-form *:focus-visible{
+  outline: none !important;
+}
+
+.upload-form input{
+  color: white !important;
+}

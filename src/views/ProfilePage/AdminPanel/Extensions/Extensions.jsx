@@ -130,7 +130,7 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
           })}
         </table>
       ) : (
-        <h3>There are no extensions yet.</h3>
+        <h3 style={{color: 'white'}}>There are no extensions yet.</h3>
       )}
     </>
   );

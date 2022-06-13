@@ -277,7 +277,7 @@ function Upload() {
                 onChange={(e) =>
                   setUploadInfo({ ...uploadInfo, category: e.target.value })
                 }
-                sx={{ width: '100%' }}
+                sx={{ width: '100%', color: 'white !important', fontWeight: 'bold' }}
               >
                 <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
                 <MenuItem value={'Linters'}>Linters</MenuItem>
@@ -308,6 +308,7 @@ function Upload() {
                   value.map((option, index) => (
                     <Chip
                       variant="outlined"
+                      sx={{color: 'white'}}
                       label={option}
                       {...getTagProps({ index })}
                     />
