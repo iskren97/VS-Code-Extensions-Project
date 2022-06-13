@@ -9,7 +9,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const ListCategory = ({ name, bgColor }) => {
+const ListCategory = ({ name }) => {
   return (
     <Item
       className="category-item"
