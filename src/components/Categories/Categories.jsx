@@ -33,52 +33,49 @@ const Categories = () => {
         <Grid container direction="row" spacing={2} className="item-grid">
           <Grid item>
             <NavLink to="/category/:code_formatters">
-              <ListCategory name={'Code Formatters'} bgColor={'transparent'} />
+              <ListCategory name={'Code Formatters'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:linters">
-              <ListCategory name={'Linters'} bgColor={'#ff8243'} />
+              <ListCategory name={'Linters'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:themes">
-              <ListCategory name={'Themes'} bgColor={'#fdc0d1'} />
+              <ListCategory name={'Themes'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:snippets">
-              <ListCategory name={'Snippets'} bgColor={'#9400D3'} />
+              <ListCategory name={'Snippets'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:programming_languages">
-              <ListCategory
-                name={'Programming Languages'}
-                bgColor={'#ffd700'}
-              />
+              <ListCategory name={'Programming Languages'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:azure">
-              <ListCategory name={'Azure'} bgColor={'blue'} />
+              <ListCategory name={'Azure'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:data_science">
-              <ListCategory name={'Data Science'} bgColor={'#808080'} />
+              <ListCategory name={'Data Science'} />
             </NavLink>
           </Grid>
 
           <Grid item>
             <NavLink to="/category/:debuggers">
-              <ListCategory name={'Debuggers'} bgColor={'black'} />
+              <ListCategory name={'Debuggers'} />
             </NavLink>
           </Grid>
         </Grid>
