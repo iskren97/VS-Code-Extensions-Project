@@ -49,12 +49,13 @@ function SingleExtension() {
   };
 
   const updateRating = (value) => {
-    return updateExtensionRating(id, userData.username, value).then((data) => {
-      const average =
-        data.reduce((sum, current) => sum + current.value, 0) / data.length;
+      return updateExtensionRating(id, userData.username, value).then((data) => {
+        const average =
+          data.reduce((sum, current) => sum + current.value, 0) / data.length;
+  
+        setRatingValue(average);
+      });
 
-      setRatingValue(average);
-    });
   };
 
   const getVersion = async (author, repo) => {
@@ -137,6 +138,7 @@ function SingleExtension() {
     getExtensionById(id).then((data) => {
       const target = data.repoUrl.split('/');
 
+      
       getExtensionRatingByUser(id, userData?.username).then((data) => {
         setMyRating(data);
       });
@@ -151,6 +153,9 @@ function SingleExtension() {
       getPulls(target[3], target[4]);
       getLastCommit(target[3], target[4]);
       getVersion(target[3], target[4]);
+
+
+      
       getExtensionRating(id).then((data) => {
         let rating = data;
 
@@ -159,6 +164,7 @@ function SingleExtension() {
         }
         setRatingValue(rating.toFixed(2));
       });
+
     });
   }, [userData]);
 

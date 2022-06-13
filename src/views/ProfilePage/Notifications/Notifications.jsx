@@ -33,7 +33,6 @@ function Notifications({userProfile}) {
   };
 
 
-
   return (
     <>
    <Grid
@@ -84,8 +83,9 @@ function Notifications({userProfile}) {
 
       {notifications.filter(notification => notification?.author === userProfile.username || notification?.recipient === userProfile.username || (userProfile.role === 'admin' && (notification?.recipient === 'Admins' || notification?.author === 'Admins')))
               .map((notif) => {
+
                 let rowColor = '';
-                if(userProfile.username === notif.author || userProfile.role === 'admin' && (notif?.recipient === 'Admins' || notif?.author === 'Admins') ){
+                if(userProfile.username === notif.author || (userProfile.role === 'admin' && notif?.author === 'Admins') ){
                   switch (notif.statusAuthor) {
                   case 'unseen':
                     rowColor = 'rgb(0, 149, 255)';
@@ -209,7 +209,9 @@ function Notifications({userProfile}) {
                               if(notif.author === userProfile.username || (userProfile.role == 'admin' && notif.author === 'Admins')){
                               curr.statusAuthor = notif.statusAuthor === 'unseen' ? 'seen' : 'unseen'
 
-                              }else{
+                              }else if (userProfile.role == 'admin' && notif.recipient === 'Admins'){
+                                curr.statusRecipient = notif.statusRecipient === 'unseen' ? 'seen' : 'unseen'
+                              } else{
                               curr.statusRecipient = notif.statusRecipient === 'unseen' ? 'seen' : 'unseen'
 
                               }
@@ -218,7 +220,7 @@ function Notifications({userProfile}) {
                           }))
                            }}
                         >
-                          Mark as {(userProfile?.username === notif.author ? notif.statusAuthor : notif.statusRecipient)  === 'seen' ? 'New' : 'Seen'}
+                          Mark as {(userProfile?.username === notif.author || (userProfile?.role === 'admin' && notif.author === 'Admins') ? notif.statusAuthor : notif.statusRecipient)  === 'seen' ? 'New' : 'Seen'}
                         </Button>
                       
                       </Grid>
