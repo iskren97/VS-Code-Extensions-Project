@@ -73,11 +73,14 @@ const Uploads = ({ userUploads, isOwner }) => {
                     justifyContent="space-between"
                     alignItems="center"
                     sx={{
-                      width: '100%',
                       margin: '0.25em',
-                      padding: '0.5em',
-                      backgroundColor: 'lightGray',
-                      borderRadius: '0.5em',
+                        padding: '0.5em',
+                        textDecoration: 'none',
+                        backgroundColor: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
                     }}
                   >
                     <div
@@ -123,6 +126,13 @@ const Uploads = ({ userUploads, isOwner }) => {
                       <Button
                         variant="contained"
                         color="primary"
+                        sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                         onClick={() => {
                           window.location.href = `/extensions/${ext.id}`;
                         }}
@@ -134,6 +144,13 @@ const Uploads = ({ userUploads, isOwner }) => {
                         <Button
                           variant="contained"
                           color="warning"
+                          sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                           onClick={() => {
                             navigate(`../extensions/edit/${ext.id}`);
                           }}
@@ -146,7 +163,13 @@ const Uploads = ({ userUploads, isOwner }) => {
                           placement="top"
                         >
                           <span>
-                            <Button variant="contained" disabled>
+                            <Button variant="contained"  sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white !important',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }} disabled>
                               Edit
                             </Button>
                           </span>
@@ -156,6 +179,13 @@ const Uploads = ({ userUploads, isOwner }) => {
                       <Button
                         variant="contained"
                         color="error"
+                        sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                         onClick={() => {
                           deleteExtension(ext.id);
                           setUploaded((allExtensions) =>
@@ -216,8 +246,12 @@ const Uploads = ({ userUploads, isOwner }) => {
                       sx={{
                         margin: '0.25em',
                         padding: '0.5em',
-                        backgroundColor: 'lightGray',
-                        borderRadius: '0.5em',
+                        textDecoration: 'none',
+                        backgroundColor: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
                       }}
                     >
                       <div
@@ -262,6 +296,13 @@ const Uploads = ({ userUploads, isOwner }) => {
                         <Button
                           variant="contained"
                           color="primary"
+                          sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                           onClick={() => {
                             window.location.href = `/extensions/${ext.id}`;
                           }}

@@ -32,11 +32,15 @@ const DisplayExt = ({
             alignItems="center"
             justify="space-around"
             sx={{
-              margin: '0.25em',
-              padding: '0.5em',
-              backgroundColor: 'lightGray',
-              borderRadius: '0.5em',
-            }}
+                      margin: '0.25em',
+                        padding: '0.5em',
+                        textDecoration: 'none',
+                        backgroundColor: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                    }}
           >
             <Grid item>
               <img
@@ -73,6 +77,13 @@ const DisplayExt = ({
                   <Button
                     variant="contained"
                     color="primary"
+                    sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                     onClick={() => {
                       window.location.href = `/extensions/${ext.id}`;
                     }}
@@ -85,6 +96,13 @@ const DisplayExt = ({
                   <Button
                     variant="contained"
                     color="success"
+                    sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                     disabled={ext.status === 'approved'}
                     onClick={() => {
                       setExtensionStatus(ext.id, 'approved');
@@ -114,6 +132,13 @@ const DisplayExt = ({
                     variant="contained"
                     color="warning"
                     disabled={ext.status === 'rejected'}
+                    sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                     onClick={() => {
                       setExtensionStatus(ext.id, 'rejected');
                       createNotification(
@@ -142,6 +167,13 @@ const DisplayExt = ({
                   <Button
                     variant="contained"
                     color="error"
+                    sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                     onClick={() => {
                       deleteExtension(ext.id);
                       setAllExtensions((allExtensions) =>

@@ -21,7 +21,7 @@ const Search = ({ setSearch, searchType }) => {
       </div>
 
       <div>
-        <SearchIcon fontSize={'large'} cursor={'pointer'} />
+        <SearchIcon fontSize={'large'} cursor={'pointer'} sx={{color:'white'}} />
       </div>
     </div>
   );

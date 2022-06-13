@@ -6,7 +6,7 @@ const Info = ({ userProfile }) => {
   const { userData } = useContext(AppContext);
 
   return (
-    <div className="user-info">
+    <div className="user-info" style={{color: 'white'}}>
       <h3>
         Username: <span>{userProfile?.username}</span>{' '}
       </h3>

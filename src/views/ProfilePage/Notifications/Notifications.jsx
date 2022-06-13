@@ -60,10 +60,11 @@ function Notifications({userProfile}) {
               flexDirection: 'row',
               alignItems: 'center',
               gap: '0.25em',
+              color: 'white',
             }}
           >
             <span style={{backgroundColor: 'rgb(0, 149, 255)', borderRadius: '50%', display: 'inline-block',   height: '25px',
-  width: '25px'}}></span>New
+  width: '25px', color: ''}}></span>New
           </div>
 
           <div
@@ -72,6 +73,8 @@ function Notifications({userProfile}) {
               flexDirection: 'row',
               alignItems: 'center',
               gap: '0.25em',
+              color: 'white',
+
             }}
           >
             <span style={{backgroundColor: 'rgb(255, 102, 0)', borderRadius: '50%', display: 'inline-block',   height: '25px',
@@ -123,8 +126,12 @@ function Notifications({userProfile}) {
                       sx={{
                         margin: '0.25em',
                         padding: '0.5em',
-                        backgroundColor: 'lightGray',
-                        borderRadius: '0.5em',
+                        textDecoration: 'none',
+                        backgroundColor: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
                       }}
                     >
                       <div
@@ -137,6 +144,8 @@ function Notifications({userProfile}) {
                           flex: '1',
                           justifyContent: 'space-between',
                           marginRight: '1em',
+                          
+
                         }}
                       >
                     
@@ -163,6 +172,13 @@ function Notifications({userProfile}) {
                         <Button
                           variant="contained"
                           color="primary"
+                          sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                           onClick={() => {
                             window.location.href = `/extensions/${notif.extensionId}`;
                           }}
@@ -172,6 +188,13 @@ function Notifications({userProfile}) {
                         <Button
                           variant="contained"
                           color="primary"
+                          sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
                           onClick={()=> {
 
                             if(notif.author === userProfile.username || (userProfile.role == 'admin' && notif.author === 'Admins')){

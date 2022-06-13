@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import AppContext from '../../providers/AppContext';
@@ -26,6 +26,8 @@ import vscodelogo from '../../assets/vscodelogo.png';
 
 const Header = () => {
   const { user, userData, setContext } = useContext(AppContext);
+  const [loadingIndicator, setLoadingIndicator] = useState(true);
+
 
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -45,6 +47,14 @@ const Header = () => {
       navigate('/');
     });
   };
+
+  useEffect(() => {
+      // eslint-disable-next-line no-undef
+      setTimeout(() => {
+        setLoadingIndicator(false);
+      }, 500);
+    
+  }, []);
 
   return (
     <>
@@ -136,7 +146,9 @@ const Header = () => {
         </Grid>
 
         <div className="header-buttons-container">
-          {user ? (
+        {loadingIndicator ? (
+          <div className="lds-dual-ring"></div>
+        ) : user ? (
             <>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {userData.role !== 'blocked' ? (
@@ -160,17 +172,21 @@ const Header = () => {
                     title="You don't have permission to do this!"
                     followCursor
                   >
+                  <span>
                     <Button
                       variant="contained"
                       startIcon={<CloudUploadIcon />}
                       sx={{
-                        color: 'rgba(0, 0, 0, 0.26) !important',
-                        backgroundColor: 'white !important',
-                        cursor: 'pointer',
-                      }}
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white !important',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }} disabled
                     >
                       Upload
                     </Button>
+                    </span>
                   </Tooltip>
                 )}
               </div>

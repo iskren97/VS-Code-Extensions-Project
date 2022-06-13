@@ -1,5 +1,5 @@
 import React from 'react';
-
+import puzzle from '..//../assets/puzzle.png';
 const Intro = () => {
   return (
     <div>
@@ -27,7 +27,7 @@ const Intro = () => {
 
         <div>
           <img
-            src="https://icons-for-free.com/download-icon-extension-1324760527053491862_512.png"
+            src={puzzle}
             alt=""
             className="general-img"
           />

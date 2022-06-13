@@ -16,7 +16,7 @@ const Legend = () => {
               <span className="legendPending"></span>
             </Grid>
 
-            <Grid item>Pending</Grid>
+            <Grid sx={{color: 'white'}} item>Pending</Grid>
           </Grid>
         </Grid>
 
@@ -31,7 +31,7 @@ const Legend = () => {
               <span className="legendApproved"></span>
             </Grid>
 
-            <Grid item>Approved</Grid>
+            <Grid sx={{color: 'white'}} item>Approved</Grid>
           </Grid>
         </Grid>
 
@@ -46,7 +46,7 @@ const Legend = () => {
               <span className="legendRejected"></span>
             </Grid>
 
-            <Grid item>Rejected</Grid>
+            <Grid sx={{color: 'white'}} item>Rejected</Grid>
           </Grid>
         </Grid>
       </Grid>

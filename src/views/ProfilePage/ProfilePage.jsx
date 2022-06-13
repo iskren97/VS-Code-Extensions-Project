@@ -101,7 +101,7 @@ const ProfilePage = () => {
 
     '@media (max-width: 1024px)' : {
       gap: '1em', 
-      width: '55vw',
+      width: '40vw',
       alignItems: 'flex-start'
 
     },
@@ -120,7 +120,7 @@ const ProfilePage = () => {
 
     '@media (min-width: 1280px)' : {
       gap: '1em', 
-      width: '65vw',
+      width: '50vw',
       alignItems: 'flex-start'
 
     },
@@ -140,7 +140,7 @@ const ProfilePage = () => {
           direction="column"
           sx={{
             height: 'auto',
-          background: 'rgba(255, 255, 255, 0.6)',
+          background: 'rgba(255, 255, 255, 0.35)',
           flexWrap: 'nowrap',
           paddingBottom: '50px',
           boxShadow: '0 1px 6px rgba(0,0,0,0.25)',
@@ -152,7 +152,7 @@ const ProfilePage = () => {
           color: 'black'
           }}
         >
-          <h1 style={{ marginLeft: '2em' }}>{username}</h1>
+          <h1 style={{ marginLeft: '2em', color: 'white' }}>{username}</h1>
 
           <Divider sx={{ marginLeft: '2em', marginRight: '2em', background: 'hsla(210,18%,87%,1)'}} />
 
@@ -193,6 +193,14 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Info')}
                   variant="contained"
+                  sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }}
                 >
                   Info
                 </Button>
@@ -201,6 +209,14 @@ const ProfilePage = () => {
                   <Button
                     onClick={() => setActiveView('Notifications')}
                     variant="contained"
+                    sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }}
                   >
                     Notifications
                   </Button>
@@ -209,6 +225,14 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Uploads')}
                   variant="contained"
+                  sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }}
                 >
                   Uploads
                 </Button>
@@ -216,6 +240,14 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Downloads')}
                   variant="contained"
+                  sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }}
                 >
                   Downloads
                 </Button>
@@ -223,6 +255,14 @@ const ProfilePage = () => {
                   <Button
                     onClick={() => setActiveView('AdminPanel')}
                     variant="contained"
+                    sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                      }}
                   >
                     Admin Panel
                   </Button>
@@ -237,7 +277,7 @@ const ProfilePage = () => {
               direction="column"
               sx={tabStyle}
             >
-              <h1>{activeView}</h1>
+              <h1 style={{color: 'white'}}>{activeView}</h1>
 
               <Divider flexItem  sx={{width: 'auto', marginBottom: '1em', background: 'hsla(210,18%,87%,1)'}}/>
 
