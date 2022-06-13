@@ -51,7 +51,7 @@ const AdminPanel = () => {
 
   return (
     <>
-      <Grid item sx={{marginLeft: '0.5em'}}>
+      <Grid item sx={{ marginLeft: '0.5em' }}>
         <Grid
           container
           direction="row"
@@ -63,13 +63,13 @@ const AdminPanel = () => {
               variant="contained"
               color="primary"
               sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                textDecoration: 'none',
+                background: 'transparent',
+                color: 'white',
+                fontWeight: 'bold',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '16px',
+              }}
               onClick={() => {
                 setExtensionsView(true);
                 setUsersView(false);
@@ -84,13 +84,13 @@ const AdminPanel = () => {
               variant="contained"
               color="primary"
               sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                textDecoration: 'none',
+                background: 'transparent',
+                color: 'white',
+                fontWeight: 'bold',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '16px',
+              }}
               onClick={() => {
                 setExtensionsView(false);
                 setUsersView(true);
@@ -112,7 +112,12 @@ const AdminPanel = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Divider sx={{ marginTop: '18px', border: '1px solid rgba(255, 255, 255, 0.3)', }} />
+            <Divider
+              sx={{
+                marginTop: '18px',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+              }}
+            />
           </Grid>
         </Grid>
 
