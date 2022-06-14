@@ -5,9 +5,14 @@
 }
 
 .upload-pic-form ::-webkit-file-upload-button {
-  background: #1976d2;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
   color: white;
+
+  background: #1976d2;
   cursor: pointer;
+  border: none;
+  border-radius: 16px;
 
   padding: 1em;
   font-size: 15px;
@@ -15,9 +20,13 @@
 }
 
 .upload-pic-btn {
+  font-weight: bold;
+  border-radius: 16px;
+
   padding: 13px 13px;
   font-size: 15px;
   cursor: pointer;
+  border: none;
 
   color: white;
   background: #1976d2;
@@ -45,4 +54,3 @@
 .user-info span {
   font-weight: bold;
 }
-

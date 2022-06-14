@@ -41,15 +41,15 @@ const DisplayUser = ({
         justify="space-around"
         className="users-container"
         sx={{
-                      margin: '0.25em',
-                        padding: '0.5em',
-                        textDecoration: 'none',
-                        backgroundColor: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                    }}
+          margin: '0.25em',
+          padding: '0.5em',
+          textDecoration: 'none',
+          backgroundColor: 'transparent',
+          color: 'white',
+          fontWeight: 'bold',
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+          borderRadius: '16px',
+        }}
       >
         <Grid item>
           <img
@@ -57,7 +57,11 @@ const DisplayUser = ({
             alt="userPic"
             width="35rem"
             height="35rem"
-            style={{ objectFit: 'cover', marginRight: '55px', borderRadius: '50%' }}
+            style={{
+              objectFit: 'cover',
+              marginRight: '55px',
+              borderRadius: '50%',
+            }}
           />
         </Grid>
 
@@ -100,12 +104,12 @@ const DisplayUser = ({
             variant="contained"
             color="primary"
             sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+              textDecoration: 'none',
+              background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '12px',
+            }}
             onClick={() => navigate(`/profile/${username}`)}
           >
             View
@@ -118,12 +122,12 @@ const DisplayUser = ({
                 color="error"
                 disabled={role === 'blocked'}
                 sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+                  textDecoration: 'none',
+                  background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  borderRadius: '12px',
+                }}
                 onClick={() => {
                   handleBlockUser();
                   const blocked = allUsers.find((user) => user.uid === uid);
@@ -150,12 +154,12 @@ const DisplayUser = ({
               variant="contained"
               color="success"
               sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+                textDecoration: 'none',
+                background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '12px',
+              }}
               onClick={() => {
                 handleBlockUser();
                 const blocked = allUsers.find((user) => user.uid === uid);
@@ -176,5 +180,4 @@ const DisplayUser = ({
     </>
   );
 };
-
 export default DisplayUser;

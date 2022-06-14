@@ -108,7 +108,11 @@ const Login = () => {
         />
 
         <br />
-        <form onSubmit={handleSubmit(onSubmit)} autocomplete="off" className="register-form">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          autocomplete="off"
+          className="register-form"
+        >
           <input
             type="email"
             placeholder="Email"
@@ -167,6 +171,7 @@ const Login = () => {
           </p>
         </div>
       </Container>
+
       {error ? (
         <AlertUser
           msg={errorMsg}

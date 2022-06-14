@@ -1,7 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import '../SortExt.css';
-
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
 

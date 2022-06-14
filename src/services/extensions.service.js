@@ -7,10 +7,9 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { storage } from '../config/firebase-config';
-import { getUserByHandle } from './users.service.js'
+import { getUserByHandle } from './users.service.js';
 
-import {createNotification} from './notifications.service.js'
-
+import { createNotification } from './notifications.service.js';
 
 export const createExtension = (
   title,
@@ -34,8 +33,12 @@ export const createExtension = (
     category: category,
   }).then((result) => {
     uploadExtensionFile(file, logo, author, fileName, result.key);
-    createNotification(author, 'Admins', `${author} uploaded a new extension - ${title} `, result.key);
-
+    createNotification(
+      author,
+      'Admins',
+      `${author} uploaded a new extension - ${title} `,
+      result.key
+    );
 
     return getExtensionById(result.key);
   });
@@ -67,26 +70,25 @@ export const getExtensionById = (id) => {
   });
 };
 
-
-
 export const updateExtensionInfo = (id, newInfo) => {
-   getExtensionById(id).then((extension) => {
+  getExtensionById(id).then((extension) => {
+    createNotification(
+      newInfo.author,
+      'Admins',
+      `${newInfo.author} updated an extension - ${newInfo.title} `,
+      id
+    );
 
-    createNotification(newInfo.author, 'Admins', `${newInfo.author} updated an extension - ${newInfo.title} `, id);
-
-
-
-    if(extension.logo == newInfo.logo && extension.downloadLink === newInfo.downloadLink){
+    if (
+      extension.logo == newInfo.logo &&
+      extension.downloadLink === newInfo.downloadLink
+    ) {
       return update(ref(db), {
-    [`/extensions/${id}`]: newInfo
-  });
+        [`/extensions/${id}`]: newInfo,
+      });
     }
-  })
-
-
-
-  
-}
+  });
+};
 
 export const updateExtensionDownloadLink = (extId, url) => {
   return update(ref(db, `extensions/${extId}`), {
@@ -253,7 +255,7 @@ export const updateExtensionDownloads = (extId, username) => {
     if (!downloads) {
       downloads = [];
     }
-    if(username !== null){
+    if (username !== null) {
       const index = downloads.findIndex((r) => r.username === username);
 
       if (index > -1) {
@@ -261,17 +263,15 @@ export const updateExtensionDownloads = (extId, username) => {
       } else {
         downloads.push({ username, downloaded: true });
       }
-  
+
       update(ref(db, `extensions/${extId}`), {
         downloads,
       });
-  
+
       return downloads;
-    }else{
+    } else {
       return;
     }
-
-
   });
 };
 
@@ -285,39 +285,34 @@ export const getExtensionDownloads = (extId) => {
   });
 };
 
-
-
-export const deleteExtension = async (extId) =>{
+export const deleteExtension = async (extId) => {
   const extension = await getExtensionById(extId);
 
-  
   getUserByHandle(extension.author).then((snapshot) => {
-    const user = snapshot.val()
-    const newExtensions = user.extensions.filter( r => r.extensionId !== extId)
+    const user = snapshot.val();
+    const newExtensions = user.extensions.filter(
+      (r) => r.extensionId !== extId
+    );
 
-    createNotification(extension.author, 'Admins', `${extension.author} deleted an extension - ${extension.title} `, extId);
+    createNotification(
+      extension.author,
+      'Admins',
+      `${extension.author} deleted an extension - ${extension.title} `,
+      extId
+    );
 
-
-  update(ref(db), {
-    [`/users/${extension.author}/extensions/`]: newExtensions
+    update(ref(db), {
+      [`/users/${extension.author}/extensions/`]: newExtensions,
     });
 
-
-  return update(ref(db), {
-    [`/extensions/${extId}`]: null
+    return update(ref(db), {
+      [`/extensions/${extId}`]: null,
+    });
   });
-  })
-  
-}
+};
 
-
-export const setExtensionStatus = (extId, status) =>{
-
-
-
+export const setExtensionStatus = (extId, status) => {
   return update(ref(db), {
-    [`extensions/${extId}/status`]: status
+    [`extensions/${extId}/status`]: status,
   });
-}
-
-
+};

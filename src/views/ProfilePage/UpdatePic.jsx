@@ -10,7 +10,7 @@ import { storage } from '../../config/firebase-config';
 
 import AppContext from '../../providers/AppContext';
 
-import { Grid, Modal, Tooltip } from '@mui/material';
+import { Divider, Grid, Modal, Tooltip } from '@mui/material';
 import { Box } from '@mui/system';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -26,9 +26,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 'auto',
   bgcolor: 'white',
   border: '2px solid #000',
+  borderRadius: '16px',
   boxShadow: 24,
   p: 4,
   padding: '20px',
@@ -166,6 +167,13 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
                 X
               </button>
             </div>
+
+            <Divider
+              sx={{
+                marginBottom: '25px',
+                border: '1px solid black',
+              }}
+            />
 
             <form onSubmit={uploadPicture} className="upload-pic-form">
               <Grid

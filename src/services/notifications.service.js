@@ -1,22 +1,7 @@
 import { ref, push, get, update } from 'firebase/database';
 import { db } from '../config/firebase-config';
 
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage';
-import { storage } from '../config/firebase-config';
-
-
-
-
-export const createNotification = (
-author,
-recipient,
-message,
-extensionId,
-) => {
+export const createNotification = (author, recipient, message, extensionId) => {
   return push(ref(db, 'notifications'), {
     author,
     recipient,
@@ -30,7 +15,6 @@ extensionId,
   });
 };
 
-
 export const getNotificationById = (id) => {
   return get(ref(db, `notifications/${id}`)).then((result) => {
     if (!result.exists()) {
@@ -41,11 +25,9 @@ export const getNotificationById = (id) => {
     notification.id = id;
     notification.createdOn = new Date(notification.createdOn);
 
-
     return notification;
   });
 };
-
 
 export const fromNotificationsDocument = (snapshot) => {
   const notificationsDocument = snapshot.val();
@@ -71,16 +53,14 @@ export const getAllNotifications = () => {
   });
 };
 
-export const setNotificationStatus = (notifId, status, person) =>{
-
-  if(person === 'author'){
+export const setNotificationStatus = (notifId, status, person) => {
+  if (person === 'author') {
     return update(ref(db), {
-      [`notifications/${notifId}/statusAuthor`]: status
+      [`notifications/${notifId}/statusAuthor`]: status,
     });
-  }else{
+  } else {
     return update(ref(db), {
-      [`notifications/${notifId}/statusRecipient`]: status
+      [`notifications/${notifId}/statusRecipient`]: status,
     });
   }
-  
-}
+};

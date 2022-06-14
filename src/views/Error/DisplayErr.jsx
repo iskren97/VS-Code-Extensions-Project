@@ -1,13 +1,6 @@
 import React from 'react';
 
-import { Container, Grid, Paper, styled } from '@mui/material';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.primary,
-}));
+import { Container, Grid } from '@mui/material';
 
 const DisplayErr = ({ img, title }) => {
   return (

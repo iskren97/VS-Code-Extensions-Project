@@ -1,9 +1,6 @@
 import React from 'react';
-
 import './Users.css';
-
 import DisplayUser from './DisplayUser';
-
 import defaultPic from '../../../../assets/avatar.jpg';
 
 const Users = ({ allUsers, setAllUsers, search }) => {

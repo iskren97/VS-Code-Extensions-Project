@@ -1,5 +1,6 @@
 import React from 'react';
 import puzzle from '..//../assets/puzzle.png';
+
 const Intro = () => {
   return (
     <div>
@@ -26,11 +27,7 @@ const Intro = () => {
         </div>
 
         <div>
-          <img
-            src={puzzle}
-            alt=""
-            className="general-img"
-          />
+          <img src={puzzle} alt="" className="general-img" />
         </div>
       </div>
 

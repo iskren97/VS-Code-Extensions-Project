@@ -1,18 +1,15 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-
-import { Divider, Grid } from '@mui/material';
-
-import Button from '@mui/material/Button';
-
+import React, { useState, useEffect } from 'react';
 import './AdminPanel.css';
 
+import { Divider, Grid } from '@mui/material';
+import Button from '@mui/material/Button';
+
 import { getAllExtensions } from '../../../services/extensions.service';
+import { getAllUsers } from '../../../services/users.service';
 
 import Extensions from './Extensions/Extensions';
 import Users from './Users/Users';
 import Search from '../../../components/Search/Search';
-import { getAllUsers } from '../../../services/users.service';
 import Legend from '../StatusLegend/Legend';
 
 const AdminPanel = () => {
@@ -23,6 +20,9 @@ const AdminPanel = () => {
   const [usersView, setUsersView] = useState(false);
 
   const [search, setSearch] = useState('');
+
+  const [extBgColor, setExtBgColor] = useState('');
+  const [usersBgColor, setUsersBgColor] = useState('transparent');
 
   useEffect(() => {
     getAllExtensions().then((ext) => setAllExtensions(ext));
@@ -64,7 +64,7 @@ const AdminPanel = () => {
               color="primary"
               sx={{
                 textDecoration: 'none',
-                background: 'transparent',
+                background: `${extBgColor}`,
                 color: 'white',
                 fontWeight: 'bold',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -73,6 +73,8 @@ const AdminPanel = () => {
               onClick={() => {
                 setExtensionsView(true);
                 setUsersView(false);
+                setExtBgColor('#1976d2');
+                setUsersBgColor('transparent');
               }}
             >
               Extensions{' '}
@@ -85,7 +87,7 @@ const AdminPanel = () => {
               color="primary"
               sx={{
                 textDecoration: 'none',
-                background: 'transparent',
+                background: `${usersBgColor}`,
                 color: 'white',
                 fontWeight: 'bold',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -94,6 +96,8 @@ const AdminPanel = () => {
               onClick={() => {
                 setExtensionsView(false);
                 setUsersView(true);
+                setUsersBgColor('#1976d2');
+                setExtBgColor('transparent');
               }}
             >
               Users{' '}
