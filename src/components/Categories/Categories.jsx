@@ -4,31 +4,17 @@ import './Categories.css';
 import { Container, Divider, Grid } from '@mui/material';
 import ListCategory from './ListCategory';
 import { NavLink } from 'react-router-dom';
+import { containerStyle, dividerStyle } from '../../styles/styles';
 
 const Categories = () => {
   return (
     <>
-      <Container
-        maxWidth="xl"
-        sx={{
-          height: 'auto',
-          marginTop: '50px',
-          paddingBottom: '55px',
-          background: 'rgba(255, 255, 255, 0.2)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          borderRadius: '16px',
-        }}
-      >
+      <Container maxWidth="xl" sx={containerStyle}>
         <div className="extensions-category">
           <h3>Categories</h3>
         </div>
 
-        <Divider
-          sx={{
-            marginBottom: '30px',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-          }}
-        />
+        <Divider sx={dividerStyle} />
 
         <Grid container direction="row" spacing={2} className="item-grid">
           <Grid item>

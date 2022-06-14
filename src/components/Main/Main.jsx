@@ -11,6 +11,7 @@ import Header from '../Header/Header';
 
 import { getAllExtensions } from '../../services/extensions.service';
 import Footer from '../Footer/Footer';
+import { containerStyle, dividerStyle } from '../../styles/styles';
 
 const Main = () => {
   const [newAddons, setNewAddons] = useState([]);
@@ -62,26 +63,11 @@ const Main = () => {
         <div style={{ marginTop: '8em', marginBottom: '8em' }}>
           <Intro />
           <Categories />
-          <Container
-            maxWidth="xl"
-            sx={{
-              height: 'auto',
-              marginTop: '50px',
-              paddingBottom: '50px',
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '16px',
-            }}
-          >
+
+          <Container maxWidth="xl" sx={containerStyle}>
             <Section category={'New'} />
 
-            <Divider
-              sx={{
-                marginBottom: '30px',
-
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-              }}
-            />
+            <Divider sx={dividerStyle} />
 
             <Grid container direction="row" spacing={2} className="item-grid">
               {newAddons.map((ext) => {
@@ -102,25 +88,11 @@ const Main = () => {
               })}
             </Grid>
           </Container>
-          <Container
-            maxWidth="xl"
-            sx={{
-              height: 'auto',
-              marginTop: '50px',
-              paddingBottom: '50px',
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '16px',
-            }}
-          >
+
+          <Container maxWidth="xl" sx={containerStyle}>
             <Section category={'Recommended'} />
 
-            <Divider
-              sx={{
-                marginBottom: '30px',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-              }}
-            />
+            <Divider sx={dividerStyle} />
 
             <Grid container direction="row" spacing={2} className="item-grid">
               {recommended.map((ext) => {
@@ -141,26 +113,11 @@ const Main = () => {
               })}
             </Grid>
           </Container>
-          <Container
-            maxWidth="xl"
-            sx={{
-              height: 'auto',
-              marginTop: '50px',
-              marginBottom: '50px',
-              paddingBottom: '50px',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '16px',
-              background: 'rgba(255, 255, 255, 0.2)',
-            }}
-          >
+
+          <Container maxWidth="xl" sx={containerStyle}>
             <Section category={'Most Popular'} />
 
-            <Divider
-              sx={{
-                marginBottom: '30px',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-              }}
-            />
+            <Divider sx={dividerStyle} />
 
             <Grid container direction="row" spacing={2} className="item-grid">
               {popular.map((ext) => {
