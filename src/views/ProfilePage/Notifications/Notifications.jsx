@@ -1,21 +1,20 @@
 import React from 'react';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-import { getAllNotifications, setNotificationStatus } from '../../../services/notifications.service';
+import {
+  getAllNotifications,
+  setNotificationStatus,
+} from '../../../services/notifications.service';
 
 import { Grid } from '@mui/material';
 
 import Button from '@mui/material/Button';
 
-
-function Notifications({userProfile}) {
-
- const [notifications, setNotifications] = useState([])
-  useEffect(()=>{
-    getAllNotifications().then(result => setNotifications(result))
-  },[])
-
-
+function Notifications({ userProfile }) {
+  const [notifications, setNotifications] = useState([]);
+  useEffect(() => {
+    getAllNotifications().then((result) => setNotifications(result));
+  }, []);
 
   const setDate = (date) => {
     const newDate = new Date(date);
@@ -32,26 +31,27 @@ function Notifications({userProfile}) {
     return newDate.toLocaleString('en-US', options);
   };
 
-
   return (
     <>
-   <Grid
+      <Grid
         container
         direction="column"
         justifyContent="center"
         alignItems="stretch"
         wrap="nowrap"
-        sx={{width: '100%'}}
+        sx={{ width: '100%' }}
       >
         <div
-          style={{      display: 'flex',
-      flexDirection: 'row',
-      width: 'auto',
-      gap: '1em',
-      flexWrap: 'wrap',
-      justifyContent: 'flex-start',
-      marginTop: '0.5em',
-      marginBottom: '0.5em',}}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: 'auto',
+            gap: '1em',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
+            marginTop: '0.5em',
+            marginBottom: '0.5em',
+          }}
         >
           <div
             style={{
@@ -62,8 +62,17 @@ function Notifications({userProfile}) {
               color: 'white',
             }}
           >
-            <span style={{backgroundColor: 'rgb(0, 149, 255)', borderRadius: '50%', display: 'inline-block',   height: '25px',
-  width: '25px', color: ''}}></span>New
+            <span
+              style={{
+                backgroundColor: 'rgb(0, 149, 255)',
+                borderRadius: '50%',
+                display: 'inline-block',
+                height: '25px',
+                width: '25px',
+                color: '',
+              }}
+            ></span>
+            New
           </div>
 
           <div
@@ -73,172 +82,222 @@ function Notifications({userProfile}) {
               alignItems: 'center',
               gap: '0.25em',
               color: 'white',
-
             }}
           >
-            <span style={{backgroundColor: 'rgb(255, 102, 0)', borderRadius: '50%', display: 'inline-block',   height: '25px',
-  width: '25px'}}></span>Seen
+            <span
+              style={{
+                backgroundColor: 'rgb(255, 102, 0)',
+                borderRadius: '50%',
+                display: 'inline-block',
+                height: '25px',
+                width: '25px',
+              }}
+            ></span>
+            Seen
           </div>
-</div>
+        </div>
 
-      {notifications.filter(notification => notification?.author === userProfile.username || notification?.recipient === userProfile.username || (userProfile.role === 'admin' && (notification?.recipient === 'Admins' || notification?.author === 'Admins')))
-              .map((notif) => {
+        {notifications
+          .filter(
+            (notification) =>
+              notification?.author === userProfile.username ||
+              notification?.recipient === userProfile.username ||
+              (userProfile.role === 'admin' &&
+                (notification?.recipient === 'Admins' ||
+                  notification?.author === 'Admins'))
+          )
+          .map((notif) => {
+            let rowColor = '';
+            if (
+              userProfile.username === notif.author ||
+              (userProfile.role === 'admin' && notif?.author === 'Admins')
+            ) {
+              switch (notif.statusAuthor) {
+                case 'unseen':
+                  rowColor = 'rgb(0, 149, 255)';
+                  break;
+                case 'seen':
+                  rowColor = 'rgb(255, 102, 0)';
+                  break;
+                default:
+                  break;
+              }
+            } else {
+              switch (notif.statusRecipient) {
+                case 'unseen':
+                  rowColor = 'rgb(0, 149, 255)';
+                  break;
+                case 'seen':
+                  rowColor = 'rgb(255, 102, 0)';
+                  break;
+                default:
+                  break;
+              }
+            }
 
-                let rowColor = '';
-                if(userProfile.username === notif.author || (userProfile.role === 'admin' && notif?.author === 'Admins') ){
-                  switch (notif.statusAuthor) {
-                  case 'unseen':
-                    rowColor = 'rgb(0, 149, 255)';
-                    break;
-                  case 'seen':
-                    rowColor = 'rgb(255, 102, 0)';
-                    break;
-                  default:
-                    break;
-                }
-                }else{
-                  switch (notif.statusRecipient) {
-                  case 'unseen':
-                    rowColor = 'rgb(0, 149, 255)';
-                    break;
-                  case 'seen':
-                    rowColor = 'rgb(255, 102, 0)';
-                    break;
-                  default:
-                    break;
-                }
-                }
-                
-
-                return (
+            return (
+              <div
+                key={notif.id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <Grid
+                  container
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  sx={{
+                    margin: '0.25em',
+                    padding: '0.5em',
+                    textDecoration: 'none',
+                    backgroundColor: 'transparent',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                  }}
+                >
                   <div
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
                       alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: '1em',
+                      flex: '1',
+                      justifyContent: 'space-between',
+                      marginRight: '1em',
                     }}
                   >
-                    <Grid
-                      container
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                      sx={{
-                        margin: '0.25em',
-                        padding: '0.5em',
-                        textDecoration: 'none',
-                        backgroundColor: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          flexWrap: 'wrap',
-                          gap: '1em',
-                          flex: '1',
-                          justifyContent: 'space-between',
-                          marginRight: '1em',
-                          
-
-                        }}
-                      >
-                    
-
-
-                        <Grid item>From: {notif.author} To: {notif.recipient}  <Grid item sx={{ width: '11em' }}>
-                          {setDate(notif.createdOn)}
-                        </Grid></Grid>
-
-                       
-                        <Grid item>{notif.message}</Grid>
-                      </div>
-
-
-                      <Grid
-                        item
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          flexWrap: 'wrap',
-                          gap: '0.25em',
-                        }}
-                      >
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
-                          onClick={() => {
-                            window.location.href = `/extensions/${notif.extensionId}`;
-                          }}
-                        >
-                          View
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
-                          onClick={()=> {
-
-                            if(notif.author === userProfile.username || (userProfile.role == 'admin' && notif.author === 'Admins')){
-                          notif.statusAuthor === 'unseen' ? setNotificationStatus(notif.id, 'seen', 'author') : setNotificationStatus(notif.id, 'unseen', 'author')
-                            }else{
-                          notif.statusRecipient === 'unseen' ? setNotificationStatus(notif.id, 'seen', 'recipient') : setNotificationStatus(notif.id, 'unseen', 'recipient')
-
-                            }
-                          
-                          setNotifications(notifications.map(curr => {
-                            if(curr.id === notif.id){
-                              if(notif.author === userProfile.username || (userProfile.role == 'admin' && notif.author === 'Admins')){
-                              curr.statusAuthor = notif.statusAuthor === 'unseen' ? 'seen' : 'unseen'
-
-                              }else if (userProfile.role == 'admin' && notif.recipient === 'Admins'){
-                                curr.statusRecipient = notif.statusRecipient === 'unseen' ? 'seen' : 'unseen'
-                              } else{
-                              curr.statusRecipient = notif.statusRecipient === 'unseen' ? 'seen' : 'unseen'
-
-                              }
-                            }
-                            return curr;
-                          }))
-                           }}
-                        >
-                          Mark as {(userProfile?.username === notif.author || (userProfile?.role === 'admin' && notif.author === 'Admins') ? notif.statusAuthor : notif.statusRecipient)  === 'seen' ? 'New' : 'Seen'}
-                        </Button>
-                      
+                    <Grid item>
+                      From: {notif.author} To: {notif.recipient}{' '}
+                      <Grid item sx={{ width: '11em' }}>
+                        {setDate(notif.createdOn)}
                       </Grid>
                     </Grid>
 
-                    <span
-                      className="legendPending"
-                      style={{ backgroundColor: rowColor }}
-                    ></span>
+                    <Grid item>{notif.message}</Grid>
                   </div>
-                );
-              })}
 
+                  <Grid
+                    item
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      flexWrap: 'wrap',
+                      gap: '0.25em',
+                    }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
 
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
+                      onClick={() => {
+                        window.location.href = `/extensions/${notif.extensionId}`;
+                      }}
+                    >
+                      View
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        textDecoration: 'none',
+                        background: 'transparent',
 
-</Grid>
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '12px',
+                      }}
+                      onClick={() => {
+                        if (
+                          notif.author === userProfile.username ||
+                          (userProfile.role == 'admin' &&
+                            notif.author === 'Admins')
+                        ) {
+                          notif.statusAuthor === 'unseen'
+                            ? setNotificationStatus(notif.id, 'seen', 'author')
+                            : setNotificationStatus(
+                                notif.id,
+                                'unseen',
+                                'author'
+                              );
+                        } else {
+                          notif.statusRecipient === 'unseen'
+                            ? setNotificationStatus(
+                                notif.id,
+                                'seen',
+                                'recipient'
+                              )
+                            : setNotificationStatus(
+                                notif.id,
+                                'unseen',
+                                'recipient'
+                              );
+                        }
+
+                        setNotifications(
+                          notifications.map((curr) => {
+                            if (curr.id === notif.id) {
+                              if (
+                                notif.author === userProfile.username ||
+                                (userProfile.role == 'admin' &&
+                                  notif.author === 'Admins')
+                              ) {
+                                curr.statusAuthor =
+                                  notif.statusAuthor === 'unseen'
+                                    ? 'seen'
+                                    : 'unseen';
+                              } else if (
+                                userProfile.role == 'admin' &&
+                                notif.recipient === 'Admins'
+                              ) {
+                                curr.statusRecipient =
+                                  notif.statusRecipient === 'unseen'
+                                    ? 'seen'
+                                    : 'unseen';
+                              } else {
+                                curr.statusRecipient =
+                                  notif.statusRecipient === 'unseen'
+                                    ? 'seen'
+                                    : 'unseen';
+                              }
+                            }
+                            return curr;
+                          })
+                        );
+                      }}
+                    >
+                      Mark as{' '}
+                      {(userProfile?.username === notif.author ||
+                      (userProfile?.role === 'admin' &&
+                        notif.author === 'Admins')
+                        ? notif.statusAuthor
+                        : notif.statusRecipient) === 'seen'
+                        ? 'New'
+                        : 'Seen'}
+                    </Button>
+                  </Grid>
+                </Grid>
+
+                <span
+                  className="legendPending"
+                  style={{ backgroundColor: rowColor }}
+                ></span>
+              </div>
+            );
+          })}
+      </Grid>
     </>
-  )
+  );
 }
 
-export default Notifications
+export default Notifications;

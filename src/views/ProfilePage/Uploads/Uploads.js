@@ -61,6 +61,7 @@ const Uploads = ({ userUploads, isOwner }) => {
 
               return (
                 <div
+                  key={ext.id}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -74,13 +75,13 @@ const Uploads = ({ userUploads, isOwner }) => {
                     alignItems="center"
                     sx={{
                       margin: '0.25em',
-                        padding: '0.5em',
-                        textDecoration: 'none',
-                        backgroundColor: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
+                      padding: '0.5em',
+                      textDecoration: 'none',
+                      backgroundColor: 'transparent',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '16px',
                     }}
                   >
                     <div
@@ -127,12 +128,12 @@ const Uploads = ({ userUploads, isOwner }) => {
                         variant="contained"
                         color="primary"
                         sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+                          textDecoration: 'none',
+                          background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                          border: '1px solid rgba(255, 255, 255, 0.3)',
+                          borderRadius: '12px',
+                        }}
                         onClick={() => {
                           window.location.href = `/extensions/${ext.id}`;
                         }}
@@ -145,12 +146,12 @@ const Uploads = ({ userUploads, isOwner }) => {
                           variant="contained"
                           color="warning"
                           sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+                            textDecoration: 'none',
+                            background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            borderRadius: '12px',
+                          }}
                           onClick={() => {
                             navigate(`../extensions/edit/${ext.id}`);
                           }}
@@ -163,13 +164,17 @@ const Uploads = ({ userUploads, isOwner }) => {
                           placement="top"
                         >
                           <span>
-                            <Button variant="contained"  sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white !important',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }} disabled>
+                            <Button
+                              variant="contained"
+                              sx={{
+                                textDecoration: 'none',
+                                background: 'transparent',
+                                color: 'white !important',
+                                border: '1px solid rgba(255, 255, 255, 0.3)',
+                                borderRadius: '12px',
+                              }}
+                              disabled
+                            >
                               Edit
                             </Button>
                           </span>
@@ -180,12 +185,12 @@ const Uploads = ({ userUploads, isOwner }) => {
                         variant="contained"
                         color="error"
                         sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+                          textDecoration: 'none',
+                          background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                          border: '1px solid rgba(255, 255, 255, 0.3)',
+                          borderRadius: '12px',
+                        }}
                         onClick={() => {
                           deleteExtension(ext.id);
                           setUploaded((allExtensions) =>
@@ -297,12 +302,12 @@ const Uploads = ({ userUploads, isOwner }) => {
                           variant="contained"
                           color="primary"
                           sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
+                            textDecoration: 'none',
+                            background: 'transparent',
 
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            borderRadius: '12px',
+                          }}
                           onClick={() => {
                             window.location.href = `/extensions/${ext.id}`;
                           }}

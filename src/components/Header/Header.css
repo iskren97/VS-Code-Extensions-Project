@@ -24,18 +24,16 @@
   text-decoration: none;
 }
 
-
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
-  height: 80px;
+  height: 50px;
 }
 .lds-dual-ring:after {
   content: ' ';
   display: block;
   width: 2rem;
   height: 2rem;
-  margin: 0.5rem;
   border-radius: 50%;
   border: 0.75rem solid #fff;
   border-color: #fff transparent #fff transparent;
