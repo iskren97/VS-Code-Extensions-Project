@@ -94,6 +94,7 @@ const ResetPass = () => {
         <br />
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
           <input
+            autoComplete="off"
             type="email"
             placeholder="Email"
             required
@@ -125,6 +126,7 @@ const ResetPass = () => {
           </p>
         </div>
       </Container>
+
       {error ? (
         <AlertUser
           msg={errorMsg}

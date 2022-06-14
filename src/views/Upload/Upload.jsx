@@ -176,6 +176,8 @@ function Upload() {
         setMsgType('success');
         setTimeout(() => {
           navigate('/');
+          // eslint-disable-next-line no-restricted-globals
+          location.reload();
         }, 1500);
       }
     });
@@ -215,9 +217,10 @@ function Upload() {
 
           <br />
 
-          <form className="upload-form">
+          <form autoComplete="off" className="upload-form">
             <input
               type="text"
+              autoComplete="off"
               placeholder="Extension Name"
               required
               onChange={(e) =>
@@ -228,6 +231,7 @@ function Upload() {
 
             <input
               type="text"
+              autoComplete="off"
               placeholder="Repository Url"
               required
               onChange={(e) =>
@@ -277,7 +281,11 @@ function Upload() {
                 onChange={(e) =>
                   setUploadInfo({ ...uploadInfo, category: e.target.value })
                 }
-                sx={{ width: '100%', color: 'white !important', fontWeight: 'bold' }}
+                sx={{
+                  width: '100%',
+                  color: 'white !important',
+                  fontWeight: 'bold',
+                }}
               >
                 <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
                 <MenuItem value={'Linters'}>Linters</MenuItem>
@@ -308,7 +316,7 @@ function Upload() {
                   value.map((option, index) => (
                     <Chip
                       variant="outlined"
-                      sx={{color: 'white'}}
+                      sx={{ color: 'white' }}
                       label={option}
                       {...getTagProps({ index })}
                     />
@@ -325,6 +333,7 @@ function Upload() {
             </Button>
           </form>
         </Container>
+
         {error ? (
           <AlertUser
             msg={errorMsg}

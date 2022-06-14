@@ -77,6 +77,7 @@ const Login = () => {
             />
           </Tooltip>
         </NavLink>
+
         <div
           style={{
             textAlign: 'center',
@@ -110,10 +111,11 @@ const Login = () => {
         <br />
         <form
           onSubmit={handleSubmit(onSubmit)}
-          autocomplete="off"
+          autoComplete="off"
           className="register-form"
         >
           <input
+            autoComplete="off"
             type="email"
             placeholder="Email"
             required

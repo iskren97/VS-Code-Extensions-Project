@@ -8,6 +8,7 @@ const Search = ({ setSearch, searchType }) => {
     <div className="search-container">
       <div>
         <input
+          autoComplete="off"
           onChange={(e) => {
             e.preventDefault();
             setSearch(e.target.value.toLowerCase());
@@ -21,7 +22,11 @@ const Search = ({ setSearch, searchType }) => {
       </div>
 
       <div>
-        <SearchIcon fontSize={'large'} cursor={'pointer'} sx={{color:'white'}} />
+        <SearchIcon
+          fontSize={'large'}
+          cursor={'pointer'}
+          sx={{ color: 'white' }}
+        />
       </div>
     </div>
   );
