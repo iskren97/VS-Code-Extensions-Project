@@ -28,7 +28,11 @@ const Category = () => {
 
   useEffect(() => {
     getAllExtensions().then((resp) =>
-      setExtensions(resp.filter((o) => o.category === categoryName))
+      setExtensions(
+        resp
+          .filter((ext) => ext.status === 'approved')
+          .filter((o) => o.category === categoryName)
+      )
     );
   }, [categoryName]);
 
@@ -36,6 +40,7 @@ const Category = () => {
     getAllExtensions().then((resp) =>
       setPopular(
         resp
+          .filter((ext) => ext.status === 'approved')
           .map((ext) => ({ ...ext, popularity: ext.downloads?.length || 0 }))
           .sort((a, b) => b.popularity - a.popularity)
       )

@@ -28,6 +28,7 @@ const Main = () => {
       setNewAddons(
         resp
           .slice(-6)
+          .filter((ext) => ext.status === 'approved')
           .map((ext) => ({ ...ext, date: setDate(ext.createdOn) }))
           .sort((a, b) => setDate(b.createdOn) - setDate(a.createdOn))
       )
@@ -35,13 +36,18 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    getAllExtensions().then((resp) => setRecommended(resp.slice(4, 10)));
+    getAllExtensions().then((resp) =>
+      setRecommended(
+        resp.filter((ext) => ext.status === 'approved').slice(4, 10)
+      )
+    );
   }, []);
 
   useEffect(() => {
     getAllExtensions().then((resp) =>
       setPopular(
         resp
+          .filter((ext) => ext.status === 'approved')
           .map((ext) => ({ ...ext, popularity: ext.downloads?.length || 0 }))
           .sort((a, b) => b.popularity - a.popularity)
           .slice(0, 6)

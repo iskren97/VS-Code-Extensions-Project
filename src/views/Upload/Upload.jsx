@@ -176,8 +176,6 @@ function Upload() {
         setMsgType('success');
         setTimeout(() => {
           navigate('/');
-          // eslint-disable-next-line no-restricted-globals
-          location.reload();
         }, 1500);
       }
     });

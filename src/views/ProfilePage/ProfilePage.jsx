@@ -62,7 +62,13 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getAllExtensions().then((ext) =>
-      setUserUploads(ext.filter((ext) => ext.author === username))
+      setUserUploads(
+        ext
+          .filter((ext) => ext.author === username)
+          .sort((a, b) =>
+            a.status > b.status ? 1 : b.status > a.status ? -1 : 0
+          )
+      )
     );
   }, [username]);
 
@@ -94,45 +100,33 @@ const ProfilePage = () => {
     );
   }, [username]);
 
-
-
   const tabStyle = {
-   
-
-    '@media (max-width: 1024px)' : {
-      gap: '1em', 
+    '@media (max-width: 1024px)': {
+      gap: '1em',
       width: '40vw',
-      alignItems: 'flex-start'
-
+      alignItems: 'flex-start',
     },
-    '@media (max-width: 768px)' : {
-      gap: '1em', 
+    '@media (max-width: 768px)': {
+      gap: '1em',
       width: '40vw',
-      alignItems: 'flex-start'
-
+      alignItems: 'flex-start',
     },
-    '@media (max-width: 425px)' : {
-      gap: '1em', 
+    '@media (max-width: 425px)': {
+      gap: '1em',
       width: 'auto',
-      alignItems: 'flex-start'
-
+      alignItems: 'flex-start',
     },
 
-    '@media (min-width: 1280px)' : {
-      gap: '1em', 
+    '@media (min-width: 1280px)': {
+      gap: '1em',
       width: '50vw',
-      alignItems: 'flex-start'
-
+      alignItems: 'flex-start',
     },
-
-
-  }
-
+  };
 
   return (
     <div className="glass-container">
-    
-    <Header />
+      <Header />
 
       <div>
         <Grid
@@ -140,21 +134,27 @@ const ProfilePage = () => {
           direction="column"
           sx={{
             height: 'auto',
-          background: 'rgba(255, 255, 255, 0.35)',
-          flexWrap: 'nowrap',
-          paddingBottom: '50px',
-          boxShadow: '0 1px 6px rgba(0,0,0,0.25)',
-          borderRadius: '20px',
-          marginBottom: '50px',
-          marginLeft: '1em',
-          marginRight: '1em',
-          width: 'auto',
-          color: 'black'
+            background: 'rgba(255, 255, 255, 0.35)',
+            flexWrap: 'nowrap',
+            paddingBottom: '50px',
+            boxShadow: '0 1px 6px rgba(0,0,0,0.25)',
+            borderRadius: '20px',
+            marginBottom: '50px',
+            marginLeft: '1em',
+            marginRight: '1em',
+            width: 'auto',
+            color: 'black',
           }}
         >
           <h1 style={{ marginLeft: '2em', color: 'white' }}>{username}</h1>
 
-          <Divider sx={{ marginLeft: '2em', marginRight: '2em', background: 'hsla(210,18%,87%,1)'}} />
+          <Divider
+            sx={{
+              marginLeft: '2em',
+              marginRight: '2em',
+              background: 'hsla(210,18%,87%,1)',
+            }}
+          />
 
           <Grid
             container
@@ -194,13 +194,13 @@ const ProfilePage = () => {
                   onClick={() => setActiveView('Info')}
                   variant="contained"
                   sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                    textDecoration: 'none',
+                    background: 'transparent',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                  }}
                 >
                   Info
                 </Button>
@@ -210,13 +210,13 @@ const ProfilePage = () => {
                     onClick={() => setActiveView('Notifications')}
                     variant="contained"
                     sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                      textDecoration: 'none',
+                      background: 'transparent',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '16px',
+                    }}
                   >
                     Notifications
                   </Button>
@@ -226,13 +226,13 @@ const ProfilePage = () => {
                   onClick={() => setActiveView('Uploads')}
                   variant="contained"
                   sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                    textDecoration: 'none',
+                    background: 'transparent',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                  }}
                 >
                   Uploads
                 </Button>
@@ -241,13 +241,13 @@ const ProfilePage = () => {
                   onClick={() => setActiveView('Downloads')}
                   variant="contained"
                   sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                    textDecoration: 'none',
+                    background: 'transparent',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    borderRadius: '16px',
+                  }}
                 >
                   Downloads
                 </Button>
@@ -256,13 +256,13 @@ const ProfilePage = () => {
                     onClick={() => setActiveView('AdminPanel')}
                     variant="contained"
                     sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                      textDecoration: 'none',
+                      background: 'transparent',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '16px',
+                    }}
                   >
                     Admin Panel
                   </Button>
@@ -270,16 +270,27 @@ const ProfilePage = () => {
               </Grid>
             </Grid>
 
-            <Divider orientation={window.matchMedia('(max-device-width: 768px)').matches ? "horizontal" : 'vertical'} flexItem sx={{background: 'hsla(210,18%,87%,1)'}} />
+            <Divider
+              orientation={
+                window.matchMedia('(max-device-width: 768px)').matches
+                  ? 'horizontal'
+                  : 'vertical'
+              }
+              flexItem
+              sx={{ background: 'hsla(210,18%,87%,1)' }}
+            />
 
-            <Grid
-              container
-              direction="column"
-              sx={tabStyle}
-            >
-              <h1 style={{color: 'white'}}>{activeView}</h1>
+            <Grid container direction="column" sx={tabStyle}>
+              <h1 style={{ color: 'white' }}>{activeView}</h1>
 
-              <Divider flexItem  sx={{width: 'auto', marginBottom: '1em', background: 'hsla(210,18%,87%,1)'}}/>
+              <Divider
+                flexItem
+                sx={{
+                  width: 'auto',
+                  marginBottom: '1em',
+                  background: 'hsla(210,18%,87%,1)',
+                }}
+              />
 
               <Grid container direction="row" spacing={2} className="item-grid">
                 {activeView === 'Uploads' ? (
@@ -304,8 +315,7 @@ const ProfilePage = () => {
           </Grid>
         </Grid>
       </div>
-      </div>
-    
+    </div>
   );
 };
 
