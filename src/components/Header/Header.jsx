@@ -23,6 +23,7 @@ import { logoutUser } from '../../services/auth.service';
 
 import avatar from '../../assets/avatar.jpg';
 import vscodelogo from '../../assets/vscodelogo.png';
+import { headerContainer, headerButton} from '../../styles/styles.js'
 
 const Header = () => {
   const { user, userData, setContext } = useContext(AppContext);
@@ -62,15 +63,7 @@ const Header = () => {
         <Grid item>
           <NavLink style={{ all: 'unset', cursor: 'pointer' }} to="/home">
             <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                contentAlign: 'center',
-                marginTop: '1em',
-                marginBottom: '1em',
-              }}
+              style={headerContainer}
             >
               <div>
                 <img
@@ -156,13 +149,7 @@ const Header = () => {
                     <Button
                       variant="contained"
                       startIcon={<CloudUploadIcon />}
-                      sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }}
+                      sx={headerButton}
                     >
                       Upload
                     </Button>
@@ -176,13 +163,7 @@ const Header = () => {
                     <Button
                       variant="contained"
                       startIcon={<CloudUploadIcon />}
-                      sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-                        color: 'white !important',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                      }} disabled
+                      sx={headerButton} disabled
                     >
                       Upload
                     </Button>
@@ -281,13 +262,7 @@ const Header = () => {
                 <Button
                   variant="contained"
                   startIcon={<VpnKeyIcon />}
-                  sx={{
-                    textDecoration: 'none',
-                    background: 'transparent',
-
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                  }}
+                  sx={headerButton}
                 >
                   {' '}
                   Sign Up{' '}
@@ -298,13 +273,8 @@ const Header = () => {
                 <Button
                   variant="contained"
                   startIcon={<LoginIcon />}
-                  sx={{
-                    textDecoration: 'none',
-                    background: 'transparent',
+                  sx={headerButton}
 
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                  }}
                 >
                   {' '}
                   Sign In{' '}

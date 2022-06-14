@@ -25,6 +25,8 @@ import Downloads from './Downloads/Downloads';
 import Uploads from './Uploads/Uploads';
 import Notifications from './Notifications/Notifications';
 
+import { tabStyle, profileButton } from '../../styles/styles.js';
+
 const ProfilePage = () => {
   const [activeView, setActiveView] = useState('Info');
   const [userProfile, setUserProfile] = useState('');
@@ -100,29 +102,6 @@ const ProfilePage = () => {
     );
   }, [username]);
 
-  const tabStyle = {
-    '@media (max-width: 1024px)': {
-      gap: '1em',
-      width: '40vw',
-      alignItems: 'flex-start',
-    },
-    '@media (max-width: 768px)': {
-      gap: '1em',
-      width: '40vw',
-      alignItems: 'flex-start',
-    },
-    '@media (max-width: 425px)': {
-      gap: '1em',
-      width: 'auto',
-      alignItems: 'flex-start',
-    },
-
-    '@media (min-width: 1280px)': {
-      gap: '1em',
-      width: '50vw',
-      alignItems: 'flex-start',
-    },
-  };
 
   return (
     <div className="glass-container">
@@ -193,14 +172,7 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Info')}
                   variant="contained"
-                  sx={{
-                    textDecoration: 'none',
-                    background: 'transparent',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                  }}
+                  sx={profileButton}
                 >
                   Info
                 </Button>
@@ -209,14 +181,7 @@ const ProfilePage = () => {
                   <Button
                     onClick={() => setActiveView('Notifications')}
                     variant="contained"
-                    sx={{
-                      textDecoration: 'none',
-                      background: 'transparent',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      border: '1px solid rgba(255, 255, 255, 0.3)',
-                      borderRadius: '16px',
-                    }}
+                    sx={profileButton}
                   >
                     Notifications
                   </Button>
@@ -225,14 +190,7 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Uploads')}
                   variant="contained"
-                  sx={{
-                    textDecoration: 'none',
-                    background: 'transparent',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                  }}
+                  sx={profileButton}
                 >
                   Uploads
                 </Button>
@@ -240,14 +198,7 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Downloads')}
                   variant="contained"
-                  sx={{
-                    textDecoration: 'none',
-                    background: 'transparent',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                  }}
+                  sx={profileButton}
                 >
                   Downloads
                 </Button>
@@ -255,14 +206,7 @@ const ProfilePage = () => {
                   <Button
                     onClick={() => setActiveView('AdminPanel')}
                     variant="contained"
-                    sx={{
-                      textDecoration: 'none',
-                      background: 'transparent',
-                      color: 'white',
-                      fontWeight: 'bold',
-                      border: '1px solid rgba(255, 255, 255, 0.3)',
-                      borderRadius: '16px',
-                    }}
+                    sx={profileButton}
                   >
                     Admin Panel
                   </Button>

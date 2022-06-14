@@ -6,6 +6,8 @@ import { updateUserRole } from '../../../../services/users.service';
 
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
+import { profileButton } from '../../../../styles/styles.js';
+
 const DisplayUser = ({
   username,
   email,
@@ -103,13 +105,7 @@ const DisplayUser = ({
           <Button
             variant="contained"
             color="primary"
-            sx={{
-              textDecoration: 'none',
-              background: 'transparent',
-
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '12px',
-            }}
+            sx={profileButton}
             onClick={() => navigate(`/profile/${username}`)}
           >
             View
@@ -121,13 +117,7 @@ const DisplayUser = ({
                 variant="contained"
                 color="error"
                 disabled={role === 'blocked'}
-                sx={{
-                  textDecoration: 'none',
-                  background: 'transparent',
-
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
-                  borderRadius: '12px',
-                }}
+                sx={profileButton}
                 onClick={() => {
                   handleBlockUser();
                   const blocked = allUsers.find((user) => user.uid === uid);
@@ -153,13 +143,7 @@ const DisplayUser = ({
             <Button
               variant="contained"
               color="success"
-              sx={{
-                textDecoration: 'none',
-                background: 'transparent',
-
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '12px',
-              }}
+              sx={profileButton}
               onClick={() => {
                 handleBlockUser();
                 const blocked = allUsers.find((user) => user.uid === uid);

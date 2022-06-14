@@ -35,7 +35,7 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
                   type="button"
                   onClick={() => requestSort('author')}
                   className={getClassNamesFor('author')}
-                  style={{ backgroundColor: 'black' }}
+                  style={{ backgroundColor: 'black', marginRight: '0.5em' }}
                 >
                   Author
                 </button>
@@ -48,7 +48,7 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
                   type="button"
                   onClick={() => requestSort('category')}
                   className={getClassNamesFor('category')}
-                  style={{ backgroundColor: 'black' }}
+                  style={{ backgroundColor: 'black', marginRight: '0.5em' }}
                 >
                   Category
                 </button>
@@ -61,7 +61,7 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
                   type="button"
                   onClick={() => requestSort('createdOn')}
                   className={getClassNamesFor('createdOn')}
-                  style={{ backgroundColor: 'black' }}
+                  style={{ backgroundColor: 'black', marginRight: '0.5em' }}
                 >
                   Date
                 </button>

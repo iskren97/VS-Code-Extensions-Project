@@ -39,11 +39,6 @@ const AdminPanel = () => {
       year: 'numeric',
       month: 'numeric',
       day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: true,
-      timeZone: 'UTC',
     };
 
     return newDate.toLocaleString('en-US', options);

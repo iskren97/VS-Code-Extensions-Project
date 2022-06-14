@@ -180,14 +180,13 @@ function EditExtension() {
     <>
       <div className="upload-parent">
         <Container className="upload-container" maxWidth="sm">
-          <NavLink to="/home" style={{ all: 'unset', cursor: 'pointer' }}>
-            <Tooltip placement="right-end" title="Back to Home">
+            <Tooltip placement="right-end" title="Go back">
               <ArrowBackIcon
                 fontSize={'medium'}
-                style={{ position: 'absolute', top: '5px', left: '5px' }}
+                style={{ position: 'absolute', top: '5px', left: '5px', cursor: 'pointer' }}
+                onClick={() => navigate(-1)}
               />
             </Tooltip>
-          </NavLink>
 
           <div
             style={{

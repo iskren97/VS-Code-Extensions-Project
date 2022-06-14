@@ -5,6 +5,7 @@ import AppContext from '../../../../../providers/AppContext';
 
 import { createNotification } from '../../../../../services/notifications.service';
 
+import { profileButton } from '../../../../../styles/styles.js';
 const DisplayExt = ({
   ext,
   setDate,
@@ -77,13 +78,7 @@ const DisplayExt = ({
                   <Button
                     variant="contained"
                     color="primary"
-                    sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                    sx={profileButton}
                     onClick={() => {
                       window.location.href = `/extensions/${ext.id}`;
                     }}
@@ -96,13 +91,7 @@ const DisplayExt = ({
                   <Button
                     variant="contained"
                     color="success"
-                    sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                    sx={profileButton}
                     disabled={ext.status === 'approved'}
                     onClick={() => {
                       setExtensionStatus(ext.id, 'approved');
@@ -132,13 +121,7 @@ const DisplayExt = ({
                     variant="contained"
                     color="warning"
                     disabled={ext.status === 'rejected'}
-                    sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                    sx={profileButton}
                     onClick={() => {
                       setExtensionStatus(ext.id, 'rejected');
                       createNotification(
@@ -167,13 +150,7 @@ const DisplayExt = ({
                   <Button
                     variant="contained"
                     color="error"
-                    sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                    sx={profileButton}
                     onClick={() => {
                       deleteExtension(ext.id);
                       setAllExtensions((allExtensions) =>
@@ -194,7 +171,7 @@ const DisplayExt = ({
         <div>
           <span
             className="legendPending"
-            style={{ backgroundColor: rowColor }}
+            style={{ backgroundColor: rowColor, marginLeft: '8px' }}
           ></span>
         </div>
       </div>

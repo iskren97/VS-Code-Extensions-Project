@@ -24,6 +24,8 @@ import {
   getExtensionDownloads,
 } from '../../services/extensions.service.js';
 
+import { singleExtensionButton, commitRow, mainWidth, infoColumn } from '../../styles/styles.js'
+
 import Img from './Img';
 
 function SingleExtension() {
@@ -185,48 +187,6 @@ function SingleExtension() {
 
 
 
-  const commitRow = {
-    '@media (max-width: 480px)' : {
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      gap: '1em',
-      margin: '0px',
-
-    }
-  }
-
-  const mainWidth = {
-    '@media (max-width: 2048px)' :{
-      gap: '1em',
-      width: '63%',
-      alignItems: 'flex-start' 
-    },
-
-  
-    '@media (max-width: 1024px)' :{
-      width: '50%',
-    },
-
-    '@media (max-width:768px)' : {
-      width: '100%',
-    },
-
-  }
-
-  const infoColumn = {
-    '@media (max-width: 2048px)' :{
-      gap: '1em', 
-      width: 'auto', 
-      maxWidth: '18em'
-    },
-
-
-    '@media (max-width:768px)' : {
-      width: '100%',
-      maxWidth: 'none',
-    },
-
-  }
 
 
 
@@ -333,14 +293,7 @@ function SingleExtension() {
                   window.open(extensionInfo.repoUrl, '_blank');
                 }}
                 variant="contained"
-                sx={{ textDecoration: 'none',
-                    background: 'transparent',
-
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                    color: 'black'
-                    
-                    }}
+                sx={singleExtensionButton}
                 startIcon={<GitHubIcon />}
               >
                 Repository
@@ -352,12 +305,7 @@ function SingleExtension() {
                   window.location.href = extensionInfo.downloadLink;
                 }}
                 variant="contained"
-                sx={{ textDecoration: 'none',
-                    background: 'transparent',
-
-                    border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                    color: 'black'}}
+                sx={singleExtensionButton}
                 startIcon={<DownloadIcon />}
               >
                 Download

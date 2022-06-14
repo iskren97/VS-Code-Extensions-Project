@@ -97,6 +97,9 @@
   border: none;
 }
 
+
+
+
 .upload-form h2 {
   margin-bottom: 0.25em;
   font-size: 1.25em;
@@ -109,4 +112,9 @@
 
 .upload-form input{
   color: white !important;
+}
+
+.upload-form fieldset{
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 16px;
 }

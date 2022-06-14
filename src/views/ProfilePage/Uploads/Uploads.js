@@ -9,6 +9,8 @@ import { deleteExtension } from '../../../services/extensions.service';
 import Legend from '../StatusLegend/Legend';
 import AppContext from '../../../providers/AppContext';
 
+import { profileUploadsButton } from '../../../styles/styles.js'
+
 const Uploads = ({ userUploads, isOwner }) => {
   const [uploaded, setUploaded] = useState(userUploads);
   const navigate = useNavigate();
@@ -127,13 +129,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                       <Button
                         variant="contained"
                         color="primary"
-                        sx={{
-                          textDecoration: 'none',
-                          background: 'transparent',
-
-                          border: '1px solid rgba(255, 255, 255, 0.3)',
-                          borderRadius: '12px',
-                        }}
+                        sx={profileUploadsButton}
                         onClick={() => {
                           window.location.href = `/extensions/${ext.id}`;
                         }}
@@ -145,13 +141,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                         <Button
                           variant="contained"
                           color="warning"
-                          sx={{
-                            textDecoration: 'none',
-                            background: 'transparent',
-
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
-                            borderRadius: '12px',
-                          }}
+                          sx={profileUploadsButton}
                           onClick={() => {
                             navigate(`../extensions/edit/${ext.id}`);
                           }}
@@ -166,13 +156,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                           <span>
                             <Button
                               variant="contained"
-                              sx={{
-                                textDecoration: 'none',
-                                background: 'transparent',
-                                color: 'white !important',
-                                border: '1px solid rgba(255, 255, 255, 0.3)',
-                                borderRadius: '12px',
-                              }}
+                              sx={profileUploadsButton}
                               disabled
                             >
                               Edit
@@ -184,13 +168,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                       <Button
                         variant="contained"
                         color="error"
-                        sx={{
-                          textDecoration: 'none',
-                          background: 'transparent',
-
-                          border: '1px solid rgba(255, 255, 255, 0.3)',
-                          borderRadius: '12px',
-                        }}
+                        sx={profileUploadsButton}
                         onClick={() => {
                           deleteExtension(ext.id);
                           setUploaded((allExtensions) =>
@@ -301,13 +279,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                         <Button
                           variant="contained"
                           color="primary"
-                          sx={{
-                            textDecoration: 'none',
-                            background: 'transparent',
-
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
-                            borderRadius: '12px',
-                          }}
+                          sx={profileUploadsButton}
                           onClick={() => {
                             window.location.href = `/extensions/${ext.id}`;
                           }}

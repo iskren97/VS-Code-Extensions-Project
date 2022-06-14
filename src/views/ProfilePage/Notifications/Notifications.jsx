@@ -10,6 +10,8 @@ import { Grid } from '@mui/material';
 
 import Button from '@mui/material/Button';
 
+import { notificationLegendContainer, profileButton  } from '../../../styles/styles.js';
+
 function Notifications({ userProfile }) {
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
@@ -54,13 +56,7 @@ function Notifications({ userProfile }) {
           }}
         >
           <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '0.25em',
-              color: 'white',
-            }}
+            style={notificationLegendContainer}
           >
             <span
               style={{
@@ -69,20 +65,13 @@ function Notifications({ userProfile }) {
                 display: 'inline-block',
                 height: '25px',
                 width: '25px',
-                color: '',
               }}
             ></span>
             New
           </div>
 
           <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '0.25em',
-              color: 'white',
-            }}
+            style={notificationLegendContainer}
           >
             <span
               style={{
@@ -194,13 +183,7 @@ function Notifications({ userProfile }) {
                     <Button
                       variant="contained"
                       color="primary"
-                      sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                      sx={profileButton}
                       onClick={() => {
                         window.location.href = `/extensions/${notif.extensionId}`;
                       }}
@@ -210,13 +193,7 @@ function Notifications({ userProfile }) {
                     <Button
                       variant="contained"
                       color="primary"
-                      sx={{
-                        textDecoration: 'none',
-                        background: 'transparent',
-
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '12px',
-                      }}
+                      sx={profileButton}
                       onClick={() => {
                         if (
                           notif.author === userProfile.username ||
