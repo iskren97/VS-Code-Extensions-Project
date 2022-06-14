@@ -12,6 +12,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { loginUser } from '../../services/auth.service';
 import { getUserData } from '../../services/users.service';
 import AlertUser from '../Register/AlertUser';
+import { loginDividerStyle } from '../../styles/styles';
 
 const Login = () => {
   const { setContext } = useContext(AppContext);
@@ -95,20 +96,10 @@ const Login = () => {
 
         <br />
 
-        <Divider
-          sx={{
-            background: 'rgba(255, 255, 255, 0.2)',
-
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            borderRadius: '16px',
-
-            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-            backdropFilter: 'blur(5px)',
-            webkitBackdropFilter: 'blur(5px)',
-          }}
-        />
+        <Divider sx={loginDividerStyle} />
 
         <br />
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"

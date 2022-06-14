@@ -11,6 +11,15 @@ export const dividerStyle = {
   border: '1px solid rgba(255, 255, 255, 0.3)',
 };
 
+export const loginDividerStyle = {
+  background: 'rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(255, 255, 255, 0.3)',
+  borderRadius: '16px',
+  boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+  backdropFilter: 'blur(5px)',
+  webkitBackdropFilter: 'blur(5px)',
+};
+
 export const headerContainer = {
   display: 'flex',
   flexDirection: 'row',
@@ -19,7 +28,7 @@ export const headerContainer = {
   contentAlign: 'center',
   marginTop: '1em',
   marginBottom: '1em',
-}
+};
 
 export const headerButton = {
   textDecoration: 'none',
@@ -28,60 +37,54 @@ export const headerButton = {
   border: '1px solid rgba(255, 255, 255, 0.3)',
   borderRadius: '16px',
   marginRight: '0.5em',
-}
+};
 
-export const singleExtensionButton = { textDecoration: 'none',
-background: 'transparent',
+export const singleExtensionButton = {
+  textDecoration: 'none',
+  background: 'transparent',
 
-border: '1px solid rgba(255, 255, 255, 0.3)',
-borderRadius: '16px',
-color: 'black'
-
-}
-
+  border: '1px solid rgba(255, 255, 255, 0.3)',
+  borderRadius: '16px',
+  color: 'black',
+};
 
 export const commitRow = {
-  '@media (max-width: 480px)' : {
+  '@media (max-width: 480px)': {
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: '1em',
     margin: '0px',
-
-  }
-}
+  },
+};
 
 export const mainWidth = {
-  '@media (max-width: 2048px)' :{
+  '@media (max-width: 2048px)': {
     gap: '1em',
     width: '63%',
-    alignItems: 'flex-start' 
+    alignItems: 'flex-start',
   },
 
-
-  '@media (max-width: 1024px)' :{
+  '@media (max-width: 1024px)': {
     width: '50%',
   },
 
-  '@media (max-width:768px)' : {
+  '@media (max-width:768px)': {
     width: '100%',
   },
-
-}
+};
 
 export const infoColumn = {
-  '@media (max-width: 2048px)' :{
-    gap: '1em', 
-    width: 'auto', 
-    maxWidth: '18em'
+  '@media (max-width: 2048px)': {
+    gap: '1em',
+    width: 'auto',
+    maxWidth: '18em',
   },
 
-
-  '@media (max-width:768px)' : {
+  '@media (max-width:768px)': {
     width: '100%',
     maxWidth: 'none',
   },
-
-}
+};
 
 export const tabStyle = {
   '@media (max-width: 1024px)': {
@@ -107,7 +110,6 @@ export const tabStyle = {
   },
 };
 
-
 export const profileButton = {
   textDecoration: 'none',
   background: 'transparent',
@@ -115,8 +117,7 @@ export const profileButton = {
   fontWeight: 'bold',
   border: '1px solid rgba(255, 255, 255, 0.3)',
   borderRadius: '16px',
-}
-
+};
 
 export const profileUploadsButton = {
   textDecoration: 'none',
@@ -124,8 +125,7 @@ export const profileUploadsButton = {
   color: 'white !important',
   border: '1px solid rgba(255, 255, 255, 0.3)',
   borderRadius: '12px',
-}
-
+};
 
 export const notificationLegendContainer = {
   display: 'flex',
@@ -133,4 +133,4 @@ export const notificationLegendContainer = {
   alignItems: 'center',
   gap: '0.25em',
   color: 'white',
-}
+};

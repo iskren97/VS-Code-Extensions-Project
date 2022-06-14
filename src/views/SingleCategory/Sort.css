@@ -29,6 +29,8 @@ thead button {
   cursor: pointer;
 
   transition: background-color 0.25s;
+
+  margin-right: 0.5em;
 }
 
 thead button:hover {

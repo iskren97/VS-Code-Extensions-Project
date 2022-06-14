@@ -6,13 +6,15 @@ const Info = ({ userProfile }) => {
   const { userData } = useContext(AppContext);
 
   return (
-    <div className="user-info" style={{color: 'white'}}>
+    <div className="user-info" style={{ color: 'white' }}>
       <h3>
         Username: <span>{userProfile?.username}</span>{' '}
       </h3>
+
       <h3>
         Email: <span>{userProfile?.email}</span>{' '}
       </h3>
+
       {userData?.username === userProfile?.username ||
       userData?.role === 'admin' ? (
         <h3>
@@ -23,6 +25,7 @@ const Info = ({ userProfile }) => {
       <h3>
         Role: <span>{userProfile?.role}</span>{' '}
       </h3>
+
       <h3>
         Total uploads: <span> {userProfile?.extensions?.length || 0}</span>
       </h3>

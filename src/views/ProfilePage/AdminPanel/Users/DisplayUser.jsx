@@ -43,8 +43,8 @@ const DisplayUser = ({
         justify="space-around"
         className="users-container"
         sx={{
-          margin: '0.25em',
-          padding: '0.5em',
+          margin: '0.5em',
+          padding: '0.25em',
           textDecoration: 'none',
           backgroundColor: 'transparent',
           color: 'white',
@@ -57,8 +57,8 @@ const DisplayUser = ({
           <img
             src={avatar}
             alt="userPic"
-            width="35rem"
-            height="35rem"
+            width="40rem"
+            height="40rem"
             style={{
               objectFit: 'cover',
               marginRight: '55px',
@@ -67,8 +67,8 @@ const DisplayUser = ({
           />
         </Grid>
 
-        <Grid item xs>
-          <Grid container direction="row" spacing={1}>
+        <Grid item>
+          <Grid container direction="column" spacing={1}>
             <Grid item>Username:</Grid>
             <Grid item>
               <span>{username}</span>
@@ -77,7 +77,7 @@ const DisplayUser = ({
         </Grid>
 
         <Grid item xs>
-          <Grid container direction="row" spacing={1}>
+          <Grid container direction="column" spacing={1}>
             <Grid item>Phone:</Grid>
             <Grid item>
               <span>{phoneNumber}</span>
@@ -86,7 +86,7 @@ const DisplayUser = ({
         </Grid>
 
         <Grid item xs>
-          <Grid container direction="row" spacing={1}>
+          <Grid container direction="column" spacing={1}>
             <Grid item>Email:</Grid>
             <Grid item>
               <span>{email}</span>
@@ -96,16 +96,18 @@ const DisplayUser = ({
 
         <Grid
           item
+          xs
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            gap: '1.55em',
+            gap: '1em',
           }}
         >
           <Button
             variant="contained"
             color="primary"
             sx={profileButton}
+            style={{ marginLeft: '1em' }}
             onClick={() => navigate(`/profile/${username}`)}
           >
             View

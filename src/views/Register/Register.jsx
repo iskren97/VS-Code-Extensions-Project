@@ -24,6 +24,7 @@ import {
 } from '../../services/users.service';
 
 import AlertUser from './AlertUser';
+import { loginDividerStyle } from '../../styles/styles';
 
 const Register = () => {
   const { setContext } = useContext(AppContext);
@@ -129,13 +130,7 @@ const Register = () => {
 
         <br />
 
-        <Divider
-          sx={{
-            background: 'rgba(255, 255, 255, 0.2)',
-
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-          }}
-        />
+        <Divider sx={loginDividerStyle} />
 
         <br />
 

@@ -102,7 +102,6 @@ const ProfilePage = () => {
     );
   }, [username]);
 
-
   return (
     <div className="glass-container">
       <Header />
@@ -118,9 +117,8 @@ const ProfilePage = () => {
             paddingBottom: '50px',
             boxShadow: '0 1px 6px rgba(0,0,0,0.25)',
             borderRadius: '20px',
+            marginTop: '50px',
             marginBottom: '50px',
-            marginLeft: '1em',
-            marginRight: '1em',
             width: 'auto',
             color: 'black',
           }}

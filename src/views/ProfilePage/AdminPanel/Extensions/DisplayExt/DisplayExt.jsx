@@ -33,15 +33,15 @@ const DisplayExt = ({
             alignItems="center"
             justify="space-around"
             sx={{
-                      margin: '0.25em',
-                        padding: '0.5em',
-                        textDecoration: 'none',
-                        backgroundColor: 'transparent',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        borderRadius: '16px',
-                    }}
+              margin: '0.25em',
+              padding: '0.5em',
+              textDecoration: 'none',
+              backgroundColor: 'transparent',
+              color: 'white',
+              fontWeight: 'bold',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '16px',
+            }}
           >
             <Grid item>
               <img
@@ -49,7 +49,7 @@ const DisplayExt = ({
                 alt="extension"
                 width="35rem"
                 height="35rem"
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'contain' }}
               />
             </Grid>
 

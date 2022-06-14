@@ -9,7 +9,7 @@ import { deleteExtension } from '../../../services/extensions.service';
 import Legend from '../StatusLegend/Legend';
 import AppContext from '../../../providers/AppContext';
 
-import { profileUploadsButton } from '../../../styles/styles.js'
+import { profileUploadsButton } from '../../../styles/styles.js';
 
 const Uploads = ({ userUploads, isOwner }) => {
   const [uploaded, setUploaded] = useState(userUploads);
@@ -22,11 +22,6 @@ const Uploads = ({ userUploads, isOwner }) => {
       year: 'numeric',
       month: 'numeric',
       day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: true,
-      timeZone: 'UTC',
     };
     return newDate.toLocaleString('en-US', options);
   };
@@ -39,7 +34,7 @@ const Uploads = ({ userUploads, isOwner }) => {
         justifyContent="center"
         alignItems="stretch"
         wrap="nowrap"
-        sx={{ width: '100%' }}
+        sx={{ width: '100%', marginLeft: '15px' }}
       >
         <Legend />
 
@@ -108,8 +103,6 @@ const Uploads = ({ userUploads, isOwner }) => {
                       </Grid>
 
                       <Grid item>{ext.title}</Grid>
-
-                      <Grid item>{ext.author}</Grid>
 
                       <Grid item sx={{ width: '11em' }}>
                         {setDate(ext.createdOn)}
@@ -189,6 +182,7 @@ const Uploads = ({ userUploads, isOwner }) => {
                       backgroundColor: rowColor,
                       minWidth: '24px',
                       minHeight: '24px',
+                      marginLeft: '8px',
                     }}
                   ></span>
                 </div>
@@ -291,7 +285,10 @@ const Uploads = ({ userUploads, isOwner }) => {
 
                     <span
                       className="legendPending"
-                      style={{ backgroundColor: rowColor }}
+                      style={{
+                        backgroundColor: rowColor,
+                        marginLeft: '8px !important',
+                      }}
                     ></span>
                   </div>
                 );

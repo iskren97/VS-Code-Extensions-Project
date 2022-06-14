@@ -126,6 +126,7 @@ const AdminPanel = () => {
           {extensionsView ? (
             <Grid item xs={12}>
               <Legend />
+
               <Extensions
                 extensions={allExtensions}
                 setAllExtensions={setAllExtensions}

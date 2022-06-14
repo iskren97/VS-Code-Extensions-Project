@@ -20,7 +20,7 @@ thead button {
   font-size: inherit;
 
   padding: 0.5em;
-  margin-bottom: 5px;
+  margin-bottom: 15px !important;
 
   color: white;
 
@@ -37,8 +37,4 @@ thead button.descending::after {
   content: '⬇';
   display: inline-block;
   margin-left: 1em;
-}
-
-tbody td {
-  padding: 0.5em;
 }

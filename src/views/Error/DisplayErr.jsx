@@ -12,7 +12,6 @@ const DisplayErr = ({ img, title }) => {
         height: 'auto',
         paddingBottom: '16px',
         paddingTop: '16px',
-
         border: '1px solid rgba(255, 255, 255, 0.3)',
         borderRadius: '16px',
         background: 'rgba(255, 255, 255, 0.2)',

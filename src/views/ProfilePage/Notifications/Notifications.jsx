@@ -10,7 +10,10 @@ import { Grid } from '@mui/material';
 
 import Button from '@mui/material/Button';
 
-import { notificationLegendContainer, profileButton  } from '../../../styles/styles.js';
+import {
+  notificationLegendContainer,
+  profileButton,
+} from '../../../styles/styles.js';
 
 function Notifications({ userProfile }) {
   const [notifications, setNotifications] = useState([]);
@@ -41,7 +44,7 @@ function Notifications({ userProfile }) {
         justifyContent="center"
         alignItems="stretch"
         wrap="nowrap"
-        sx={{ width: '100%' }}
+        sx={{ width: '100%', marginLeft: '15px' }}
       >
         <div
           style={{
@@ -55,9 +58,7 @@ function Notifications({ userProfile }) {
             marginBottom: '0.5em',
           }}
         >
-          <div
-            style={notificationLegendContainer}
-          >
+          <div style={notificationLegendContainer}>
             <span
               style={{
                 backgroundColor: 'rgb(0, 149, 255)',
@@ -70,9 +71,7 @@ function Notifications({ userProfile }) {
             New
           </div>
 
-          <div
-            style={notificationLegendContainer}
-          >
+          <div style={notificationLegendContainer}>
             <span
               style={{
                 backgroundColor: 'rgb(255, 102, 0)',
@@ -267,7 +266,7 @@ function Notifications({ userProfile }) {
 
                 <span
                   className="legendPending"
-                  style={{ backgroundColor: rowColor }}
+                  style={{ backgroundColor: rowColor, marginLeft: '8px' }}
                 ></span>
               </div>
             );
