@@ -28,17 +28,17 @@ const Main = () => {
     getAllExtensions().then((resp) =>
       setNewAddons(
         resp
-          .slice(-6)
           .filter((ext) => ext.status === 'approved')
           .map((ext) => ({ ...ext, date: setDate(ext.createdOn) }))
           .sort((a, b) => setDate(b.createdOn) - setDate(a.createdOn))
+          .slice(0, 6)
       )
     );
   }, []);
 
   useEffect(() => {
     getAllExtensions().then((resp) =>
-      setRecommended(resp.filter((ext) => ext.status === 'approved').slice(4, 10))
+      setRecommended(resp.filter((ext) => ext.status === 'approved').slice(2, 8))
     );
   }, []);
 
