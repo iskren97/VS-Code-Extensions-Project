@@ -22,14 +22,9 @@ const AlertUser = ({ msg, type, err, setErr }) => {
       sx={{ height: '20%' }}
       anchorOrigin={{
         vertical: 'top',
-        horizontal: 'center',
-      }}
-    >
-      <Alert
-        onClose={handleClose}
-        severity={type}
-        sx={{ width: '100%', fontSize: '18px' }}
-      >
+        horizontal: 'center'
+      }}>
+      <Alert onClose={handleClose} severity={type} sx={{ width: '100%', fontSize: '18px' }}>
         {msg}
       </Alert>
     </Snackbar>

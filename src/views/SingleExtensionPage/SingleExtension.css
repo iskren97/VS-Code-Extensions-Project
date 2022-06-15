@@ -1,9 +1,7 @@
-
-.infoContainer{
+.infoContainer {
   display: flex;
   flex-direction: column;
 }
-
 
 .glass-container-single {
   color: black;
@@ -14,8 +12,7 @@
   border-radius: 16px;
 }
 
-
-.git_field{
+.git_field {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -24,6 +21,6 @@
   border-radius: 16px;
 }
 
-.git_field:hover{
+.git_field:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }

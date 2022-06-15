@@ -3,19 +3,14 @@
   position: absolute;
   padding-bottom: 70px;
   padding-top: 70px;
-
   top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-
   color: white;
-
   background: rgba(255, 255, 255, 0.2);
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
-
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -34,17 +29,13 @@
   display: block;
   box-sizing: border-box;
   width: 100%;
-
   padding: 10px 15px;
   margin-top: 10px;
   font-size: 18px;
   font-weight: bold;
-
   background: rgba(255, 255, 255, 0.2);
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
-
   transition: background-color 0.25s;
   color: white;
 }
@@ -68,16 +59,12 @@ input[type='submit'] {
   cursor: pointer;
   text-transform: uppercase;
   color: white;
-
   margin-top: 40px;
   padding: 20px;
-
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 10px;
-
   background: rgba(255, 255, 255, 0.2);
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
 }

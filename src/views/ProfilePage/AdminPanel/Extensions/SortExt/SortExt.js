@@ -25,9 +25,9 @@ const useSortableData = (items, config = null) => {
     let direction = 'ascending';
 
     if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === 'ascending'
+      sortConfig
+      && sortConfig.key === key
+      && sortConfig.direction === 'ascending'
     ) {
       direction = 'descending';
     }

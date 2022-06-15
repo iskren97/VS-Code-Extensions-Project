@@ -20,7 +20,7 @@ const ResetPass = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
 
   const onSubmit = (data) => {
@@ -28,7 +28,7 @@ const ResetPass = () => {
       .then(() => {
         return (
           setError(true),
-          setErrorMsg(`Password reset email sent!`),
+          setErrorMsg('Password reset email sent!'),
           setMsgType('success'),
           setTimeout(() => {
             navigate('/');
@@ -36,9 +36,7 @@ const ResetPass = () => {
         );
       })
       .catch((err) => {
-        return (
-          setError(true), setErrorMsg(`${err.message}`), setMsgType('error')
-        );
+        return setError(true), setErrorMsg(`${err.message}`), setMsgType('error');
       });
   };
 
@@ -69,9 +67,8 @@ const ResetPass = () => {
             textAlign: 'center',
             position: 'relative',
             top: '-25px',
-            fontSize: '22px',
-          }}
-        >
+            fontSize: '22px'
+          }}>
           <h2>Reset password</h2>
         </div>
 
@@ -90,16 +87,12 @@ const ResetPass = () => {
             required
             {...register('email', {
               minLength: 2,
-              maxLength: 35,
+              maxLength: 35
             })}
             onKeyDown={handleKeyEnter}
           />
-          {errors?.email?.type === 'minLength' && (
-            <p>Email cannot be less than 2 characters</p>
-          )}
-          {errors?.email?.type === 'maxLength' && (
-            <p>Email cannot exceed 20 characters</p>
-          )}
+          {errors?.email?.type === 'minLength' && <p>Email cannot be less than 2 characters</p>}
+          {errors?.email?.type === 'maxLength' && <p>Email cannot exceed 20 characters</p>}
 
           <input type="submit" />
         </form>
@@ -107,24 +100,14 @@ const ResetPass = () => {
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <p>
             Go back to Log In?{' '}
-            <span
-              onClick={() => navigate('/login')}
-              style={{ color: 'blue', cursor: 'pointer' }}
-            >
+            <span onClick={() => navigate('/login')} style={{ color: 'blue', cursor: 'pointer' }}>
               Log In
             </span>
           </p>
         </div>
       </Container>
 
-      {error ? (
-        <AlertUser
-          msg={errorMsg}
-          type={msgType}
-          err={error}
-          setErr={setError}
-        />
-      ) : null}
+      {error ? <AlertUser msg={errorMsg} type={msgType} err={error} setErr={setError} /> : null}
     </>
   );
 };

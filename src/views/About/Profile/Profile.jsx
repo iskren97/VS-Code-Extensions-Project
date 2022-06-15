@@ -26,9 +26,8 @@ const Profile = ({ name, img, age, location, town, ins, fb, linked, git }) => {
 
         border: '1px solid rgba(255, 255, 255, 0.3)',
         borderRadius: '16px',
-        background: 'rgba(255, 255, 255, 0.2)',
-      }}
-    >
+        background: 'rgba(255, 255, 255, 0.2)'
+      }}>
       <Grid container spacing={2} direction="column">
         <Grid item sx={{ textAlign: 'center' }}>
           <img
@@ -47,19 +46,16 @@ const Profile = ({ name, img, age, location, town, ins, fb, linked, git }) => {
               rel="noreferrer"
               style={{
                 textDecoration: 'none',
-                all: 'unset',
-              }}
-            >
-              <SchoolIcon
-                sx={{ color: '#47DB00', fontSize: 'medium', cursor: 'pointer' }}
-              />{' '}
+                all: 'unset'
+              }}>
+              <SchoolIcon sx={{ color: '#47DB00', fontSize: 'medium', cursor: 'pointer' }} />{' '}
             </a>
             Telerik Academy student
           </p>
           <Divider
             sx={{
               border: '1px solid rgba(255, 255, 255, 0.3)',
-              marginTop: '20px',
+              marginTop: '20px'
             }}
           />
         </Grid>
@@ -75,9 +71,8 @@ const Profile = ({ name, img, age, location, town, ins, fb, linked, git }) => {
             style={{
               textDecoration: 'none',
               all: 'unset',
-              cursor: 'pointer',
-            }}
-          >
+              cursor: 'pointer'
+            }}>
             <LocationOnIcon /> {town}, Bulgaria
           </a>
         </Grid>

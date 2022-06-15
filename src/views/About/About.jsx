@@ -44,11 +44,11 @@ const About = () => {
 
           <h1>IDE Addonis Project</h1>
           <p style={{ fontSize: '18px' }}>
-            Our Project is part of Telerik Academy's JavaScript Alpha program, a
-            national IT group and leading IT teaching center. <br />
+            Our Project is part of Telerik Academy's JavaScript Alpha program, a national IT group
+            and leading IT teaching center. <br />
             <br />
-            Visit their corporate site. <br /> © Telerik Academy, 30 Krastyo
-            Rakovski Str. <br /> 1729 Sofia, Bulgaria.
+            Visit their corporate site. <br /> © Telerik Academy, 30 Krastyo Rakovski Str. <br />{' '}
+            1729 Sofia, Bulgaria.
             <br />
             <br />
             All rights reserved.

@@ -28,9 +28,8 @@ const ErrorPage = () => {
         style={{
           paddingLeft: '70px',
           paddingRight: '70px',
-          paddingTop: '50px',
-        }}
-      >
+          paddingTop: '50px'
+        }}>
         <NavLink to="/home" style={{ all: 'unset', cursor: 'pointer' }}>
           <Tooltip placement="right-end" title="Back to Home">
             <ArrowBackIcon
@@ -40,15 +39,13 @@ const ErrorPage = () => {
           </Tooltip>
         </NavLink>
 
-        <h1 style={{ textAlign: 'center', marginTop: '0' }}>
-          Oops.. Page not found!
-        </h1>
+        <h1 style={{ textAlign: 'center', marginTop: '0' }}>Oops.. Page not found!</h1>
 
         <Divider
           sx={{
             marginBottom: '30px',
 
-            border: '1px solid rgba(255, 255, 255, 0.3)',
+            border: '1px solid rgba(255, 255, 255, 0.3)'
           }}
         />
 
@@ -56,10 +53,7 @@ const ErrorPage = () => {
           {errors.map((err) => {
             return (
               <Grid key={err.id} item>
-                <DisplayErr
-                  title={'404 Page not found'}
-                  img={err.images.original.url}
-                />
+                <DisplayErr title={'404 Page not found'} img={err.images.original.url} />
               </Grid>
             );
           })}

@@ -3,19 +3,16 @@ import { useEffect, useState } from 'react';
 
 import {
   getAllNotifications,
-  setNotificationStatus,
+  setNotificationStatus
 } from '../../../services/notifications.service';
 
 import { Grid } from '@mui/material';
 
 import Button from '@mui/material/Button';
 
-import {
-  notificationLegendContainer,
-  profileButton,
-} from '../../../styles/styles.js';
+import { notificationLegendContainer, profileButton } from '../../../styles/styles.js';
 
-function Notifications({ userProfile }) {
+const Notifications = ({ userProfile }) => {
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     getAllNotifications().then((result) => setNotifications(result));
@@ -31,7 +28,7 @@ function Notifications({ userProfile }) {
       minute: 'numeric',
       second: 'numeric',
       hour12: true,
-      timeZone: 'UTC',
+      timeZone: 'UTC'
     };
     return newDate.toLocaleString('en-US', options);
   };
@@ -44,8 +41,7 @@ function Notifications({ userProfile }) {
         justifyContent="center"
         alignItems="stretch"
         wrap="nowrap"
-        sx={{ width: '100%', marginLeft: '15px' }}
-      >
+        sx={{ width: '100%', marginLeft: '15px' }}>
         <div
           style={{
             display: 'flex',
@@ -55,9 +51,8 @@ function Notifications({ userProfile }) {
             flexWrap: 'wrap',
             justifyContent: 'flex-start',
             marginTop: '0.5em',
-            marginBottom: '0.5em',
-          }}
-        >
+            marginBottom: '0.5em'
+          }}>
           <div style={notificationLegendContainer}>
             <span
               style={{
@@ -65,9 +60,8 @@ function Notifications({ userProfile }) {
                 borderRadius: '50%',
                 display: 'inline-block',
                 height: '25px',
-                width: '25px',
-              }}
-            ></span>
+                width: '25px'
+              }}></span>
             New
           </div>
 
@@ -78,9 +72,8 @@ function Notifications({ userProfile }) {
                 borderRadius: '50%',
                 display: 'inline-block',
                 height: '25px',
-                width: '25px',
-              }}
-            ></span>
+                width: '25px'
+              }}></span>
             Seen
           </div>
         </div>
@@ -88,38 +81,37 @@ function Notifications({ userProfile }) {
         {notifications
           .filter(
             (notification) =>
-              notification?.author === userProfile.username ||
-              notification?.recipient === userProfile.username ||
-              (userProfile.role === 'admin' &&
-                (notification?.recipient === 'Admins' ||
-                  notification?.author === 'Admins'))
+              notification?.author === userProfile.username
+              || notification?.recipient === userProfile.username
+              || (userProfile.role === 'admin'
+                && (notification?.recipient === 'Admins' || notification?.author === 'Admins'))
           )
           .map((notif) => {
             let rowColor = '';
             if (
-              userProfile.username === notif.author ||
-              (userProfile.role === 'admin' && notif?.author === 'Admins')
+              userProfile.username === notif.author
+              || (userProfile.role === 'admin' && notif?.author === 'Admins')
             ) {
               switch (notif.statusAuthor) {
-                case 'unseen':
-                  rowColor = 'rgb(0, 149, 255)';
-                  break;
-                case 'seen':
-                  rowColor = 'rgb(255, 102, 0)';
-                  break;
-                default:
-                  break;
+              case 'unseen':
+                rowColor = 'rgb(0, 149, 255)';
+                break;
+              case 'seen':
+                rowColor = 'rgb(255, 102, 0)';
+                break;
+              default:
+                break;
               }
             } else {
               switch (notif.statusRecipient) {
-                case 'unseen':
-                  rowColor = 'rgb(0, 149, 255)';
-                  break;
-                case 'seen':
-                  rowColor = 'rgb(255, 102, 0)';
-                  break;
-                default:
-                  break;
+              case 'unseen':
+                rowColor = 'rgb(0, 149, 255)';
+                break;
+              case 'seen':
+                rowColor = 'rgb(255, 102, 0)';
+                break;
+              default:
+                break;
               }
             }
 
@@ -129,9 +121,8 @@ function Notifications({ userProfile }) {
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
-                  alignItems: 'center',
-                }}
-              >
+                  alignItems: 'center'
+                }}>
                 <Grid
                   container
                   direction="row"
@@ -145,9 +136,8 @@ function Notifications({ userProfile }) {
                     color: 'white',
                     fontWeight: 'bold',
                     border: '1px solid rgba(255, 255, 255, 0.3)',
-                    borderRadius: '16px',
-                  }}
-                >
+                    borderRadius: '16px'
+                  }}>
                   <div
                     style={{
                       display: 'flex',
@@ -157,9 +147,8 @@ function Notifications({ userProfile }) {
                       gap: '1em',
                       flex: '1',
                       justifyContent: 'space-between',
-                      marginRight: '1em',
-                    }}
-                  >
+                      marginRight: '1em'
+                    }}>
                     <Grid item>
                       From: {notif.author} To: {notif.recipient}{' '}
                       <Grid item sx={{ width: '11em' }}>
@@ -176,17 +165,15 @@ function Notifications({ userProfile }) {
                       display: 'flex',
                       flexDirection: 'row',
                       flexWrap: 'wrap',
-                      gap: '0.25em',
-                    }}
-                  >
+                      gap: '0.25em'
+                    }}>
                     <Button
                       variant="contained"
                       color="primary"
                       sx={profileButton}
                       onClick={() => {
                         window.location.href = `/extensions/${notif.extensionId}`;
-                      }}
-                    >
+                      }}>
                       View
                     </Button>
                     <Button
@@ -195,67 +182,45 @@ function Notifications({ userProfile }) {
                       sx={profileButton}
                       onClick={() => {
                         if (
-                          notif.author === userProfile.username ||
-                          (userProfile.role == 'admin' &&
-                            notif.author === 'Admins')
+                          notif.author === userProfile.username
+                          || (userProfile.role === 'admin' && notif.author === 'Admins')
                         ) {
                           notif.statusAuthor === 'unseen'
                             ? setNotificationStatus(notif.id, 'seen', 'author')
-                            : setNotificationStatus(
-                                notif.id,
-                                'unseen',
-                                'author'
-                              );
+                            : setNotificationStatus(notif.id, 'unseen', 'author');
                         } else {
                           notif.statusRecipient === 'unseen'
-                            ? setNotificationStatus(
-                                notif.id,
-                                'seen',
-                                'recipient'
-                              )
-                            : setNotificationStatus(
-                                notif.id,
-                                'unseen',
-                                'recipient'
-                              );
+                            ? setNotificationStatus(notif.id, 'seen', 'recipient')
+                            : setNotificationStatus(notif.id, 'unseen', 'recipient');
                         }
 
                         setNotifications(
                           notifications.map((curr) => {
                             if (curr.id === notif.id) {
                               if (
-                                notif.author === userProfile.username ||
-                                (userProfile.role == 'admin' &&
-                                  notif.author === 'Admins')
+                                notif.author === userProfile.username
+                                || (userProfile.role === 'admin' && notif.author === 'Admins')
                               ) {
-                                curr.statusAuthor =
-                                  notif.statusAuthor === 'unseen'
-                                    ? 'seen'
-                                    : 'unseen';
+                                curr.statusAuthor
+                                  = notif.statusAuthor === 'unseen' ? 'seen' : 'unseen';
                               } else if (
-                                userProfile.role == 'admin' &&
-                                notif.recipient === 'Admins'
+                                userProfile.role === 'admin'
+                                && notif.recipient === 'Admins'
                               ) {
-                                curr.statusRecipient =
-                                  notif.statusRecipient === 'unseen'
-                                    ? 'seen'
-                                    : 'unseen';
+                                curr.statusRecipient
+                                  = notif.statusRecipient === 'unseen' ? 'seen' : 'unseen';
                               } else {
-                                curr.statusRecipient =
-                                  notif.statusRecipient === 'unseen'
-                                    ? 'seen'
-                                    : 'unseen';
+                                curr.statusRecipient
+                                  = notif.statusRecipient === 'unseen' ? 'seen' : 'unseen';
                               }
                             }
                             return curr;
                           })
                         );
-                      }}
-                    >
+                      }}>
                       Mark as{' '}
-                      {(userProfile?.username === notif.author ||
-                      (userProfile?.role === 'admin' &&
-                        notif.author === 'Admins')
+                      {(userProfile?.username === notif.author
+                      || (userProfile?.role === 'admin' && notif.author === 'Admins')
                         ? notif.statusAuthor
                         : notif.statusRecipient) === 'seen'
                         ? 'New'
@@ -266,14 +231,13 @@ function Notifications({ userProfile }) {
 
                 <span
                   className="legendPending"
-                  style={{ backgroundColor: rowColor, marginLeft: '8px' }}
-                ></span>
+                  style={{ backgroundColor: rowColor, marginLeft: '8px' }}></span>
               </div>
             );
           })}
       </Grid>
     </>
   );
-}
+};
 
 export default Notifications;

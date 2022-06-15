@@ -22,15 +22,14 @@ const Sort = ({ extensions, search }) => {
 
   return (
     <table>
-      <thead>
+      <thead className="thead-2">
         <tr>
           <th>
             <button
               type="button"
               onClick={() => requestSort('title')}
               className={getClassNamesFor('title')}
-              style={{ backgroundColor: 'black' }}
-            >
+              style={{ backgroundColor: 'black' }}>
               Title
             </button>
           </th>
@@ -42,8 +41,7 @@ const Sort = ({ extensions, search }) => {
               type="button"
               onClick={() => requestSort('createdOn')}
               className={getClassNamesFor('createdOn')}
-              style={{ backgroundColor: 'black' }}
-            >
+              style={{ backgroundColor: 'black' }}>
               Date
             </button>
           </th>
@@ -55,8 +53,7 @@ const Sort = ({ extensions, search }) => {
               type="button"
               onClick={() => requestSort('author')}
               className={getClassNamesFor('author')}
-              style={{ backgroundColor: 'black' }}
-            >
+              style={{ backgroundColor: 'black' }}>
               Author
             </button>
           </th>
@@ -68,8 +65,7 @@ const Sort = ({ extensions, search }) => {
               type="button"
               onClick={() => requestSort('averageRating')}
               className={getClassNamesFor('averageRating')}
-              style={{ backgroundColor: 'black' }}
-            >
+              style={{ backgroundColor: 'black' }}>
               Rating
             </button>
           </th>
@@ -79,7 +75,7 @@ const Sort = ({ extensions, search }) => {
       <br />
       <Divider
         sx={{
-          border: '1px solid rgba(255, 255, 255, 0.3)',
+          border: '1px solid rgba(255, 255, 255, 0.3)'
         }}
       />
       <br />
@@ -89,15 +85,12 @@ const Sort = ({ extensions, search }) => {
           <td>
             <Grid container direction="row" spacing={2} className="item-grid">
               {allExtensions.map((ext) => {
-                ext.averageRating =
-                  ext?.rating?.reduce(
-                    (sum, current) => sum + current.value,
-                    0
-                  ) / ext?.rating?.length || 0;
+                ext.averageRating
+                  = ext?.rating?.reduce((sum, current) => sum + current.value, 0)
+                    / ext?.rating?.length || 0;
 
                 if (search) {
-                  return ext.title.toLowerCase().includes(search) ||
-                    ext.tags.includes(search) ? (
+                  return ext.title.toLowerCase().includes(search) || ext.tags.includes(search) ? (
                     <Grid key={ext.id} item>
                       <Items
                         key={ext.id}

@@ -14,7 +14,7 @@ import defaultAvatar from '../../assets/avatar.jpg';
 import {
   getAllExtensions,
   getExtensionById,
-  getExtensionDownloads,
+  getExtensionDownloads
 } from '../../services/extensions.service';
 
 import { getUserByHandle, getUserData } from '../../services/users.service';
@@ -67,9 +67,7 @@ const ProfilePage = () => {
       setUserUploads(
         ext
           .filter((ext) => ext.author === username)
-          .sort((a, b) =>
-            a.status > b.status ? 1 : b.status > a.status ? -1 : 0
-          )
+          .sort((a, b) => (a.status > b.status ? 1 : b.status > a.status ? -1 : 0))
       )
     );
   }, [username]);
@@ -89,9 +87,7 @@ const ProfilePage = () => {
           if (resp.length > 0) {
             resp.filter((down) =>
               down.username === username
-                ? getExtensionById(ext.id).then((extension) =>
-                    downloadedExtensions.push(extension)
-                  )
+                ? getExtensionById(ext.id).then((extension) => downloadedExtensions.push(extension))
                 : null
             );
 
@@ -120,58 +116,41 @@ const ProfilePage = () => {
             marginTop: '50px',
             marginBottom: '50px',
             width: 'auto',
-            color: 'black',
-          }}
-        >
+            color: 'black'
+          }}>
           <h1 style={{ marginLeft: '2em', color: 'white' }}>{username}</h1>
 
           <Divider
             sx={{
               marginLeft: '2em',
               marginRight: '2em',
-              background: 'hsla(210,18%,87%,1)',
+              background: 'hsla(210,18%,87%,1)'
             }}
           />
 
           <Grid
             container
             direction="row"
-            sx={{ flexWrap: 'wrap', margin: '3em', width: 'auto', gap: '1em' }}
-          >
-            <Grid
-              container
-              direction="column"
-              sx={{ gap: '1em', width: 'auto', maxWidth: '18em' }}
-            >
+            sx={{ flexWrap: 'wrap', margin: '3em', width: 'auto', gap: '1em' }}>
+            <Grid container direction="column" sx={{ gap: '1em', width: 'auto', maxWidth: '18em' }}>
               <Grid item>
                 <img
-                  src={
-                    userProfile?.avatarUrl
-                      ? userProfile?.avatarUrl
-                      : defaultAvatar
-                  }
+                  src={userProfile?.avatarUrl ? userProfile?.avatarUrl : defaultAvatar}
                   alt="Profile"
                   style={{
                     maxWidth: '100%',
-                    maxHeight: '100%',
+                    maxHeight: '100%'
                   }}
                 />
 
-                <UpdatePic
-                  userProfile={userProfile}
-                  setUserProfile={setUserProfile}
-                />
+                <UpdatePic userProfile={userProfile} setUserProfile={setUserProfile} />
               </Grid>
 
-              <Grid
-                item
-                sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}
-              >
+              <Grid item sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
                 <Button
                   onClick={() => setActiveView('Info')}
                   variant="contained"
-                  sx={profileButton}
-                >
+                  sx={profileButton}>
                   Info
                 </Button>
 
@@ -179,8 +158,7 @@ const ProfilePage = () => {
                   <Button
                     onClick={() => setActiveView('Notifications')}
                     variant="contained"
-                    sx={profileButton}
-                  >
+                    sx={profileButton}>
                     Notifications
                   </Button>
                 ) : null}
@@ -188,24 +166,21 @@ const ProfilePage = () => {
                 <Button
                   onClick={() => setActiveView('Uploads')}
                   variant="contained"
-                  sx={profileButton}
-                >
+                  sx={profileButton}>
                   Uploads
                 </Button>
 
                 <Button
                   onClick={() => setActiveView('Downloads')}
                   variant="contained"
-                  sx={profileButton}
-                >
+                  sx={profileButton}>
                   Downloads
                 </Button>
                 {userData?.role === 'admin' ? (
                   <Button
                     onClick={() => setActiveView('AdminPanel')}
                     variant="contained"
-                    sx={profileButton}
-                  >
+                    sx={profileButton}>
                     Admin Panel
                   </Button>
                 ) : null}
@@ -214,9 +189,7 @@ const ProfilePage = () => {
 
             <Divider
               orientation={
-                window.matchMedia('(max-device-width: 768px)').matches
-                  ? 'horizontal'
-                  : 'vertical'
+                window.matchMedia('(max-device-width: 768px)').matches ? 'horizontal' : 'vertical'
               }
               flexItem
               sx={{ background: 'hsla(210,18%,87%,1)' }}
@@ -230,7 +203,7 @@ const ProfilePage = () => {
                 sx={{
                   width: 'auto',
                   marginBottom: '1em',
-                  background: 'hsla(210,18%,87%,1)',
+                  background: 'hsla(210,18%,87%,1)'
                 }}
               />
 
@@ -243,13 +216,9 @@ const ProfilePage = () => {
                   <Notifications userProfile={userProfile} />
                 ) : null}
 
-                {activeView === 'Info' ? (
-                  <Info userProfile={userProfile} />
-                ) : null}
+                {activeView === 'Info' ? <Info userProfile={userProfile} /> : null}
 
-                {activeView === 'Downloads' ? (
-                  <Downloads userDownloads={userDownloads} />
-                ) : null}
+                {activeView === 'Downloads' ? <Downloads userDownloads={userDownloads} /> : null}
 
                 {activeView === 'AdminPanel' ? <AdminPanel /> : null}
               </Grid>

@@ -26,7 +26,7 @@ import ResetPass from './views/Login/ResetPassword/ResetPass';
 const App = () => {
   const [appState, setAppState] = useState({
     user: null,
-    userData: null,
+    userData: null
   });
 
   const [user, loading] = useAuthState(auth);
@@ -42,7 +42,7 @@ const App = () => {
 
         setAppState({
           user,
-          userData: snapshot.val()[Object.keys(snapshot.val())[0]],
+          userData: snapshot.val()[Object.keys(snapshot.val())[0]]
         });
       })
       // eslint-disable-next-line no-undef

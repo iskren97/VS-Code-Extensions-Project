@@ -25,7 +25,7 @@ const Login = () => {
   const {
     formState: { errors },
     register,
-    handleSubmit,
+    handleSubmit
   } = useForm();
 
   const handleInvalidData = () => {
@@ -41,11 +41,11 @@ const Login = () => {
           if (snapshot.exists()) {
             setContext({
               user: u.user.email,
-              userData: snapshot.val()[Object.keys(snapshot.val())[0]],
+              userData: snapshot.val()[Object.keys(snapshot.val())[0]]
             });
           }
           setError(true);
-          setErrorMsg(`You are now logged in!`);
+          setErrorMsg('You are now logged in!');
           setMsgType('success');
           setTimeout(() => {
             navigate('/');
@@ -84,15 +84,12 @@ const Login = () => {
             textAlign: 'center',
             position: 'relative',
             top: '-25px',
-            fontSize: '22px',
-          }}
-        >
+            fontSize: '22px'
+          }}>
           <h2>Log In</h2>
         </div>
 
-        <p style={{ textAlign: 'center' }}>
-          Sign in with your email and password
-        </p>
+        <p style={{ textAlign: 'center' }}>Sign in with your email and password</p>
 
         <br />
 
@@ -100,11 +97,7 @@ const Login = () => {
 
         <br />
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          autoComplete="off"
-          className="register-form"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="register-form">
           <input
             autoComplete="off"
             type="email"
@@ -112,16 +105,12 @@ const Login = () => {
             required
             {...register('email', {
               minLength: 2,
-              maxLength: 35,
+              maxLength: 35
             })}
             onKeyDown={handleKeyEnter}
           />
-          {errors?.email?.type === 'minLength' && (
-            <p>Email cannot be less than 2 characters</p>
-          )}
-          {errors?.email?.type === 'maxLength' && (
-            <p>Email cannot exceed 20 characters</p>
-          )}
+          {errors?.email?.type === 'minLength' && <p>Email cannot be less than 2 characters</p>}
+          {errors?.email?.type === 'maxLength' && <p>Email cannot exceed 20 characters</p>}
 
           <input
             type="password"
@@ -129,15 +118,14 @@ const Login = () => {
             required
             {...register('password', {
               minLength: 6,
-              maxLength: 18,
+              maxLength: 18
             })}
             onKeyDown={handleKeyEnter}
           />
 
           <p
             onClick={() => navigate('/password_reset')}
-            style={{ cursor: 'pointer', fontSize: '13px', marginTop: '2px' }}
-          >
+            style={{ cursor: 'pointer', fontSize: '13px', marginTop: '2px' }}>
             Forgot your password?
           </p>
 
@@ -145,9 +133,7 @@ const Login = () => {
             <p>Password cannot be less than 6 characters </p>
           )}
 
-          {errors?.password?.type === 'maxLength' && (
-            <p>Password cannot exceed 20 characters </p>
-          )}
+          {errors?.password?.type === 'maxLength' && <p>Password cannot exceed 20 characters </p>}
 
           <input type="submit" />
         </form>
@@ -157,22 +143,14 @@ const Login = () => {
             Don't have an account?{' '}
             <span
               onClick={() => navigate('/register')}
-              style={{ color: 'blue', cursor: 'pointer' }}
-            >
+              style={{ color: 'blue', cursor: 'pointer' }}>
               Sign Up
             </span>
           </p>
         </div>
       </Container>
 
-      {error ? (
-        <AlertUser
-          msg={errorMsg}
-          type={msgType}
-          err={error}
-          setErr={setError}
-        />
-      ) : null}
+      {error ? <AlertUser msg={errorMsg} type={msgType} err={error} setErr={setError} /> : null}
     </>
   );
 };

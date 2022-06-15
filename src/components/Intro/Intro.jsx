@@ -11,17 +11,15 @@ const Intro = () => {
           textAlign: 'center',
           alignItems: 'center',
           columnGap: '0',
-          justifyContent: 'center',
-        }}
-      >
+          justifyContent: 'center'
+        }}>
         <div>
           <h1
             style={{
               fontSize: '40px',
               fontStyle: 'normal',
-              fontWeight: '600',
-            }}
-          >
+              fontWeight: '600'
+            }}>
             Extensions
           </h1>
         </div>
@@ -37,9 +35,8 @@ const Intro = () => {
           fontStyle: 'normal',
           fontWeight: '400',
           margin: '0',
-          textAlign: 'center',
-        }}
-      >
+          textAlign: 'center'
+        }}>
         Explore powerful tools and features to customize Visual Studio Code
       </h2>
     </div>

@@ -15,8 +15,7 @@ const Info = ({ userProfile }) => {
         Email: <span>{userProfile?.email}</span>{' '}
       </h3>
 
-      {userData?.username === userProfile?.username ||
-      userData?.role === 'admin' ? (
+      {userData?.username === userProfile?.username || userData?.role === 'admin' ? (
         <h3>
           Phone Number: <span>{userProfile?.phoneNumber}</span>{' '}
         </h3>

@@ -38,9 +38,7 @@ const Main = () => {
 
   useEffect(() => {
     getAllExtensions().then((resp) =>
-      setRecommended(
-        resp.filter((ext) => ext.status === 'approved').slice(4, 10)
-      )
+      setRecommended(resp.filter((ext) => ext.status === 'approved').slice(4, 10))
     );
   }, []);
 

@@ -12,19 +12,29 @@ thead th {
 }
 
 thead button {
-  border: 0;
-  border-radius: none;
+  background: none !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
 
   font-family: inherit;
   font-weight: 700;
   font-size: inherit;
 
   padding: 0.5em;
-  margin-bottom: 15px !important;
+  margin-bottom: 18px !important;
 
   color: white;
 
   cursor: pointer;
+
+  transition: background-color 0.25s;
+
+  margin-right: 0.5em;
+}
+
+thead button:hover {
+  background: rgba(255, 255, 255, 0.295) !important;
 }
 
 thead button.ascending::after {

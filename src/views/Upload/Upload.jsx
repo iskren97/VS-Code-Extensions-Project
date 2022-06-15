@@ -18,14 +18,11 @@ import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
-import {
-  createExtension,
-  getAllExtensions,
-} from '../../services/extensions.service';
+import { createExtension, getAllExtensions } from '../../services/extensions.service';
 
 import { NavLink } from 'react-router-dom';
 
-function Upload() {
+const Upload = () => {
   const { userData } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -78,10 +75,10 @@ function Upload() {
     }
 
     if (
-      !uploadInfo.logo ||
-      (uploadInfo.logo.type !== 'image/jpg' &&
-        uploadInfo.logo.type !== 'image/png' &&
-        uploadInfo.logo.type !== 'image/jpeg')
+      !uploadInfo.logo
+      || (uploadInfo.logo.type !== 'image/jpg'
+        && uploadInfo.logo.type !== 'image/png'
+        && uploadInfo.logo.type !== 'image/jpeg')
     ) {
       setError(true);
       setErrorMsg('Please upload a jpg or png file');
@@ -89,10 +86,7 @@ function Upload() {
       return false;
     }
 
-    if (
-      !uploadInfo.repositoryUrl ||
-      !uploadInfo.repositoryUrl.startsWith('https://github.com/')
-    ) {
+    if (!uploadInfo.repositoryUrl || !uploadInfo.repositoryUrl.startsWith('https://github.com/')) {
       setError(true);
       setErrorMsg('Please enter a valid URL');
       setMsgType('error');
@@ -130,7 +124,7 @@ function Upload() {
     'c++',
     'xml',
     'jsx',
-    'es6',
+    'es6'
   ];
 
   const submitExtension = async () => {
@@ -172,7 +166,7 @@ function Upload() {
         );
 
         setError(true);
-        setErrorMsg(`Extension uploaded successfully!`);
+        setErrorMsg('Extension uploaded successfully!');
         setMsgType('success');
         setTimeout(() => {
           navigate('/');
@@ -199,9 +193,8 @@ function Upload() {
               textAlign: 'center',
               position: 'relative',
               top: '-25px',
-              fontSize: '22px',
-            }}
-          >
+              fontSize: '22px'
+            }}>
             <h2>Upload an extension</h2>
           </div>
 
@@ -209,7 +202,7 @@ function Upload() {
 
           <Divider
             sx={{
-              border: '1px solid rgba(255, 255, 255, 0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.3)'
             }}
           />
 
@@ -221,9 +214,7 @@ function Upload() {
               autoComplete="off"
               placeholder="Extension Name"
               required
-              onChange={(e) =>
-                setUploadInfo({ ...uploadInfo, name: e.target.value })
-              }
+              onChange={(e) => setUploadInfo({ ...uploadInfo, name: e.target.value })}
               onKeyDown={handleKeyEnter}
             />
 
@@ -235,7 +226,7 @@ function Upload() {
               onChange={(e) =>
                 setUploadInfo({
                   ...uploadInfo,
-                  repositoryUrl: e.target.value,
+                  repositoryUrl: e.target.value
                 })
               }
               onKeyDown={handleKeyEnter}
@@ -248,9 +239,7 @@ function Upload() {
                 type="file"
                 accept=".vsix"
                 required
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, file: e.target.files[0] })
-                }
+                onChange={(e) => setUploadInfo({ ...uploadInfo, file: e.target.files[0] })}
                 onKeyDown={handleKeyEnter}
               />
             </div>
@@ -262,9 +251,7 @@ function Upload() {
                 type="file"
                 accept="image/*"
                 required
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, logo: e.target.files[0] })
-                }
+                onChange={(e) => setUploadInfo({ ...uploadInfo, logo: e.target.files[0] })}
                 onKeyDown={handleKeyEnter}
               />
             </div>
@@ -276,22 +263,17 @@ function Upload() {
                 labelId="demo-simple-select-autowidth-label"
                 id="demo-simple-select-autowidth"
                 value={uploadInfo.category || ''}
-                onChange={(e) =>
-                  setUploadInfo({ ...uploadInfo, category: e.target.value })
-                }
+                onChange={(e) => setUploadInfo({ ...uploadInfo, category: e.target.value })}
                 sx={{
                   width: '100%',
                   color: 'white !important',
-                  fontWeight: 'bold',
-                }}
-              >
+                  fontWeight: 'bold'
+                }}>
                 <MenuItem value={'Code Formatters'}>Code Formatters</MenuItem>
                 <MenuItem value={'Linters'}>Linters</MenuItem>
                 <MenuItem value={'Themes'}>Themes</MenuItem>
                 <MenuItem value={'Snippets'}>Snippets</MenuItem>
-                <MenuItem value={'Programming Languages'}>
-                  Programming Languages
-                </MenuItem>
+                <MenuItem value={'Programming Languages'}>Programming Languages</MenuItem>
                 <MenuItem value={'Azure'}>Azure</MenuItem>
                 <MenuItem value={'Data Science'}>Data Science</MenuItem>
                 <MenuItem value={'Debuggers'}>Debuggers</MenuItem>
@@ -307,9 +289,7 @@ function Upload() {
                 disableClearable
                 className="upload-form-tags"
                 fullWidth
-                onChange={(e, values) =>
-                  setUploadInfo({ ...uploadInfo, tags: values })
-                }
+                onChange={(e, values) => setUploadInfo({ ...uploadInfo, tags: values })}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
                     <Chip
@@ -332,17 +312,10 @@ function Upload() {
           </form>
         </Container>
 
-        {error ? (
-          <AlertUser
-            msg={errorMsg}
-            type={msgType}
-            err={error}
-            setErr={setError}
-          />
-        ) : null}
+        {error ? <AlertUser msg={errorMsg} type={msgType} err={error} setErr={setError} /> : null}
       </div>
     </>
   );
-}
+};
 
 export default Upload;

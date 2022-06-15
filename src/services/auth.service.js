@@ -2,7 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  sendPasswordResetEmail,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 import { auth } from '../config/firebase-config';
 

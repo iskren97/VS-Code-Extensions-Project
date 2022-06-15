@@ -10,14 +10,10 @@
   position: absolute;
   padding-bottom: 70px;
   padding-top: 70px;
-
   color: white;
-
   background: rgba(255, 255, 255, 0.2);
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
-
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -43,12 +39,9 @@
   margin-top: 10px;
   font-size: 18px;
   font-weight: bold;
-
   background: rgba(255, 255, 255, 0.2);
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
-
   transition: background-color 0.25s;
 }
 
@@ -71,13 +64,10 @@
   border: none;
   margin-top: 40px;
   padding: 20px;
-
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 10px;
-
   background: rgba(255, 255, 255, 0.2);
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
 }
@@ -92,29 +82,24 @@
   height: 2em;
   margin-bottom: 0.5em;
   color: white !important;
-
   background: rgba(255, 255, 255, 0.2) !important;
   border: none;
 }
-
-
-
 
 .upload-form h2 {
   margin-bottom: 0.25em;
   font-size: 1.25em;
 }
 
-
-.upload-form *:focus-visible{
+.upload-form *:focus-visible {
   outline: none !important;
 }
 
-.upload-form input{
+.upload-form input {
   color: white !important;
 }
 
-.upload-form fieldset{
+.upload-form fieldset {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 16px;
 }

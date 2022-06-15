@@ -3,52 +3,41 @@ table {
   border-collapse: collapse;
 }
 
-thead tr {
+.thead-2 tr {
   display: inline-block;
 }
 
-thead th {
+.thead-2 th {
   text-align: left;
 }
 
-thead button {
+.thead-2 button {
   background: none !important;
-
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
-
   font-family: inherit;
   font-weight: 700;
   font-size: inherit;
-
   padding: 0.5em;
-  margin-bottom: 3px;
-
+  margin-bottom: 2px !important;
   color: white;
-
   cursor: pointer;
-
   transition: background-color 0.25s;
-
   margin-right: 0.5em;
 }
 
-thead button:hover {
+.thead-2 button:hover {
   background: rgba(255, 255, 255, 0.295) !important;
 }
 
-thead button.ascending::after {
+.thead-2 button.ascending::after {
   content: '⬆';
   display: inline-block;
   margin-left: 1em;
 }
 
-thead button.descending::after {
+.thead-2 button.descending::after {
   content: '⬇';
   display: inline-block;
   margin-left: 1em;
-}
-
-tbody td {
-  padding: 0.5em;
 }

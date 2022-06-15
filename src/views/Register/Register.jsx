@@ -20,7 +20,7 @@ import {
   createUserHandle,
   getAllUsers,
   getUserByHandle,
-  getUserData,
+  getUserData
 } from '../../services/users.service';
 
 import AlertUser from './AlertUser';
@@ -38,7 +38,7 @@ const Register = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
 
   const onSubmit = (data) => {
@@ -54,30 +54,25 @@ const Register = () => {
         Object.values(users.val()).map((o) =>
           o.phoneNumber === data.phoneNumber
             ? (function () {
-                throw new Error('phone number already in use');
-              })()
+              throw new Error('phone number already in use');
+            })()
             : null
         );
 
         const credential = await registerUser(data.email, data.password);
 
-        createUserHandle(
-          data.email,
-          data.username,
-          credential.user.uid,
-          data.phoneNumber
-        );
+        createUserHandle(data.email, data.username, credential.user.uid, data.phoneNumber);
 
         const userData = await getUserData(credential.user.uid);
         if (userData.exists()) {
           setContext({
             user: data.email,
-            userData: userData.val()[Object.keys(userData.val())[0]],
+            userData: userData.val()[Object.keys(userData.val())[0]]
           });
         }
 
         setError(true);
-        setErrorMsg(`Account successfully created!`);
+        setErrorMsg('Account successfully created!');
         setMsgType('success');
 
         setTimeout(() => {
@@ -90,13 +85,11 @@ const Register = () => {
           setMsgType('error');
         } else if (err.message.includes('auth/email-already-in-use')) {
           setError(true);
-          setErrorMsg(`Email already used!`);
+          setErrorMsg('Email already used!');
           setMsgType('error');
         } else if (err.message.includes('phone number already in use')) {
           setError(true);
-          setErrorMsg(
-            `User with phone number ${data.phoneNumber} already exists!`
-          );
+          setErrorMsg(`User with phone number ${data.phoneNumber} already exists!`);
           setMsgType('error');
         }
       }
@@ -120,9 +113,8 @@ const Register = () => {
             textAlign: 'center',
             position: 'relative',
             top: '-25px',
-            fontSize: '22px',
-          }}
-        >
+            fontSize: '22px'
+          }}>
           <h2>Register</h2>
         </div>
 
@@ -134,27 +126,21 @@ const Register = () => {
 
         <br />
 
-        <form
-          autoComplete="off"
-          onSubmit={handleSubmit(onSubmit)}
-          className="register-form"
-        >
+        <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="register-form">
           <input
             placeholder="Username"
             autoComplete="off"
             required
             {...register('username', {
               minLength: 2,
-              maxLength: 20,
+              maxLength: 20
             })}
           />
 
           {errors?.username?.type === 'minLength' && (
             <p>Username cannot be less than 2 characters</p>
           )}
-          {errors?.username?.type === 'maxLength' && (
-            <p>Username cannot exceed 20 characters</p>
-          )}
+          {errors?.username?.type === 'maxLength' && <p>Username cannot exceed 20 characters</p>}
 
           <input
             placeholder="Email"
@@ -162,16 +148,12 @@ const Register = () => {
             required
             {...register('email', {
               minLength: 2,
-              maxLength: 35,
+              maxLength: 35
             })}
           />
 
-          {errors?.email?.type === 'minLength' && (
-            <p>Email cannot be less than 2 characters</p>
-          )}
-          {errors?.email?.type === 'maxLength' && (
-            <p>Email cannot exceed 20 characters</p>
-          )}
+          {errors?.email?.type === 'minLength' && <p>Email cannot be less than 2 characters</p>}
+          {errors?.email?.type === 'maxLength' && <p>Email cannot exceed 20 characters</p>}
 
           <input
             placeholder="Password"
@@ -179,7 +161,7 @@ const Register = () => {
             required
             {...register('password', {
               minLength: 6,
-              maxLength: 18,
+              maxLength: 18
             })}
           />
 
@@ -187,16 +169,14 @@ const Register = () => {
             <p>Password cannot be less than 6 characters </p>
           )}
 
-          {errors?.password?.type === 'maxLength' && (
-            <p>Password cannot exceed 20 characters </p>
-          )}
+          {errors?.password?.type === 'maxLength' && <p>Password cannot exceed 20 characters </p>}
 
           <Controller
             name="phoneNumber"
             control={control}
             rules={{
               required: true,
-              validate: (value) => isValidPhoneNumber(value),
+              validate: (value) => isValidPhoneNumber(value)
             }}
             render={({ field: { onChange, value } }) => (
               <PhoneInput
@@ -209,9 +189,7 @@ const Register = () => {
             )}
           />
 
-          {errors['phoneNumber'] && (
-            <p className="error-message">Invalid Phone</p>
-          )}
+          {errors['phoneNumber'] && <p className="error-message">Invalid Phone</p>}
 
           <input type="submit" />
         </form>
@@ -219,23 +197,13 @@ const Register = () => {
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <p>
             Already have an account?{' '}
-            <span
-              onClick={() => navigate('/login')}
-              style={{ color: 'blue', cursor: 'pointer' }}
-            >
+            <span onClick={() => navigate('/login')} style={{ color: 'blue', cursor: 'pointer' }}>
               Log In
             </span>
           </p>
         </div>
       </Container>
-      {error ? (
-        <AlertUser
-          msg={errorMsg}
-          type={msgType}
-          err={error}
-          setErr={setError}
-        />
-      ) : null}
+      {error ? <AlertUser msg={errorMsg} type={msgType} err={error} setErr={setError} /> : null}
     </>
   );
 };

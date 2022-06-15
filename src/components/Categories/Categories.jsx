@@ -1,10 +1,9 @@
 import React from 'react';
 import './Categories.css';
-
-import { Container, Divider, Grid } from '@mui/material';
-import ListCategory from './ListCategory';
 import { NavLink } from 'react-router-dom';
+import { Container, Divider, Grid } from '@mui/material';
 import { containerStyle, dividerStyle } from '../../styles/styles';
+import ListCategory from './ListCategory';
 
 const Categories = () => {
   return (

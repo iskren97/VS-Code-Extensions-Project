@@ -1,26 +1,13 @@
 import { ref, push, get, update } from 'firebase/database';
 import { db } from '../config/firebase-config';
 
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage';
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../config/firebase-config';
 import { getUserByHandle } from './users.service.js';
 
 import { createNotification } from './notifications.service.js';
 
-export const createExtension = (
-  title,
-  repoUrl,
-  category,
-  author,
-  fileName,
-  file,
-  tags,
-  logo
-) => {
+export const createExtension = (title, repoUrl, category, author, fileName, file, tags, logo) => {
   return push(ref(db, 'extensions'), {
     title,
     author: author,
@@ -30,7 +17,7 @@ export const createExtension = (
     logo,
     status: 'pending',
     createdOn: Date.now(),
-    category: category,
+    category: category
   }).then((result) => {
     uploadExtensionFile(file, logo, author, fileName, result.key);
     createNotification(
@@ -79,12 +66,9 @@ export const updateExtensionInfo = (id, newInfo) => {
       id
     );
 
-    if (
-      extension.logo === newInfo.logo &&
-      extension.downloadLink === newInfo.downloadLink
-    ) {
+    if (extension.logo === newInfo.logo && extension.downloadLink === newInfo.downloadLink) {
       return update(ref(db), {
-        [`/extensions/${id}`]: newInfo,
+        [`/extensions/${id}`]: newInfo
       });
     }
   });
@@ -92,7 +76,7 @@ export const updateExtensionInfo = (id, newInfo) => {
 
 export const updateExtensionDownloadLink = (extId, url) => {
   return update(ref(db, `extensions/${extId}`), {
-    downloadLink: url,
+    downloadLink: url
   });
 };
 
@@ -105,7 +89,7 @@ export const fromExtensionsDocument = (snapshot) => {
     return {
       ...extension,
       id: key,
-      createdOn: new Date(extension.createdOn),
+      createdOn: new Date(extension.createdOn)
     };
   });
 };
@@ -147,10 +131,7 @@ const uploadLogo = (e, username, fileName, extId) => {
 
   if (file['type'].split('/')[0] !== 'image') return;
 
-  const picture = storageRef(
-    storage,
-    `extensions/${username}/${fileName}_logo`
-  );
+  const picture = storageRef(storage, `extensions/${username}/${fileName}_logo`);
 
   uploadBytes(picture, file)
     .then((snapshot) => {
@@ -164,12 +145,12 @@ const uploadLogo = (e, username, fileName, extId) => {
 
 export const updateExtensionLogo = (extId, url) => {
   return update(ref(db), {
-    [`extensions/${extId}/logo`]: url,
+    [`extensions/${extId}/logo`]: url
   });
 };
 
 export const updateExtensions = (username, url, fileName, extId) => {
-  return get(ref(db, `users`)).then((snapshot) => {
+  return get(ref(db, 'users')).then((snapshot) => {
     if (!snapshot.exists()) {
       return [];
     }
@@ -179,10 +160,10 @@ export const updateExtensions = (username, url, fileName, extId) => {
     extensions.push({
       fileName: fileName,
       downLoadLink: url,
-      extensionId: extId,
+      extensionId: extId
     });
     return update(ref(db), {
-      [`users/${username}/extensions`]: extensions,
+      [`users/${username}/extensions`]: extensions
     });
   });
 };
@@ -241,7 +222,7 @@ export const updateExtensionRating = (extId, username, value) => {
     }
 
     update(ref(db, `extensions/${extId}`), {
-      rating,
+      rating
     });
 
     return rating;
@@ -265,7 +246,7 @@ export const updateExtensionDownloads = (extId, username) => {
       }
 
       update(ref(db, `extensions/${extId}`), {
-        downloads,
+        downloads
       });
 
       return downloads;
@@ -290,9 +271,7 @@ export const deleteExtension = async (extId) => {
 
   getUserByHandle(extension.author).then((snapshot) => {
     const user = snapshot.val();
-    const newExtensions = user.extensions.filter(
-      (r) => r.extensionId !== extId
-    );
+    const newExtensions = user.extensions.filter((r) => r.extensionId !== extId);
 
     createNotification(
       extension.author,
@@ -302,17 +281,17 @@ export const deleteExtension = async (extId) => {
     );
 
     update(ref(db), {
-      [`/users/${extension.author}/extensions/`]: newExtensions,
+      [`/users/${extension.author}/extensions/`]: newExtensions
     });
 
     return update(ref(db), {
-      [`/extensions/${extId}`]: null,
+      [`/extensions/${extId}`]: null
     });
   });
 };
 
 export const setExtensionStatus = (extId, status) => {
   return update(ref(db), {
-    [`extensions/${extId}/status`]: status,
+    [`extensions/${extId}/status`]: status
   });
 };

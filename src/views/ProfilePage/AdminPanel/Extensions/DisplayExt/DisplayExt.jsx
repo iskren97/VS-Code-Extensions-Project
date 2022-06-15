@@ -13,7 +13,7 @@ const DisplayExt = ({
   setAllExtensions,
   allExtensions,
   deleteExtension,
-  rowColor,
+  rowColor
 }) => {
   const { userData } = useContext(AppContext);
   return (
@@ -23,7 +23,7 @@ const DisplayExt = ({
           display: 'grid',
           gridTemplateColumns: '1fr auto',
           alignItems: 'center',
-          columnGap: '7px',
+          columnGap: '7px'
         }}
       >
         <div>
@@ -40,7 +40,7 @@ const DisplayExt = ({
               color: 'white',
               fontWeight: 'bold',
               border: '1px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '16px',
+              borderRadius: '16px'
             }}
           >
             <Grid item>
@@ -70,7 +70,7 @@ const DisplayExt = ({
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                gap: '0.25em',
+                gap: '0.25em'
               }}
             >
               <Grid container direction="row" spacing={0.5}>

@@ -9,7 +9,7 @@ export const createNotification = (author, recipient, message, extensionId) => {
     statusAuthor: 'unseen',
     statusRecipient: 'unseen',
     createdOn: Date.now(),
-    extensionId,
+    extensionId
   }).then((result) => {
     return getNotificationById(result.key);
   });
@@ -38,7 +38,7 @@ export const fromNotificationsDocument = (snapshot) => {
     return {
       ...notification,
       id: key,
-      createdOn: new Date(notification.createdOn),
+      createdOn: new Date(notification.createdOn)
     };
   });
 };
@@ -56,11 +56,11 @@ export const getAllNotifications = () => {
 export const setNotificationStatus = (notifId, status, person) => {
   if (person === 'author') {
     return update(ref(db), {
-      [`notifications/${notifId}/statusAuthor`]: status,
+      [`notifications/${notifId}/statusAuthor`]: status
     });
   } else {
     return update(ref(db), {
-      [`notifications/${notifId}/statusRecipient`]: status,
+      [`notifications/${notifId}/statusRecipient`]: status
     });
   }
 };

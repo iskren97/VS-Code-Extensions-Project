@@ -8,16 +8,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import { profileButton } from '../../../../styles/styles.js';
 
-const DisplayUser = ({
-  username,
-  email,
-  phoneNumber,
-  uid,
-  avatar,
-  role,
-  allUsers,
-  setUsers,
-}) => {
+const DisplayUser = ({ username, email, phoneNumber, uid, avatar, role, allUsers, setUsers }) => {
   const navigate = useNavigate();
 
   const [isUserBlocked, setIsUserBlocked] = useState(role === 'blocked');
@@ -50,9 +41,8 @@ const DisplayUser = ({
           color: 'white',
           fontWeight: 'bold',
           border: '1px solid rgba(255, 255, 255, 0.3)',
-          borderRadius: '16px',
-        }}
-      >
+          borderRadius: '16px'
+        }}>
         <Grid item>
           <img
             src={avatar}
@@ -62,14 +52,14 @@ const DisplayUser = ({
             style={{
               objectFit: 'cover',
               marginRight: '55px',
-              borderRadius: '50%',
+              borderRadius: '50%'
             }}
           />
         </Grid>
 
         <Grid item>
           <Grid container direction="column" spacing={1}>
-            <Grid item>Username:</Grid>
+            <Grid item>Username</Grid>
             <Grid item>
               <span>{username}</span>
             </Grid>
@@ -78,7 +68,7 @@ const DisplayUser = ({
 
         <Grid item xs>
           <Grid container direction="column" spacing={1}>
-            <Grid item>Phone:</Grid>
+            <Grid item>Phone</Grid>
             <Grid item>
               <span>{phoneNumber}</span>
             </Grid>
@@ -87,7 +77,7 @@ const DisplayUser = ({
 
         <Grid item xs>
           <Grid container direction="column" spacing={1}>
-            <Grid item>Email:</Grid>
+            <Grid item>Email</Grid>
             <Grid item>
               <span>{email}</span>
             </Grid>
@@ -100,16 +90,14 @@ const DisplayUser = ({
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            gap: '1em',
-          }}
-        >
+            gap: '1em'
+          }}>
           <Button
             variant="contained"
             color="primary"
             sx={profileButton}
             style={{ marginLeft: '1em' }}
-            onClick={() => navigate(`/profile/${username}`)}
-          >
+            onClick={() => navigate(`/profile/${username}`)}>
             View
           </Button>
 
@@ -126,12 +114,9 @@ const DisplayUser = ({
                   blocked.role = 'blocked';
 
                   setUsers((allUsers) =>
-                    [...allUsers, blocked].filter(
-                      (user, index) => allUsers.indexOf(user) === index
-                    )
+                    [...allUsers, blocked].filter((user, index) => allUsers.indexOf(user) === index)
                   );
-                }}
-              >
+                }}>
                 Block
               </Button>
             ) : (
@@ -152,12 +137,9 @@ const DisplayUser = ({
                 blocked.role = 'user';
 
                 setUsers((allUsers) =>
-                  [...allUsers, blocked].filter(
-                    (user, index) => allUsers.indexOf(user) === index
-                  )
+                  [...allUsers, blocked].filter((user, index) => allUsers.indexOf(user) === index)
                 );
-              }}
-            >
+              }}>
               Unblock
             </Button>
           )}

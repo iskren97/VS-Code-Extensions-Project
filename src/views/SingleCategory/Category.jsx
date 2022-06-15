@@ -16,9 +16,9 @@ const Category = () => {
 
   let categoryName = '';
   if (category.includes('_')) {
-    categoryName =
-      category.charAt(1).toUpperCase() +
-      category
+    categoryName
+      = category.charAt(1).toUpperCase()
+      + category
         .slice(2)
         .replace('_', ' ')
         .replace(/(^\w{0})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
@@ -29,9 +29,7 @@ const Category = () => {
   useEffect(() => {
     getAllExtensions().then((resp) =>
       setExtensions(
-        resp
-          .filter((ext) => ext.status === 'approved')
-          .filter((o) => o.category === categoryName)
+        resp.filter((ext) => ext.status === 'approved').filter((o) => o.category === categoryName)
       )
     );
   }, [categoryName]);
@@ -85,9 +83,8 @@ const Category = () => {
                 fontWeight: '400',
                 margin: '0px',
                 textAlign: 'center',
-                marginTop: '0.67em',
-              }}
-            >
+                marginTop: '0.67em'
+              }}>
               Browse Extensions
             </p>
 
@@ -108,9 +105,8 @@ const Category = () => {
                 background: 'rgba(255, 255, 255, 0.2)',
 
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '16px',
-              }}
-            >
+                borderRadius: '16px'
+              }}>
               <br />
 
               <div style={{ textAlign: 'center' }}>
@@ -127,9 +123,8 @@ const Category = () => {
                 fontWeight: '400',
                 margin: '0px',
                 textAlign: 'center',
-                marginTop: '0.67em',
-              }}
-            >
+                marginTop: '0.67em'
+              }}>
               Browse Extensions
             </p>
 
@@ -150,9 +145,8 @@ const Category = () => {
                 background: 'rgba(255, 255, 255, 0.2)',
 
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '16px',
-              }}
-            >
+                borderRadius: '16px'
+              }}>
               <br />
 
               <div style={{ textAlign: 'center' }}>

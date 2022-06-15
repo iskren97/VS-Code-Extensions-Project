@@ -15,18 +15,12 @@ const Search = ({ setSearch, searchType }) => {
           }}
           type="search"
           id="search"
-          placeholder={
-            searchType ? searchType : 'search extension title, tag ...'
-          }
+          placeholder={searchType ? searchType : 'search extension title, tag ...'}
         />
       </div>
 
       <div>
-        <SearchIcon
-          fontSize={'large'}
-          cursor={'pointer'}
-          sx={{ color: 'white' }}
-        />
+        <SearchIcon fontSize={'large'} cursor={'pointer'} sx={{ color: 'white' }} />
       </div>
     </div>
   );

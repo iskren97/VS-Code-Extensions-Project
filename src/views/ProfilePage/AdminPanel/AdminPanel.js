@@ -38,7 +38,7 @@ const AdminPanel = () => {
     const options = {
       year: 'numeric',
       month: 'numeric',
-      day: 'numeric',
+      day: 'numeric'
     };
 
     return newDate.toLocaleString('en-US', options);
@@ -47,12 +47,7 @@ const AdminPanel = () => {
   return (
     <>
       <Grid item sx={{ marginLeft: '0.5em' }}>
-        <Grid
-          container
-          direction="row"
-          spacing={2}
-          sx={{ alignItems: 'center' }}
-        >
+        <Grid container direction="row" spacing={2} sx={{ alignItems: 'center' }}>
           <Grid item>
             <Button
               variant="contained"
@@ -63,15 +58,14 @@ const AdminPanel = () => {
                 color: 'white',
                 fontWeight: 'bold',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '16px',
+                borderRadius: '16px'
               }}
               onClick={() => {
                 setExtensionsView(true);
                 setUsersView(false);
                 setExtBgColor('#1976d2');
                 setUsersBgColor('transparent');
-              }}
-            >
+              }}>
               Extensions{' '}
             </Button>
           </Grid>
@@ -86,15 +80,14 @@ const AdminPanel = () => {
                 color: 'white',
                 fontWeight: 'bold',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '16px',
+                borderRadius: '16px'
               }}
               onClick={() => {
                 setExtensionsView(false);
                 setUsersView(true);
                 setUsersBgColor('#1976d2');
                 setExtBgColor('transparent');
-              }}
-            >
+              }}>
               Users{' '}
             </Button>
           </Grid>
@@ -103,10 +96,7 @@ const AdminPanel = () => {
             {extensionsView ? <Search setSearch={setSearch} /> : null}
 
             {usersView ? (
-              <Search
-                setSearch={setSearch}
-                searchType={'search username, email ...'}
-              />
+              <Search setSearch={setSearch} searchType={'search username, email ...'} />
             ) : null}
           </Grid>
 
@@ -114,7 +104,7 @@ const AdminPanel = () => {
             <Divider
               sx={{
                 marginTop: '18px',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.3)'
               }}
             />
           </Grid>
@@ -138,11 +128,7 @@ const AdminPanel = () => {
 
           <Grid item xs={12}>
             {usersView ? (
-              <Users
-                allUsers={allUsers}
-                setAllUsers={setAllUsers}
-                search={search}
-              />
+              <Users allUsers={allUsers} setAllUsers={setAllUsers} search={search} />
             ) : null}
           </Grid>
         </Grid>

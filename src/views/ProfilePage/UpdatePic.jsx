@@ -1,11 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage';
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebase-config';
 
 import AppContext from '../../providers/AppContext';
@@ -17,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {
   getUserData,
   getUserByHandle,
-  updateUserProfilePicture,
+  updateUserProfilePicture
 } from '../../services/users.service';
 import AlertUser from '../Register/AlertUser';
 
@@ -32,7 +28,7 @@ const style = {
   borderRadius: '16px',
   boxShadow: 24,
   p: 4,
-  padding: '20px',
+  padding: '20px'
 };
 
 const UpdatePic = ({ userProfile, setUserProfile }) => {
@@ -103,12 +99,12 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
               user,
               userData: {
                 ...userData,
-                avatarUrl: url,
-              },
+                avatarUrl: url
+              }
             });
 
             setError(true);
-            setErrorMsg(`Image successfully uploaded!`);
+            setErrorMsg('Image successfully uploaded!');
             setMsgType('success');
 
             setUserProfile({ ...userData, avatarUrl: url });
@@ -128,9 +124,8 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
             onClick={handleOpen}
             style={{
               fontSize: '13.5px',
-              textTransform: 'none',
-            }}
-          >
+              textTransform: 'none'
+            }}>
             <Tooltip title="Change profile picture" placement="right-end">
               <EditIcon sx={{ cursor: 'pointer', color: 'white' }} />
             </Tooltip>
@@ -141,17 +136,15 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
+          aria-describedby="modal-modal-description">
           <Box sx={style}>
             <div
               style={{
                 display: 'flex',
                 top: '-50px',
                 justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
+                alignItems: 'center'
+              }}>
               <h3>Upload a picture</h3>
 
               <button
@@ -160,10 +153,9 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
                   border: 'none',
                   fontSize: '20px',
                   fontWeight: 'bold',
-                  cursor: 'pointer',
+                  cursor: 'pointer'
                 }}
-                onClick={handleClose}
-              >
+                onClick={handleClose}>
                 X
               </button>
             </div>
@@ -171,7 +163,7 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
             <Divider
               sx={{
                 marginBottom: '25px',
-                border: '1px solid black',
+                border: '1px solid black'
               }}
             />
 
@@ -180,14 +172,9 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
                 container
                 direction="column"
                 spacing={0}
-                sx={{ textAlign: 'center', alignItems: 'center' }}
-              >
+                sx={{ textAlign: 'center', alignItems: 'center' }}>
                 <Grid>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="custom-file-upload"
-                  />
+                  <input type="file" accept="image/*" className="custom-file-upload" />
                 </Grid>
 
                 <Grid>
@@ -201,14 +188,7 @@ const UpdatePic = ({ userProfile, setUserProfile }) => {
         </Modal>
       </div>
 
-      {error ? (
-        <AlertUser
-          msg={errorMsg}
-          type={msgType}
-          err={error}
-          setErr={setError}
-        />
-      ) : null}
+      {error ? <AlertUser msg={errorMsg} type={msgType} err={error} setErr={setError} /> : null}
     </>
   );
 };

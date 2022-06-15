@@ -3,7 +3,7 @@ import './SortExt.css';
 
 import {
   deleteExtension,
-  setExtensionStatus,
+  setExtensionStatus
 } from '../../../../services/extensions.service';
 import DisplayExt from './DisplayExt/DisplayExt';
 
@@ -86,33 +86,33 @@ const Extensions = ({ extensions, setAllExtensions, setDate, search }) => {
             let rowColor = '';
 
             switch (ext.status) {
-              case 'pending':
-                rowColor = 'rgb(229, 255, 0)';
-                break;
-              case 'approved':
-                rowColor = 'rgb(0, 255, 42)';
-                break;
-              case 'rejected':
-                rowColor = 'rgb(255, 102, 0)';
-                break;
-              default:
-                break;
+            case 'pending':
+              rowColor = 'rgb(229, 255, 0)';
+              break;
+            case 'approved':
+              rowColor = 'rgb(0, 255, 42)';
+              break;
+            case 'rejected':
+              rowColor = 'rgb(255, 102, 0)';
+              break;
+            default:
+              break;
             }
 
             if (search) {
-              return ext.title.toLowerCase().includes(search) ||
-                ext.tags.includes(search) ? (
-                <DisplayExt
-                  key={ext.id}
-                  ext={ext}
-                  setDate={setDate}
-                  setExtensionStatus={setExtensionStatus}
-                  setAllExtensions={setAllExtensions}
-                  allExtensions={allExtensions}
-                  deleteExtension={deleteExtension}
-                  rowColor={rowColor}
-                />
-              ) : null;
+              return ext.title.toLowerCase().includes(search)
+                || ext.tags.includes(search) ? (
+                  <DisplayExt
+                    key={ext.id}
+                    ext={ext}
+                    setDate={setDate}
+                    setExtensionStatus={setExtensionStatus}
+                    setAllExtensions={setAllExtensions}
+                    allExtensions={allExtensions}
+                    deleteExtension={deleteExtension}
+                    rowColor={rowColor}
+                  />
+                ) : null;
             }
 
             return (
