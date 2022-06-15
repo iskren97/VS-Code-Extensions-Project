@@ -11,9 +11,7 @@ import './Item.css';
 const Items = ({
   name,
   logo,
-  author,
   category,
-  rating,
   downloadLink,
   extId,
 }) => {

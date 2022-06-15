@@ -1,17 +1,16 @@
 import React from 'react';
-import './Footer.css';
+import { NavLink } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 import { Divider } from '@mui/material';
-
 import InfoIcon from '@mui/icons-material/Info';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import RecommendIcon from '@mui/icons-material/Recommend';
-
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { NavLink } from 'react-router-dom';
+
+import './Footer.css';
 
 const Footer = () => {
   return (

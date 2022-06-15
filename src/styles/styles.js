@@ -1,3 +1,6 @@
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+
 export const containerStyle = {
   height: 'auto',
   marginTop: '50px',
@@ -134,3 +137,10 @@ export const notificationLegendContainer = {
   gap: '0.25em',
   color: 'white',
 };
+
+export const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  color: theme.palette.text.primary,
+}));

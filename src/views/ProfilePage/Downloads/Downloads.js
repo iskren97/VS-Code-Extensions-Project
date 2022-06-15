@@ -10,9 +10,7 @@ const Downloads = ({ userDownloads }) => {
           key={download.id}
           name={download.title}
           logo={download.logo}
-          author={download.author}
           category={download.category}
-          rating={3.8}
           downloadLink={download.downloadLink}
           extId={download.id}
         />

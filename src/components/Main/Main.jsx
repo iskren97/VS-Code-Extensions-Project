@@ -77,9 +77,7 @@ const Main = () => {
                       key={ext.id}
                       name={ext.title}
                       logo={ext.logo}
-                      author={ext.author}
                       category={ext.category}
-                      rating={3.8}
                       downloadLink={ext.downloadLink}
                       extId={ext.id}
                     />
@@ -102,9 +100,7 @@ const Main = () => {
                       key={ext.id}
                       name={ext.title}
                       logo={ext.logo}
-                      author={ext.author}
                       category={ext.category}
-                      rating={3.8}
                       downloadLink={ext.downloadLink}
                       extId={ext.id}
                     />
@@ -127,9 +123,7 @@ const Main = () => {
                       key={ext.id}
                       name={ext.title}
                       logo={ext.logo}
-                      author={ext.author}
                       category={ext.category}
-                      rating={3.8}
                       downloadLink={ext.downloadLink}
                       extId={ext.id}
                     />

@@ -1,11 +1,8 @@
 .category-item {
   width: auto;
   height: auto;
-
   border: none;
-
   font-family: 'Inter', sans-serif !important;
-
   transition: background-color 0.25s !important;
 }
 

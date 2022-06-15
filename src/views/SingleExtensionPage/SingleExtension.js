@@ -42,9 +42,9 @@ function SingleExtension() {
 
   const { id } = useParams();
 
-  const { user, userData, setContext } = useContext(AppContext);
+  const {userData } = useContext(AppContext);
 
-  let headersList = {
+  const headersList = {
     Accept: 'application/vnd.github.v3+json',
     'User-Agent': 'Thunder Client (https://www.thunderclient.com)',
     Authorization: 'Bearer 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',

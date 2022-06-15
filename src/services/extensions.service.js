@@ -80,7 +80,7 @@ export const updateExtensionInfo = (id, newInfo) => {
     );
 
     if (
-      extension.logo == newInfo.logo &&
+      extension.logo === newInfo.logo &&
       extension.downloadLink === newInfo.downloadLink
     ) {
       return update(ref(db), {

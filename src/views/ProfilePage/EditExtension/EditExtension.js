@@ -1,15 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useNavigate, useParams } from 'react-router';
 
-
-import AppContext from '../../../providers/AppContext';
-import {
-  ref as storageRef,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage';
-import { storage } from '../../../config/firebase-config';
 
 import { Container, Divider } from '@mui/material';
 
@@ -26,15 +18,12 @@ import TextField from '@mui/material/TextField';
 import '../../Upload/Upload.css'
 
 import {
-  createExtension,
   getAllExtensions,
   getExtensionById,
   updateExtensionInfo
 } from '../../../services/extensions.service';
-import { NavLink } from 'react-router-dom';
 
 function EditExtension() {
-  const { user, userData, setContext } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [error, setError] = useState(false);
@@ -45,10 +34,6 @@ function EditExtension() {
   const [currentExtension, setCurrentExtension] = useState({});
   const { id } = useParams();
 
-
-
-  // const [extension, setExtension] = useState('')
-
   useEffect(() => {
     getExtensionById(id).then((ext) => {
       setCurrentExtension(ext);
@@ -57,11 +42,6 @@ function EditExtension() {
 
     
   },[])
-
-
-  console.log(uploadInfo)
-
-
 
   const validateData = async () => {
     if (!uploadInfo.category) {

@@ -1,11 +1,12 @@
 import React from 'react';
 import './Header.css';
 import { useState, useContext, useEffect } from 'react';
-import { Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import AppContext from '../../providers/AppContext';
 import { useNavigate } from 'react-router';
+import AppContext from '../../providers/AppContext';
+import { logoutUser } from '../../services/auth.service';
 
+import { Grid } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -19,7 +20,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 
-import { logoutUser } from '../../services/auth.service';
 
 import avatar from '../../assets/avatar.jpg';
 import vscodelogo from '../../assets/vscodelogo.png';

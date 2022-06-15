@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -8,7 +8,6 @@ import { auth } from './config/firebase-config';
 import { getUserData } from './services/users.service';
 import AppContext from './providers/AppContext';
 
-import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ScrollTop from './components/ScrollTop/ScrollTop';
 import ScrollPage from './components/ScrollTop/ScrollPage';
@@ -16,7 +15,6 @@ import ScrollPage from './components/ScrollTop/ScrollPage';
 import SingleExtension from './views/SingleExtensionPage/SingleExtension';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import Register from './views/Register/Register';
-import AlertUser from './views/Register/AlertUser';
 import Login from './views/Login/Login';
 import Category from './views/SingleCategory/Category';
 import Upload from './views/Upload/Upload';
