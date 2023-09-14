@@ -1,12 +1,10 @@
-# Team 3 - IDE Addonis Project
+# IDE Addonis Project
 
 ## Welcome to our React Project.
 
-### 1. We are Team 3, and we are pleased to present you our React - Addonis project.
+The application focus lies on the extensions for VS Code, which means users can post, download, rate their favorite extensions, and more.
 
-The application focus lays on the extensions for VS Code, which means users can post, download, rate their favorite extensions and more.
-
-In our application you can find all the information you need when it comes to extensions for VS Code.
+In our application, you can find all the information you need when it comes to extensions for VS Code.
 
 For the build we used **React JS**, **HTML** & **CSS**, and some external libraries such as **Material UI**.
 
@@ -21,7 +19,7 @@ There are lots of interesting functionalities and some features, which make our 
 
 ---
 
-Our project has **public** and **private (user)** part.
+Our project has **public** and **private (user)** parts.
 
 The public is accessible for all viewers despite being registered or not.
 
