@@ -1,7 +1,5 @@
 # IDE Addonis Project
 
-## Welcome to our React Project.
-
 The application focus lies on the extensions for VS Code, which means users can post, download, rate their favorite extensions, and more.
 
 In our application, you can find all the information you need when it comes to extensions for VS Code.
